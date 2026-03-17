@@ -6,6 +6,11 @@ import Login from "./pages/Login";
 import StudentDashboard from "./pages/StudentDashboard";
 import InstructorDashboard from "./pages/InstructorDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminStudents from "./pages/AdminStudents";
+import AdminFaculty from "./pages/AdminFaculty";
+import AdminAnnouncements from "./pages/AdminAnnouncements";
+import AdminAuditLogs from "./pages/AdminAuditLogs";
+import AdminSettings from "./pages/AdminSettings";
 import InstructorManageStudents from "./pages/InstructorManageStudents";
 import InstructorSettings from "./pages/InstructorSettings";
 import StudentSettings from "./pages/StudentSettings";
@@ -19,8 +24,8 @@ import QuizTaking from "./pages/QuizTaking";
 import QuizResult from "./pages/QuizResult";
 import TestModelPage from "./pages/testmodel";
 import GuestLab from "./pages/GuestLab";
-import AdminSettings from "./pages/AdminSettings";
 import CreateQuiz from "./pages/CreateQuiz";
+import VRMTSModuleAssignment from "./pages/AssignModule";
 
 const queryClient = new QueryClient();
 
@@ -35,12 +40,17 @@ const App = () => (
           <Route path="/studentdashboard" element={<StudentDashboard />} />
           <Route path="/instructordashboard" element={<InstructorDashboard />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/admin/students" element={<AdminStudents />} />
+          <Route path="/admin/faculty" element={<AdminFaculty />} />
+          <Route path="/admin/announcements" element={<AdminAnnouncements />} />
+          <Route path="/admin/audit" element={<AdminAuditLogs />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/instructor/students" element={<InstructorManageStudents />} />
           <Route path="/instructor/settings" element={<InstructorSettings />} />
           <Route path="/instructor/create-quiz" element={<CreateQuiz />} />
           <Route path="/settings" element={<StudentSettings />} />
           <Route path="/studentanalytics" element={<StudentAnalytics />} />
+          <Route path="/instructor/modules" element={<VRMTSModuleAssignment />} />
           <Route path="/modules" element={<ModulesList />} />
           <Route path="/module/:id" element={<ModuleExploration />} />
           <Route path="/lab1explore" element={<Lab1Explore />} />

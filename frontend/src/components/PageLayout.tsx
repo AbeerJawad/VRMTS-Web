@@ -3,7 +3,7 @@ import { Home, ChevronRight, LogOut } from 'lucide-react';
 
 const API_BASE_URL = 'http://localhost:8080/api';
 
-type NavKey = 'dashboard' | 'modules' | 'quiz' | 'analytics' | 'students' | 'none';
+type NavKey = 'dashboard' | 'modules' | 'quiz' | 'analytics' | 'students' | 'faculty' | 'announcements' | 'audit' | 'none';
 
 export interface NavItemConfig {
   key: NavKey;
@@ -73,8 +73,8 @@ export function PageLayout({
         <div className={`${isWide ? 'max-w-[1600px]' : 'max-w-[1200px]'} mx-auto px-6 py-4`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <h1 className="text-sm font-bold text-white uppercase tracking-tighter cursor-pointer" onClick={() => navigate(dashboardPath)}>
-                VRMTS
+              <h1 className="text-sm font-bold uppercase tracking-tighter cursor-pointer" onClick={() => navigate(dashboardPath)}>
+                <span className="text-emerald-500">VR</span><span className="text-white">MTS</span>
                 {userType === 'instructor' && (
                   <span className="text-emerald-500 ml-1.5 uppercase">INSTRUCTOR</span>
                 )}

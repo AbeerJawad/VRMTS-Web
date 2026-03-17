@@ -1,4 +1,4 @@
-﻿-- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 
 USE vrmts;
 
@@ -59,6 +59,27 @@ LOCK TABLES `admin` WRITE;
 INSERT INTO `admin` VALUES (1,1),(2,2);
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `audit_logs`
+--
+
+DROP TABLE IF EXISTS `audit_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `audit_logs` (
+  `logId` int NOT NULL AUTO_INCREMENT,
+  `userId` int NOT NULL,
+  `action` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `entityType` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `entityId` int DEFAULT NULL,
+  `details` text COLLATE utf8mb4_unicode_ci,
+  `timestamp` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`logId`),
+  KEY `idx_userId` (`userId`),
+  CONSTRAINT `audit_logs_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `aichat`
@@ -659,11 +680,14 @@ CREATE TABLE `student` (
   `enrollmentDate` date DEFAULT NULL,
   `enrollmentModuleId` int DEFAULT NULL,
   `currentGrade` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `assignedTeacherId` int DEFAULT NULL,
+  `className` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`studentId`),
   UNIQUE KEY `userId` (`userId`),
   UNIQUE KEY `enrollmentNumber` (`enrollmentNumber`),
   KEY `idx_enrollmentNumber` (`enrollmentNumber`),
-  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE
+  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE,
+  CONSTRAINT `student_ibfk_2` FOREIGN KEY (`assignedTeacherId`) REFERENCES `teacher` (`teacherId`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
