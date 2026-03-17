@@ -80,7 +80,7 @@ export default function AdminDashboard() {
               <div className="absolute top-0 right-0 p-6 opacity-10 scale-150 rotate-12 pointer-events-none transition-transform group-hover:scale-[1.8]">
                 <Server className="w-32 h-32 text-emerald-500" />
               </div>
-              <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.25em] mb-10 flex items-center gap-3">
+              <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-10 flex items-center gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 System Health
               </h3>
@@ -111,13 +111,13 @@ export default function AdminDashboard() {
             </div>
 
             <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-8 shadow-inner">
-               <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.25em] mb-10">Resource Usage</h3>
+               <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-10">Resource Usage</h3>
                <div className="space-y-8">
                   {[
-                    { label: 'CPU Usage', value: 34, color: 'bg-emerald-500' },
-                    { label: 'Memory', value: 58, color: 'bg-blue-500' },
-                    { label: 'Network', value: 21, color: 'bg-purple-500' },
-                    { label: 'Disk Usage', value: 72, color: 'bg-amber-500' },
+                    { label: 'CPU Usage', value: stats?.system?.cpu || 0, color: 'bg-emerald-500' },
+                    { label: 'Memory', value: stats?.system?.memory || 0, color: 'bg-blue-500' },
+                    { label: 'Network', value: stats?.system?.network || 0, color: 'bg-purple-500' },
+                    { label: 'Disk Usage', value: stats?.system?.disk || 0, color: 'bg-amber-500' },
                   ].map((sys, i) => (
                     <div key={i}>
                       <div className="flex justify-between text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">
@@ -133,6 +133,31 @@ export default function AdminDashboard() {
                <button className="w-full mt-12 py-3.5 bg-neutral-950 border border-neutral-800 rounded-lg text-[9px] font-bold text-neutral-500 uppercase tracking-[0.2em] hover:text-white hover:border-neutral-600 transition-all shadow-lg active:scale-95">
                  Run Diagnostics
                </button>
+            </div>
+          </div>
+          
+          <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-8">
+            <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-6">Recent Administrative Activity</h3>
+            <div className="space-y-4">
+              {recentActivity.map((log: any) => (
+                <div key={log.logId} className="flex items-center justify-between py-3 border-b border-neutral-800/50 last:border-0">
+                  <div className="flex items-center gap-4">
+                    <div className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-[10px] font-bold text-neutral-400">
+                      {log.adminName?.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white tracking-tight">{log.action}</div>
+                      <div className="text-[10px] text-neutral-500 uppercase tracking-widest">{log.adminName} • {new Date(log.timestamp).toLocaleTimeString()}</div>
+                    </div>
+                  </div>
+                  <div className="text-[10px] font-mono text-neutral-600 uppercase tracking-widest">
+                    {log.entityType}
+                  </div>
+                </div>
+              ))}
+              {recentActivity.length === 0 && (
+                <div className="text-center py-6 text-neutral-600 text-xs font-bold uppercase tracking-widest">No recent activity detected</div>
+              )}
             </div>
           </div>
         </div>
