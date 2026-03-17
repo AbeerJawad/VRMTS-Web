@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What are the three types of muscle tissue?",
+    "options": [
+      "Fast, slow, intermediate",
+      "Skeletal, cardiac, smooth",
+      "Striated, non-striated, mixed",
+      "Voluntary, involuntary, automatic"
+    ],
+    "correctIndex": 1,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 2,
+    "question": "What is the origin of a muscle?",
+    "options": [
+      "The more movable attachment point",
+      "The belly of the muscle",
+      "The tendon",
+      "The less movable attachment point"
+    ],
+    "correctIndex": 3,
+    "tag": "MuscleAttachments"
+  },
+  {
+    "id": 3,
+    "question": "What is the insertion of a muscle?",
+    "options": [
+      "The less movable attachment point",
+      "The center of the muscle",
+      "The more movable attachment point",
+      "The nerve supply"
+    ],
+    "correctIndex": 2,
+    "tag": "MuscleAttachments"
+  },
+  {
+    "id": 4,
+    "question": "What muscle closes the eye?",
+    "options": [
+      "Temporalis",
+      "Orbicularis oculi",
+      "Frontalis",
+      "Orbicularis oris"
+    ],
+    "correctIndex": 1,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 5,
+    "question": "What muscle closes the mouth and purses the lips?",
+    "options": [
+      "Orbicularis oculi",
+      "Masseter",
+      "Buccinator",
+      "Orbicularis oris"
+    ],
+    "correctIndex": 3,
+    "tag": "OralCavity"
+  },
+  {
+    "id": 6,
+    "question": "What is the main muscle of mastication (chewing)?",
+    "options": [
+      "Masseter",
+      "Buccinator",
+      "Platysma",
+      "Temporalis"
+    ],
+    "correctIndex": 0,
+    "tag": "FacialMuscles"
+  },
+  {
+    "id": 7,
+    "question": "What muscle raises the eyebrows?",
+    "options": [
+      "Corrugator supercilii",
+      "Frontalis",
+      "Occipitalis",
+      "Orbicularis oculi"
+    ],
+    "correctIndex": 1,
+    "tag": "FacialMuscles"
+  },
+  {
+    "id": 8,
+    "question": "What muscle turns the head to the opposite side?",
+    "options": [
+      "Trapezius",
+      "Platysma",
+      "Scalenes",
+      "Sternocleidomastoid"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 9,
+    "question": "What is the main muscle of the chest that adducts the arm?",
+    "options": [
+      "Deltoid",
+      "Latissimus dorsi",
+      "Pectoralis major",
+      "Serratus anterior"
+    ],
+    "correctIndex": 2,
+    "tag": "ChestMuscles"
+  },
+  {
+    "id": 10,
+    "question": "What muscle forms the 'six-pack' of the abdomen?",
+    "options": [
+      "Internal oblique",
+      "Transversus abdominis",
+      "Rectus abdominis",
+      "External oblique"
+    ],
+    "correctIndex": 2,
+    "tag": "AbdominalMuscles"
+  },
+  {
+    "id": 11,
+    "question": "What is the large, flat muscle of the back that extends the arm?",
+    "options": [
+      "Rhomboid major",
+      "Latissimus dorsi",
+      "Erector spinae",
+      "Trapezius"
+    ],
+    "correctIndex": 1,
+    "tag": "BackMuscles"
+  },
+  {
+    "id": 12,
+    "question": "What muscle elevates and retracts the scapula?",
+    "options": [
+      "Pectoralis major",
+      "Trapezius",
+      "Deltoid",
+      "Latissimus dorsi"
+    ],
+    "correctIndex": 1,
+    "tag": "UpperLimbBones"
+  },
+  {
+    "id": 13,
+    "question": "What muscle abducts the arm at the shoulder?",
+    "options": [
+      "Latissimus dorsi",
+      "Pectoralis major",
+      "Deltoid",
+      "Biceps brachii"
+    ],
+    "correctIndex": 2,
+    "tag": "ShoulderMuscles"
+  },
+  {
+    "id": 14,
+    "question": "What muscle flexes the elbow and supinates the forearm?",
+    "options": [
+      "Triceps brachii",
+      "Biceps brachii",
+      "Brachialis",
+      "Brachioradialis"
+    ],
+    "correctIndex": 1,
+    "tag": "ArmMuscles"
+  },
+  {
+    "id": 15,
+    "question": "What muscle extends the elbow?",
+    "options": [
+      "Brachialis",
+      "Triceps brachii",
+      "Biceps brachii",
+      "Deltoid"
+    ],
+    "correctIndex": 1,
+    "tag": "ArmMuscles"
+  },
+  {
+    "id": 16,
+    "question": "What are the four muscles of the rotator cuff?",
+    "options": [
+      "Biceps, triceps, brachialis, brachioradialis",
+      "Deltoid, trapezius, pectoralis, latissimus",
+      "Rhomboids, levator scapulae, serratus, pectoralis",
+      "Supraspinatus, infraspinatus, teres minor, subscapularis"
+    ],
+    "correctIndex": 3,
+    "tag": "RotatorCuff"
+  },
+  {
+    "id": 17,
+    "question": "What are the four muscles of the quadriceps?",
+    "options": [
+      "Gluteus maximus, medius, minimus, tensor",
+      "Biceps femoris, semimembranosus, semitendinosus, gracilis",
+      "Iliopsoas, sartorius, pectineus, adductors",
+      "Rectus femoris, vastus lateralis, vastus medialis, vastus intermedius"
+    ],
+    "correctIndex": 3,
+    "tag": "Quadriceps"
+  },
+  {
+    "id": 18,
+    "question": "What do the quadriceps muscles do?",
+    "options": [
+      "Extend the knee",
+      "Rotate the hip",
+      "Flex the knee",
+      "Adduct the thigh"
+    ],
+    "correctIndex": 0,
+    "tag": "Quadriceps"
+  },
+  {
+    "id": 19,
+    "question": "What are the three hamstring muscles?",
+    "options": [
+      "Rectus femoris, vastus lateralis, vastus medialis",
+      "Gluteus maximus, medius, minimus",
+      "Biceps femoris, semimembranosus, semitendinosus",
+      "Gastrocnemius, soleus, plantaris"
+    ],
+    "correctIndex": 2,
+    "tag": "Hamstrings"
+  },
+  {
+    "id": 20,
+    "question": "What do the hamstrings do?",
+    "options": [
+      "Extend the knee",
+      "Adduct the thigh",
+      "Flex the knee and extend the hip",
+      "Plantar flex the foot"
+    ],
+    "correctIndex": 2,
+    "tag": "MuscularSystem"
+  },
+  {
+    "id": 21,
+    "question": "What is the largest muscle in the body?",
+    "options": [
+      "Latissimus dorsi",
+      "Pectoralis major",
+      "Gluteus maximus",
+      "Quadriceps"
+    ],
+    "correctIndex": 2,
+    "tag": "GlutealMuscles"
+  },
+  {
+    "id": 22,
+    "question": "What muscle plantar flexes the foot?",
+    "options": [
+      "Gastrocnemius",
+      "Tibialis anterior",
+      "Peroneus longus",
+      "Extensor digitorum"
+    ],
+    "correctIndex": 0,
+    "tag": "LegMuscles"
+  },
+  {
+    "id": 23,
+    "question": "What muscle dorsiflexes and inverts the foot?",
+    "options": [
+      "Peroneus longus",
+      "Tibialis anterior",
+      "Gastrocnemius",
+      "Soleus"
+    ],
+    "correctIndex": 1,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 24,
+    "question": "What is the Achilles tendon attached to?",
+    "options": [
+      "Hamstrings to tibia",
+      "Gastrocnemius and soleus to calcaneus",
+      "Gluteus to femur",
+      "Quadriceps to patella"
+    ],
+    "correctIndex": 1,
+    "tag": "LowerLimbBones"
+  },
+  {
+    "id": 25,
+    "question": "What is the longest muscle in the body?",
+    "options": [
+      "Rectus femoris",
+      "Gracilis",
+      "Biceps femoris",
+      "Sartorius"
+    ],
+    "correctIndex": 3,
+    "tag": "ThighMuscles"
+  },
+  {
+    "id": 26,
+    "question": "What muscle flexes the hip and is the primary hip flexor?",
+    "options": [
+      "Quadriceps",
+      "Sartorius",
+      "Gluteus maximus",
+      "Iliopsoas"
+    ],
+    "correctIndex": 3,
+    "tag": "HipMuscles"
+  },
+  {
+    "id": 27,
+    "question": "What connects muscle to bone?",
+    "options": [
+      "Fascia",
+      "Ligament",
+      "Tendon",
+      "Aponeurosis"
+    ],
+    "correctIndex": 2,
+    "tag": "MuscularSystem"
+  },
+  {
+    "id": 28,
+    "question": "What connects bone to bone?",
+    "options": [
+      "Cartilage",
+      "Ligament",
+      "Tendon",
+      "Fascia"
+    ],
+    "correctIndex": 1,
+    "tag": "SpinalLigaments"
+  },
+  {
+    "id": 29,
+    "question": "What is an aponeurosis?",
+    "options": [
+      "A flat, sheet-like tendon",
+      "A nerve sheath",
+      "A type of muscle",
+      "A bone covering"
+    ],
+    "correctIndex": 0,
+    "tag": "MuscularSystem"
+  },
+  {
+    "id": 30,
+    "question": "What is the external oblique?",
+    "options": [
+      "A neck muscle",
+      "A thigh muscle",
+      "Abdominal muscle whose fibers run downward and medially",
+      "A back muscle"
+    ],
+    "correctIndex": 2,
+    "tag": "Oblique"
+  },
+  {
+    "id": 31,
+    "question": "What is the linea alba?",
+    "options": [
+      "A nerve",
+      "White line of connective tissue in midline of abdomen",
+      "A muscle of the abdomen",
+      "A blood vessel"
+    ],
+    "correctIndex": 1,
+    "tag": "MuscularSystem"
+  },
+  {
+    "id": 32,
+    "question": "What muscles are the hip adductors?",
+    "options": [
+      "Adductor longus, brevis, magnus, gracilis, pectineus",
+      "Gluteus maximus, medius, minimus",
+      "Quadriceps group",
+      "Iliopsoas, sartorius"
+    ],
+    "correctIndex": 0,
+    "tag": "MuscularSystem"
+  },
+  {
+    "id": 33,
+    "question": "What does the gluteus medius do?",
+    "options": [
+      "Adducts the thigh",
+      "Flexes the knee",
+      "Extends the hip",
+      "Abducts the thigh"
+    ],
+    "correctIndex": 3,
+    "tag": "GlutealMuscles"
+  },
+  {
+    "id": 34,
+    "question": "What muscle protrudes the tongue?",
+    "options": [
+      "Genioglossus",
+      "Palatoglossus",
+      "Hyoglossus",
+      "Styloglossus"
+    ],
+    "correctIndex": 0,
+    "tag": "OralCavity"
+  },
+  {
+    "id": 35,
+    "question": "What is a muscle synergist?",
+    "options": [
+      "A muscle that opposes movement",
+      "A muscle that assists the prime mover",
+      "A muscle at rest",
+      "The main muscle producing movement"
+    ],
+    "correctIndex": 1,
+    "tag": "MuscularSystem"
+  },
+  {
+    "id": 36,
+    "question": "What is a muscle antagonist?",
+    "options": [
+      "A muscle that opposes the prime mover",
+      "A muscle that assists movement",
+      "A muscle that stabilizes",
+      "The main muscle producing movement"
+    ],
+    "correctIndex": 0,
+    "tag": "MuscularSystem"
+  },
+  {
+    "id": 37,
+    "question": "What is the prime mover (agonist)?",
+    "options": [
+      "A muscle that stabilizes",
+      "A muscle that assists",
+      "The main muscle responsible for a movement",
+      "A muscle that opposes movement"
+    ],
+    "correctIndex": 2,
+    "tag": "MuscularSystem"
+  },
+  {
+    "id": 38,
+    "question": "What are the erector spinae muscles?",
+    "options": [
+      "Deep back muscles that extend the vertebral column",
+      "Neck muscles",
+      "Abdominal muscles",
+      "Chest muscles"
+    ],
+    "correctIndex": 0,
+    "tag": "BackMuscles"
+  },
+  {
+    "id": 39,
+    "question": "What is the buccinator muscle?",
+    "options": [
+      "An eye muscle",
+      "Cheek muscle that compresses the cheek",
+      "A forehead muscle",
+      "A tongue muscle"
+    ],
+    "correctIndex": 1,
+    "tag": "FacialMuscles"
+  },
+  {
+    "id": 40,
+    "question": "What is the serratus anterior?",
+    "options": [
+      "A leg muscle",
+      "An arm muscle",
+      "A back muscle",
+      "Muscle that protracts and rotates the scapula upward"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  }
+]

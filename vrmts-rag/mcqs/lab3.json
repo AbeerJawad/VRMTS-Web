@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What are the three layers of meninges that protect the spinal cord?",
+    "options": [
+      "Serosa, muscularis, mucosa",
+      "Periosteum, endosteum, perichondrium",
+      "Dura mater, arachnoid mater, pia mater",
+      "Epidermis, dermis, hypodermis"
+    ],
+    "correctIndex": 2,
+    "tag": "Meninges"
+  },
+  {
+    "id": 2,
+    "question": "Which meninx is the outermost and toughest layer?",
+    "options": [
+      "Pia mater",
+      "Arachnoid mater",
+      "Epidural membrane",
+      "Dura mater"
+    ],
+    "correctIndex": 3,
+    "tag": "Meninges"
+  },
+  {
+    "id": 3,
+    "question": "Which meninx is the innermost layer that directly covers the spinal cord?",
+    "options": [
+      "Dura mater",
+      "Arachnoid mater",
+      "Subdural membrane",
+      "Pia mater"
+    ],
+    "correctIndex": 3,
+    "tag": "Meninges"
+  },
+  {
+    "id": 4,
+    "question": "What is the tapered end of the spinal cord called?",
+    "options": [
+      "Cauda equina",
+      "Lumbar enlargement",
+      "Filum terminale",
+      "Conus medullaris"
+    ],
+    "correctIndex": 3,
+    "tag": "SpinalCordAnatomy"
+  },
+  {
+    "id": 5,
+    "question": "What is the bundle of nerve roots extending from the conus medullaris called?",
+    "options": [
+      "Cauda equina",
+      "Filum terminale",
+      "Conus medullaris",
+      "Cervical enlargement"
+    ],
+    "correctIndex": 0,
+    "tag": "SpinalCordAnatomy"
+  },
+  {
+    "id": 6,
+    "question": "How many pairs of spinal nerves are there in the human body?",
+    "options": [
+      "31 pairs",
+      "24 pairs",
+      "33 pairs",
+      "12 pairs"
+    ],
+    "correctIndex": 0,
+    "tag": "SpinalCord"
+  },
+  {
+    "id": 7,
+    "question": "How many pairs of cervical spinal nerves are there?",
+    "options": [
+      "12 pairs",
+      "8 pairs",
+      "5 pairs",
+      "7 pairs"
+    ],
+    "correctIndex": 1,
+    "tag": "Vertebrae"
+  },
+  {
+    "id": 8,
+    "question": "How many pairs of thoracic spinal nerves are there?",
+    "options": [
+      "8 pairs",
+      "5 pairs",
+      "7 pairs",
+      "12 pairs"
+    ],
+    "correctIndex": 3,
+    "tag": "Vertebrae"
+  },
+  {
+    "id": 9,
+    "question": "What region of gray matter contains motor neurons?",
+    "options": [
+      "Posterior horn",
+      "Lateral horn",
+      "Anterior horn",
+      "Central canal"
+    ],
+    "correctIndex": 2,
+    "tag": "SpinalCordStructure"
+  },
+  {
+    "id": 10,
+    "question": "What region of gray matter receives sensory information?",
+    "options": [
+      "Posterior horn",
+      "Anterior horn",
+      "White matter",
+      "Lateral horn"
+    ],
+    "correctIndex": 0,
+    "tag": "SpinalCordStructure"
+  },
+  {
+    "id": 11,
+    "question": "What is a dermatome?",
+    "options": [
+      "A muscle innervated by multiple nerves",
+      "A bone marking on vertebrae",
+      "A type of sensory receptor",
+      "A skin region innervated by a single spinal nerve"
+    ],
+    "correctIndex": 3,
+    "tag": "Dermatomes"
+  },
+  {
+    "id": 12,
+    "question": "Which spinal cord region is enlarged to serve the upper limbs?",
+    "options": [
+      "Lumbar enlargement",
+      "Cervical enlargement",
+      "Thoracic region",
+      "Sacral region"
+    ],
+    "correctIndex": 1,
+    "tag": "Vertebrae"
+  },
+  {
+    "id": 13,
+    "question": "Which spinal cord region is enlarged to serve the lower limbs?",
+    "options": [
+      "Thoracic region",
+      "Cervical enlargement",
+      "Coccygeal region",
+      "Lumbar enlargement"
+    ],
+    "correctIndex": 3,
+    "tag": "Vertebrae"
+  },
+  {
+    "id": 14,
+    "question": "What type of neurons carry sensory information toward the CNS?",
+    "options": [
+      "Efferent neurons",
+      "Afferent neurons",
+      "Motor neurons",
+      "Interneurons"
+    ],
+    "correctIndex": 1,
+    "tag": "NeuronTypes"
+  },
+  {
+    "id": 15,
+    "question": "What type of neurons carry motor commands away from the CNS?",
+    "options": [
+      "Association neurons",
+      "Sensory neurons",
+      "Efferent neurons",
+      "Afferent neurons"
+    ],
+    "correctIndex": 2,
+    "tag": "NeuronTypes"
+  },
+  {
+    "id": 16,
+    "question": "What is the space between the arachnoid mater and pia mater called?",
+    "options": [
+      "Central canal",
+      "Subarachnoid space",
+      "Subdural space",
+      "Epidural space"
+    ],
+    "correctIndex": 1,
+    "tag": "Meninges"
+  },
+  {
+    "id": 17,
+    "question": "Where is cerebrospinal fluid (CSF) found in relation to the spinal cord?",
+    "options": [
+      "Periosteal space",
+      "Subarachnoid space",
+      "Subdural space",
+      "Epidural space"
+    ],
+    "correctIndex": 1,
+    "tag": "CSF"
+  },
+  {
+    "id": 18,
+    "question": "What anchors the spinal cord to the coccyx?",
+    "options": [
+      "Denticulate ligaments",
+      "Cauda equina",
+      "Conus medullaris",
+      "Filum terminale"
+    ],
+    "correctIndex": 3,
+    "tag": "Vertebrae"
+  },
+  {
+    "id": 19,
+    "question": "What structures anchor the spinal cord laterally to the dura mater?",
+    "options": [
+      "Denticulate ligaments",
+      "Spinal roots",
+      "Cauda equina",
+      "Filum terminale"
+    ],
+    "correctIndex": 0,
+    "tag": "Meninges"
+  },
+  {
+    "id": 20,
+    "question": "At what vertebral level does the spinal cord typically end in adults?",
+    "options": [
+      "L5",
+      "L1-L2",
+      "S1",
+      "T12"
+    ],
+    "correctIndex": 1,
+    "tag": "SpinalCord"
+  },
+  {
+    "id": 21,
+    "question": "What carries sensory information into the spinal cord?",
+    "options": [
+      "Dorsal root",
+      "Gray ramus",
+      "Ventral root",
+      "Spinal nerve"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 22,
+    "question": "What carries motor information out of the spinal cord?",
+    "options": [
+      "Dorsal root ganglion",
+      "Ventral root",
+      "Dorsal root",
+      "White ramus"
+    ],
+    "correctIndex": 1,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 23,
+    "question": "Where are the cell bodies of sensory neurons located?",
+    "options": [
+      "Dorsal root ganglion",
+      "Lateral horn",
+      "Ventral root",
+      "Anterior horn"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 24,
+    "question": "What type of tracts carry information up the spinal cord to the brain?",
+    "options": [
+      "Commissural tracts",
+      "Ascending tracts",
+      "Motor tracts",
+      "Descending tracts"
+    ],
+    "correctIndex": 1,
+    "tag": "SpinalCord"
+  },
+  {
+    "id": 25,
+    "question": "What type of tracts carry information down from the brain to the spinal cord?",
+    "options": [
+      "Ascending tracts",
+      "Association tracts",
+      "Descending tracts",
+      "Sensory tracts"
+    ],
+    "correctIndex": 2,
+    "tag": "SpinalCord"
+  },
+  {
+    "id": 26,
+    "question": "Which plexus is formed by cervical spinal nerves C1-C4?",
+    "options": [
+      "Brachial plexus",
+      "Cervical plexus",
+      "Lumbar plexus",
+      "Sacral plexus"
+    ],
+    "correctIndex": 1,
+    "tag": "Vertebrae"
+  },
+  {
+    "id": 27,
+    "question": "Which plexus innervates the upper limb?",
+    "options": [
+      "Cervical plexus",
+      "Brachial plexus",
+      "Lumbar plexus",
+      "Sacral plexus"
+    ],
+    "correctIndex": 1,
+    "tag": "NervePlexus"
+  },
+  {
+    "id": 28,
+    "question": "Which nerve from the brachial plexus innervates the deltoid muscle?",
+    "options": [
+      "Median nerve",
+      "Ulnar nerve",
+      "Axillary nerve",
+      "Radial nerve"
+    ],
+    "correctIndex": 2,
+    "tag": "NervePlexus"
+  },
+  {
+    "id": 29,
+    "question": "Which is the largest nerve in the human body?",
+    "options": [
+      "Median nerve",
+      "Femoral nerve",
+      "Sciatic nerve",
+      "Tibial nerve"
+    ],
+    "correctIndex": 2,
+    "tag": "SpinalCord"
+  },
+  {
+    "id": 30,
+    "question": "Which plexus gives rise to the sciatic nerve?",
+    "options": [
+      "Cervical plexus",
+      "Sacral plexus",
+      "Brachial plexus",
+      "Lumbar plexus"
+    ],
+    "correctIndex": 1,
+    "tag": "NervePlexus"
+  },
+  {
+    "id": 31,
+    "question": "What is a reflex arc?",
+    "options": [
+      "A brain structure",
+      "A voluntary motor pathway",
+      "A sensory receptor type",
+      "A neural pathway for an automatic response"
+    ],
+    "correctIndex": 3,
+    "tag": "Reflexes"
+  },
+  {
+    "id": 32,
+    "question": "What is the minimum number of neurons needed for a reflex arc?",
+    "options": [
+      "One",
+      "Three",
+      "Four",
+      "Two (sensory and motor)"
+    ],
+    "correctIndex": 3,
+    "tag": "Reflexes"
+  },
+  {
+    "id": 33,
+    "question": "What type of reflex involves only two neurons?",
+    "options": [
+      "Crossed reflex",
+      "Polysynaptic reflex",
+      "Autonomic reflex",
+      "Monosynaptic reflex"
+    ],
+    "correctIndex": 3,
+    "tag": "Reflexes"
+  },
+  {
+    "id": 34,
+    "question": "The knee-jerk reflex is an example of what type of reflex?",
+    "options": [
+      "Autonomic reflex",
+      "Withdrawal reflex",
+      "Stretch reflex",
+      "Crossed extensor reflex"
+    ],
+    "correctIndex": 2,
+    "tag": "Reflexes"
+  },
+  {
+    "id": 35,
+    "question": "What is the gray commissure?",
+    "options": [
+      "A meningeal structure",
+      "Gray matter connecting the two halves of the spinal cord",
+      "A type of ganglion",
+      "White matter tracts"
+    ],
+    "correctIndex": 1,
+    "tag": "SpinalCordStructure"
+  },
+  {
+    "id": 36,
+    "question": "What runs through the center of the gray commissure?",
+    "options": [
+      "Nerve fibers",
+      "Cerebrospinal fluid only",
+      "Blood vessels",
+      "Central canal"
+    ],
+    "correctIndex": 3,
+    "tag": "SpinalCord"
+  },
+  {
+    "id": 37,
+    "question": "What does the lateral horn contain?",
+    "options": [
+      "Interneurons only",
+      "Autonomic motor neurons",
+      "Somatic motor neurons",
+      "Sensory neurons"
+    ],
+    "correctIndex": 1,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 38,
+    "question": "In which spinal cord regions is the lateral horn present?",
+    "options": [
+      "All regions",
+      "Cervical only",
+      "Sacral only",
+      "Thoracic and upper lumbar"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 39,
+    "question": "What is the phrenic nerve responsible for?",
+    "options": [
+      "Innervating the heart",
+      "Innervating the face",
+      "Innervating the arm",
+      "Innervating the diaphragm"
+    ],
+    "correctIndex": 3,
+    "tag": "Breathing"
+  },
+  {
+    "id": 40,
+    "question": "From which spinal nerve roots does the phrenic nerve arise?",
+    "options": [
+      "L1, L2",
+      "C3, C4, C5",
+      "T1, T2",
+      "C1, C2"
+    ],
+    "correctIndex": 1,
+    "tag": "SpinalNerves"
+  }
+]

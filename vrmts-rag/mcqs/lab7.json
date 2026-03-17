@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What are the four chambers of the heart?",
+    "options": [
+      "Tricuspid, bicuspid, aortic, pulmonary",
+      "Epicardium, myocardium, endocardium, pericardium",
+      "Aorta, pulmonary artery, vena cava, pulmonary vein",
+      "Right atrium, left atrium, right ventricle, left ventricle"
+    ],
+    "correctIndex": 3,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 2,
+    "question": "What are the three layers of the heart wall?",
+    "options": [
+      "Adventitia, media, intima",
+      "Epicardium, myocardium, endocardium",
+      "Serosa, muscularis, mucosa",
+      "Pericardium, myocardium, endothelium"
+    ],
+    "correctIndex": 1,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 3,
+    "question": "Which layer of the heart wall is the thickest?",
+    "options": [
+      "Pericardium",
+      "Myocardium",
+      "Endocardium",
+      "Epicardium"
+    ],
+    "correctIndex": 1,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 4,
+    "question": "What valve is located between the right atrium and right ventricle?",
+    "options": [
+      "Tricuspid valve",
+      "Aortic valve",
+      "Bicuspid (mitral) valve",
+      "Pulmonary valve"
+    ],
+    "correctIndex": 0,
+    "tag": "Ventricles"
+  },
+  {
+    "id": 5,
+    "question": "What valve is located between the left atrium and left ventricle?",
+    "options": [
+      "Pulmonary valve",
+      "Bicuspid (mitral) valve",
+      "Aortic valve",
+      "Tricuspid valve"
+    ],
+    "correctIndex": 1,
+    "tag": "Ventricles"
+  },
+  {
+    "id": 6,
+    "question": "What type of valves are the tricuspid and mitral valves?",
+    "options": [
+      "Atrioventricular (AV) valves",
+      "Arterial valves",
+      "Venous valves",
+      "Semilunar valves"
+    ],
+    "correctIndex": 0,
+    "tag": "HeartValves"
+  },
+  {
+    "id": 7,
+    "question": "What type of valves are the aortic and pulmonary valves?",
+    "options": [
+      "Bicuspid valves",
+      "Tricuspid valves",
+      "Atrioventricular valves",
+      "Semilunar valves"
+    ],
+    "correctIndex": 3,
+    "tag": "HeartValves"
+  },
+  {
+    "id": 8,
+    "question": "What prevents the AV valves from inverting?",
+    "options": [
+      "Coronary sinus",
+      "Trabeculae carneae",
+      "Chordae tendineae and papillary muscles",
+      "Pectinate muscles"
+    ],
+    "correctIndex": 2,
+    "tag": "ValveSupport"
+  },
+  {
+    "id": 9,
+    "question": "What vessel carries deoxygenated blood from the heart to the lungs?",
+    "options": [
+      "Pulmonary trunk/arteries",
+      "Superior vena cava",
+      "Aorta",
+      "Pulmonary veins"
+    ],
+    "correctIndex": 0,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 10,
+    "question": "What vessels carry oxygenated blood from the lungs to the heart?",
+    "options": [
+      "Coronary arteries",
+      "Pulmonary arteries",
+      "Superior vena cava",
+      "Pulmonary veins"
+    ],
+    "correctIndex": 3,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 11,
+    "question": "Which chamber of the heart has the thickest wall?",
+    "options": [
+      "Left atrium",
+      "Right atrium",
+      "Left ventricle",
+      "Right ventricle"
+    ],
+    "correctIndex": 2,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 12,
+    "question": "What is the pacemaker of the heart?",
+    "options": [
+      "Bundle of His",
+      "Purkinje fibers",
+      "Sinoatrial (SA) node",
+      "Atrioventricular (AV) node"
+    ],
+    "correctIndex": 2,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 13,
+    "question": "Where is the SA node located?",
+    "options": [
+      "Left atrium",
+      "Right ventricle",
+      "Right atrium near the superior vena cava",
+      "Interventricular septum"
+    ],
+    "correctIndex": 2,
+    "tag": "ConductionSystem"
+  },
+  {
+    "id": 14,
+    "question": "What is the function of the AV node?",
+    "options": [
+      "Speeds up conduction",
+      "Prevents backflow of blood",
+      "Delays impulse to allow atrial contraction before ventricular contraction",
+      "Initiates the heartbeat"
+    ],
+    "correctIndex": 2,
+    "tag": "ConductionSystem"
+  },
+  {
+    "id": 15,
+    "question": "What supplies blood to the heart muscle itself?",
+    "options": [
+      "Coronary arteries",
+      "Carotid arteries",
+      "Aorta directly",
+      "Pulmonary arteries"
+    ],
+    "correctIndex": 0,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 16,
+    "question": "What are the two main coronary arteries?",
+    "options": [
+      "Aortic and pulmonary coronary arteries",
+      "Right coronary artery and left coronary artery",
+      "Superior and inferior coronary arteries",
+      "Anterior and posterior coronary arteries"
+    ],
+    "correctIndex": 1,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 17,
+    "question": "Where does venous blood from the heart wall drain?",
+    "options": [
+      "Superior vena cava",
+      "Coronary sinus into right atrium",
+      "Pulmonary veins",
+      "Aorta"
+    ],
+    "correctIndex": 1,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 18,
+    "question": "What is the largest artery in the body?",
+    "options": [
+      "Aorta",
+      "Femoral artery",
+      "Common carotid",
+      "Pulmonary trunk"
+    ],
+    "correctIndex": 0,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 19,
+    "question": "What are the three regions of the aorta?",
+    "options": [
+      "Thoracic, abdominal, pelvic",
+      "Superior, middle, inferior",
+      "Ascending aorta, aortic arch, descending aorta",
+      "Proximal, middle, distal"
+    ],
+    "correctIndex": 2,
+    "tag": "Aorta"
+  },
+  {
+    "id": 20,
+    "question": "What are the three major branches of the aortic arch?",
+    "options": [
+      "Right and left vertebral arteries",
+      "Brachiocephalic trunk, left common carotid, left subclavian",
+      "Superior and inferior mesenteric, celiac trunk",
+      "Right and left coronary, pulmonary trunk"
+    ],
+    "correctIndex": 1,
+    "tag": "Aorta"
+  },
+  {
+    "id": 21,
+    "question": "What artery supplies the brain with blood?",
+    "options": [
+      "Brachiocephalic artery",
+      "Subclavian artery",
+      "Internal carotid and vertebral arteries",
+      "External carotid artery"
+    ],
+    "correctIndex": 2,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 22,
+    "question": "What is the brachial artery?",
+    "options": [
+      "A branch of the femoral artery",
+      "Main artery of the upper arm",
+      "Main artery of the forearm",
+      "An artery in the neck"
+    ],
+    "correctIndex": 1,
+    "tag": "NervePlexus"
+  },
+  {
+    "id": 23,
+    "question": "What artery is commonly used to measure blood pressure?",
+    "options": [
+      "Femoral artery",
+      "Radial artery",
+      "Carotid artery",
+      "Brachial artery"
+    ],
+    "correctIndex": 3,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 24,
+    "question": "What artery is palpated at the wrist to check pulse?",
+    "options": [
+      "Brachial artery",
+      "Ulnar artery",
+      "Median artery",
+      "Radial artery"
+    ],
+    "correctIndex": 3,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 25,
+    "question": "What is the main artery of the thigh?",
+    "options": [
+      "Femoral artery",
+      "Tibial artery",
+      "Iliac artery",
+      "Popliteal artery"
+    ],
+    "correctIndex": 0,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 26,
+    "question": "What are the two veins that drain into the right atrium?",
+    "options": [
+      "Hepatic and renal veins",
+      "Superior and inferior vena cava",
+      "Jugular and subclavian veins",
+      "Right and left pulmonary veins"
+    ],
+    "correctIndex": 1,
+    "tag": "HeartChambers"
+  },
+  {
+    "id": 27,
+    "question": "What are the three layers of blood vessel walls?",
+    "options": [
+      "Epicardium, myocardium, endocardium",
+      "Tunica intima, tunica media, tunica adventitia",
+      "Serosa, muscularis, mucosa",
+      "Endothelium, smooth muscle, connective tissue"
+    ],
+    "correctIndex": 1,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 28,
+    "question": "What type of blood vessels have valves?",
+    "options": [
+      "Arteries",
+      "Capillaries",
+      "Veins",
+      "Arterioles"
+    ],
+    "correctIndex": 2,
+    "tag": "CardiovascularSystem"
+  },
+  {
+    "id": 29,
+    "question": "What is the hepatic portal system?",
+    "options": [
+      "Blood supply to the heart",
+      "Circulation through the lungs",
+      "Vessels carrying blood from GI tract to liver",
+      "Drainage of the brain"
+    ],
+    "correctIndex": 2,
+    "tag": "PortalCirculation"
+  },
+  {
+    "id": 30,
+    "question": "What vessel drains blood from the digestive organs to the liver?",
+    "options": [
+      "Hepatic portal vein",
+      "Inferior vena cava",
+      "Superior mesenteric artery",
+      "Hepatic artery"
+    ],
+    "correctIndex": 0,
+    "tag": "Liver"
+  },
+  {
+    "id": 31,
+    "question": "What is pulmonary circulation?",
+    "options": [
+      "Blood flow through the brain",
+      "Blood flow to the body",
+      "Blood flow between heart and lungs",
+      "Blood flow through coronary vessels"
+    ],
+    "correctIndex": 2,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 32,
+    "question": "What is systemic circulation?",
+    "options": [
+      "Blood flow through coronary arteries",
+      "Blood flow from heart to body and back",
+      "Blood flow through the liver",
+      "Blood flow between heart and lungs"
+    ],
+    "correctIndex": 1,
+    "tag": "Circulation"
+  },
+  {
+    "id": 33,
+    "question": "What is the fossa ovalis?",
+    "options": [
+      "A coronary vessel",
+      "Remnant of fetal foramen ovale in right atrium",
+      "Part of the left ventricle",
+      "A heart valve"
+    ],
+    "correctIndex": 1,
+    "tag": "BoneMarkings"
+  },
+  {
+    "id": 34,
+    "question": "What are the trabeculae carneae?",
+    "options": [
+      "Muscular ridges on ventricular walls",
+      "Strings attached to valves",
+      "Conducting fibers",
+      "Muscles in atria"
+    ],
+    "correctIndex": 0,
+    "tag": "BoneTypes"
+  },
+  {
+    "id": 35,
+    "question": "What are pectinate muscles?",
+    "options": [
+      "Muscles attached to valves",
+      "Smooth muscle in arteries",
+      "Muscular ridges in atrial walls",
+      "Muscles in ventricular walls"
+    ],
+    "correctIndex": 2,
+    "tag": "ValveSupport"
+  },
+  {
+    "id": 36,
+    "question": "What separates the right and left ventricles?",
+    "options": [
+      "Pericardium",
+      "Interventricular septum",
+      "Interatrial septum",
+      "Atrioventricular valve"
+    ],
+    "correctIndex": 1,
+    "tag": "CardiovascularSystem"
+  },
+  {
+    "id": 37,
+    "question": "What surrounds and protects the heart?",
+    "options": [
+      "Meninges",
+      "Pericardium",
+      "Pleura",
+      "Peritoneum"
+    ],
+    "correctIndex": 1,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 38,
+    "question": "What artery branches into the right common carotid and right subclavian?",
+    "options": [
+      "Left common carotid",
+      "Coronary artery",
+      "Brachiocephalic trunk",
+      "Aortic arch"
+    ],
+    "correctIndex": 2,
+    "tag": "HeadNeckVessels"
+  },
+  {
+    "id": 39,
+    "question": "What is the circle of Willis?",
+    "options": [
+      "Arterial anastomosis at base of brain",
+      "Part of pulmonary circulation",
+      "Venous drainage of brain",
+      "A heart structure"
+    ],
+    "correctIndex": 0,
+    "tag": "CardiovascularSystem"
+  },
+  {
+    "id": 40,
+    "question": "What drains blood from the brain?",
+    "options": [
+      "Internal jugular veins",
+      "External jugular veins",
+      "Subclavian veins",
+      "Vertebral veins"
+    ],
+    "correctIndex": 0,
+    "tag": "HeadNeckVessels"
+  }
+]

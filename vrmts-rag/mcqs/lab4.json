@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What are the four main regions of the brain?",
+    "options": [
+      "Cerebrum, diencephalon, brainstem, cerebellum",
+      "Medulla, pons, midbrain, thalamus",
+      "Cortex, white matter, ventricles, meninges",
+      "Frontal, parietal, temporal, occipital"
+    ],
+    "correctIndex": 0,
+    "tag": "Cerebrum"
+  },
+  {
+    "id": 2,
+    "question": "What is the largest part of the brain?",
+    "options": [
+      "Cerebellum",
+      "Brainstem",
+      "Diencephalon",
+      "Cerebrum"
+    ],
+    "correctIndex": 3,
+    "tag": "Cerebrum"
+  },
+  {
+    "id": 3,
+    "question": "Which lobe of the cerebrum is responsible for voluntary motor control?",
+    "options": [
+      "Occipital lobe",
+      "Parietal lobe",
+      "Frontal lobe",
+      "Temporal lobe"
+    ],
+    "correctIndex": 2,
+    "tag": "Cerebrum"
+  },
+  {
+    "id": 4,
+    "question": "Which lobe contains the primary visual cortex?",
+    "options": [
+      "Temporal lobe",
+      "Occipital lobe",
+      "Frontal lobe",
+      "Parietal lobe"
+    ],
+    "correctIndex": 1,
+    "tag": "Lungs"
+  },
+  {
+    "id": 5,
+    "question": "Which lobe contains the primary auditory cortex?",
+    "options": [
+      "Parietal lobe",
+      "Occipital lobe",
+      "Temporal lobe",
+      "Frontal lobe"
+    ],
+    "correctIndex": 2,
+    "tag": "Lungs"
+  },
+  {
+    "id": 6,
+    "question": "Which lobe contains the primary somatosensory cortex?",
+    "options": [
+      "Parietal lobe",
+      "Frontal lobe",
+      "Temporal lobe",
+      "Occipital lobe"
+    ],
+    "correctIndex": 0,
+    "tag": "Lungs"
+  },
+  {
+    "id": 7,
+    "question": "What gyrus contains the primary motor cortex?",
+    "options": [
+      "Cingulate gyrus",
+      "Postcentral gyrus",
+      "Precentral gyrus",
+      "Superior temporal gyrus"
+    ],
+    "correctIndex": 2,
+    "tag": "CerebralGyri"
+  },
+  {
+    "id": 8,
+    "question": "What gyrus contains the primary somatosensory cortex?",
+    "options": [
+      "Supramarginal gyrus",
+      "Precentral gyrus",
+      "Angular gyrus",
+      "Postcentral gyrus"
+    ],
+    "correctIndex": 3,
+    "tag": "CerebralGyri"
+  },
+  {
+    "id": 9,
+    "question": "What are the three parts of the brainstem?",
+    "options": [
+      "Thalamus, hypothalamus, epithalamus",
+      "Frontal, parietal, temporal",
+      "Cerebrum, cerebellum, diencephalon",
+      "Midbrain, pons, medulla oblongata"
+    ],
+    "correctIndex": 3,
+    "tag": "Brainstem"
+  },
+  {
+    "id": 10,
+    "question": "Which part of the brainstem is most inferior?",
+    "options": [
+      "Medulla oblongata",
+      "Midbrain",
+      "Pons",
+      "Thalamus"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 11,
+    "question": "What are the three parts of the diencephalon?",
+    "options": [
+      "Frontal, parietal, temporal",
+      "Thalamus, hypothalamus, epithalamus",
+      "Cerebrum, cerebellum, brainstem",
+      "Midbrain, pons, medulla"
+    ],
+    "correctIndex": 1,
+    "tag": "Diencephalon"
+  },
+  {
+    "id": 12,
+    "question": "Which structure serves as the main relay station for sensory information?",
+    "options": [
+      "Cerebellum",
+      "Thalamus",
+      "Medulla",
+      "Hypothalamus"
+    ],
+    "correctIndex": 1,
+    "tag": "Diencephalon"
+  },
+  {
+    "id": 13,
+    "question": "Which structure controls autonomic functions and links the nervous and endocrine systems?",
+    "options": [
+      "Hypothalamus",
+      "Thalamus",
+      "Pons",
+      "Cerebellum"
+    ],
+    "correctIndex": 0,
+    "tag": "Diencephalon"
+  },
+  {
+    "id": 14,
+    "question": "What structure connects the hypothalamus to the pituitary gland?",
+    "options": [
+      "Fornix",
+      "Optic chiasm",
+      "Infundibulum",
+      "Corpus callosum"
+    ],
+    "correctIndex": 2,
+    "tag": "Diencephalon"
+  },
+  {
+    "id": 15,
+    "question": "What is the function of the cerebellum?",
+    "options": [
+      "Processing vision",
+      "Coordination of movement and balance",
+      "Language production",
+      "Memory formation"
+    ],
+    "correctIndex": 1,
+    "tag": "Cerebellum"
+  },
+  {
+    "id": 16,
+    "question": "What connects the two cerebral hemispheres?",
+    "options": [
+      "Fornix",
+      "Cerebral peduncles",
+      "Pons",
+      "Corpus callosum"
+    ],
+    "correctIndex": 3,
+    "tag": "Cerebrum"
+  },
+  {
+    "id": 17,
+    "question": "How many ventricles are in the brain?",
+    "options": [
+      "Four",
+      "Three",
+      "Two",
+      "Six"
+    ],
+    "correctIndex": 0,
+    "tag": "Brain"
+  },
+  {
+    "id": 18,
+    "question": "What produces cerebrospinal fluid (CSF)?",
+    "options": [
+      "Dura mater",
+      "Arachnoid villi",
+      "Choroid plexus",
+      "Pia mater"
+    ],
+    "correctIndex": 2,
+    "tag": "CSF"
+  },
+  {
+    "id": 19,
+    "question": "What connects the third and fourth ventricles?",
+    "options": [
+      "Interventricular foramen",
+      "Cerebral aqueduct",
+      "Lateral aperture",
+      "Central canal"
+    ],
+    "correctIndex": 1,
+    "tag": "Cerebrum"
+  },
+  {
+    "id": 20,
+    "question": "What separates the cerebrum from the cerebellum?",
+    "options": [
+      "Falx cerebelli",
+      "Diaphragma sellae",
+      "Tentorium cerebelli",
+      "Falx cerebri"
+    ],
+    "correctIndex": 2,
+    "tag": "Cerebrum"
+  },
+  {
+    "id": 21,
+    "question": "Which cranial nerve is responsible for smell?",
+    "options": [
+      "Facial (VII)",
+      "Trigeminal (V)",
+      "Optic (II)",
+      "Olfactory (I)"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 22,
+    "question": "Which cranial nerve is responsible for vision?",
+    "options": [
+      "Trochlear (IV)",
+      "Olfactory (I)",
+      "Oculomotor (III)",
+      "Optic (II)"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 23,
+    "question": "Which cranial nerve controls most eye movements and pupil constriction?",
+    "options": [
+      "Optic (II)",
+      "Trochlear (IV)",
+      "Oculomotor (III)",
+      "Abducens (VI)"
+    ],
+    "correctIndex": 2,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 24,
+    "question": "Which cranial nerve innervates the superior oblique muscle?",
+    "options": [
+      "Abducens (VI)",
+      "Facial (VII)",
+      "Oculomotor (III)",
+      "Trochlear (IV)"
+    ],
+    "correctIndex": 3,
+    "tag": "Oblique"
+  },
+  {
+    "id": 25,
+    "question": "Which cranial nerve has three divisions and is involved in facial sensation?",
+    "options": [
+      "Vagus (X)",
+      "Glossopharyngeal (IX)",
+      "Facial (VII)",
+      "Trigeminal (V)"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 26,
+    "question": "Which cranial nerve controls the lateral rectus muscle?",
+    "options": [
+      "Trochlear (IV)",
+      "Abducens (VI)",
+      "Oculomotor (III)",
+      "Optic (II)"
+    ],
+    "correctIndex": 1,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 27,
+    "question": "Which cranial nerve controls facial expressions?",
+    "options": [
+      "Trigeminal (V)",
+      "Accessory (XI)",
+      "Hypoglossal (XII)",
+      "Facial (VII)"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 28,
+    "question": "Which cranial nerve is responsible for hearing and balance?",
+    "options": [
+      "Glossopharyngeal (IX)",
+      "Vagus (X)",
+      "Facial (VII)",
+      "Vestibulocochlear (VIII)"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 29,
+    "question": "Which cranial nerve has the most extensive distribution in the body?",
+    "options": [
+      "Facial (VII)",
+      "Glossopharyngeal (IX)",
+      "Trigeminal (V)",
+      "Vagus (X)"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 30,
+    "question": "Which cranial nerve innervates the trapezius and sternocleidomastoid muscles?",
+    "options": [
+      "Accessory (XI)",
+      "Glossopharyngeal (IX)",
+      "Vagus (X)",
+      "Hypoglossal (XII)"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 31,
+    "question": "Which cranial nerve controls tongue movement?",
+    "options": [
+      "Glossopharyngeal (IX)",
+      "Facial (VII)",
+      "Hypoglossal (XII)",
+      "Vagus (X)"
+    ],
+    "correctIndex": 2,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 32,
+    "question": "Which brain area is responsible for speech production?",
+    "options": [
+      "Wernicke's area",
+      "Primary motor cortex",
+      "Broca's area",
+      "Prefrontal cortex"
+    ],
+    "correctIndex": 2,
+    "tag": "LanguageAreas"
+  },
+  {
+    "id": 33,
+    "question": "Which brain area is responsible for speech comprehension?",
+    "options": [
+      "Wernicke's area",
+      "Angular gyrus",
+      "Broca's area",
+      "Primary auditory cortex"
+    ],
+    "correctIndex": 0,
+    "tag": "LanguageAreas"
+  },
+  {
+    "id": 34,
+    "question": "What is the pineal gland's primary function?",
+    "options": [
+      "Control of hunger",
+      "Production of CSF",
+      "Regulation of body temperature",
+      "Secretion of melatonin"
+    ],
+    "correctIndex": 3,
+    "tag": "UrineFormation"
+  },
+  {
+    "id": 35,
+    "question": "What structures make up the corpora quadrigemina?",
+    "options": [
+      "Thalamus and hypothalamus",
+      "Caudate and putamen",
+      "Superior and inferior colliculi",
+      "Hippocampus and amygdala"
+    ],
+    "correctIndex": 2,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 36,
+    "question": "What is the arbor vitae?",
+    "options": [
+      "White matter pattern in the cerebellum",
+      "Part of the brainstem",
+      "Gray matter in the cerebrum",
+      "A cranial nerve nucleus"
+    ],
+    "correctIndex": 0,
+    "tag": "SpinalCordStructure"
+  },
+  {
+    "id": 37,
+    "question": "Which structure regulates arousal and sleep-wake cycles?",
+    "options": [
+      "Basal ganglia",
+      "Corpus callosum",
+      "Reticular formation",
+      "Hippocampus"
+    ],
+    "correctIndex": 2,
+    "tag": "Brain"
+  },
+  {
+    "id": 38,
+    "question": "What dural fold separates the two cerebral hemispheres?",
+    "options": [
+      "Tentorium cerebelli",
+      "Falx cerebelli",
+      "Diaphragma sellae",
+      "Falx cerebri"
+    ],
+    "correctIndex": 3,
+    "tag": "Cerebrum"
+  },
+  {
+    "id": 39,
+    "question": "What are arachnoid granulations (villi) responsible for?",
+    "options": [
+      "Transmitting nerve impulses",
+      "Protecting the brain",
+      "Producing CSF",
+      "Returning CSF to venous blood"
+    ],
+    "correctIndex": 3,
+    "tag": "Meninges"
+  },
+  {
+    "id": 40,
+    "question": "Where is the primary gustatory cortex located?",
+    "options": [
+      "Occipital lobe",
+      "Parietal lobe",
+      "Temporal lobe",
+      "Insula and frontal operculum"
+    ],
+    "correctIndex": 3,
+    "tag": "Taste"
+  }
+]

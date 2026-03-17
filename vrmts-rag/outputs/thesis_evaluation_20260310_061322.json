@@ -1,0 +1,4612 @@
+{
+  "metadata": {
+    "timestamp": "20260310_061322",
+    "model": "llama3.2",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "vector_db": "FAISS (IndexFlatL2)",
+    "top_k": 6,
+    "chunk_size": 800,
+    "chunk_overlap": 200,
+    "total_chunks": 262,
+    "total_labs": 10,
+    "total_mcqs": 399
+  },
+  "mcq_accuracy": {
+    "total_questions": 50,
+    "correct": 43,
+    "ambiguous": 0,
+    "wrong": 7,
+    "errors": 0,
+    "strict_accuracy_pct": 86.0,
+    "lenient_accuracy_pct": 86.0,
+    "avg_response_time_sec": 50.95,
+    "per_lab": {
+      "1": {
+        "total": 5,
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 4,
+        "errors": 0,
+        "strict_accuracy": 20.0,
+        "lenient_accuracy": 20.0,
+        "avg_response_time": 54.9
+      },
+      "2": {
+        "total": 5,
+        "correct": 5,
+        "ambiguous": 0,
+        "wrong": 0,
+        "errors": 0,
+        "strict_accuracy": 100.0,
+        "lenient_accuracy": 100.0,
+        "avg_response_time": 58.87
+      },
+      "3": {
+        "total": 5,
+        "correct": 5,
+        "ambiguous": 0,
+        "wrong": 0,
+        "errors": 0,
+        "strict_accuracy": 100.0,
+        "lenient_accuracy": 100.0,
+        "avg_response_time": 54.19
+      },
+      "4": {
+        "total": 5,
+        "correct": 4,
+        "ambiguous": 0,
+        "wrong": 1,
+        "errors": 0,
+        "strict_accuracy": 80.0,
+        "lenient_accuracy": 80.0,
+        "avg_response_time": 47.0
+      },
+      "5": {
+        "total": 5,
+        "correct": 5,
+        "ambiguous": 0,
+        "wrong": 0,
+        "errors": 0,
+        "strict_accuracy": 100.0,
+        "lenient_accuracy": 100.0,
+        "avg_response_time": 48.81
+      },
+      "6": {
+        "total": 5,
+        "correct": 5,
+        "ambiguous": 0,
+        "wrong": 0,
+        "errors": 0,
+        "strict_accuracy": 100.0,
+        "lenient_accuracy": 100.0,
+        "avg_response_time": 46.81
+      },
+      "7": {
+        "total": 5,
+        "correct": 4,
+        "ambiguous": 0,
+        "wrong": 1,
+        "errors": 0,
+        "strict_accuracy": 80.0,
+        "lenient_accuracy": 80.0,
+        "avg_response_time": 43.47
+      },
+      "8": {
+        "total": 5,
+        "correct": 4,
+        "ambiguous": 0,
+        "wrong": 1,
+        "errors": 0,
+        "strict_accuracy": 80.0,
+        "lenient_accuracy": 80.0,
+        "avg_response_time": 53.67
+      },
+      "9": {
+        "total": 5,
+        "correct": 5,
+        "ambiguous": 0,
+        "wrong": 0,
+        "errors": 0,
+        "strict_accuracy": 100.0,
+        "lenient_accuracy": 100.0,
+        "avg_response_time": 46.29
+      },
+      "10": {
+        "total": 5,
+        "correct": 5,
+        "ambiguous": 0,
+        "wrong": 0,
+        "errors": 0,
+        "strict_accuracy": 100.0,
+        "lenient_accuracy": 100.0,
+        "avg_response_time": 55.47
+      }
+    },
+    "per_tag": {
+      "AnatomicalPosition": {
+        "correct": 0,
+        "ambiguous": 0,
+        "wrong": 1,
+        "total": 1
+      },
+      "Coronal": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "MuscleTypes": {
+        "correct": 0,
+        "ambiguous": 0,
+        "wrong": 1,
+        "total": 1
+      },
+      "BoneMarkings": {
+        "correct": 3,
+        "ambiguous": 0,
+        "wrong": 1,
+        "total": 4
+      },
+      "Transverse": {
+        "correct": 0,
+        "ambiguous": 0,
+        "wrong": 1,
+        "total": 1
+      },
+      "BonesAndMarkings": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "SkullBones": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "NervePlexus": {
+        "correct": 2,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 2
+      },
+      "Meninges": {
+        "correct": 3,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 3
+      },
+      "SpinalCord": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "NeuronTypes": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "Cerebellum": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "LanguageAreas": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "Cerebrum": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "SpinalCordStructure": {
+        "correct": 0,
+        "ambiguous": 0,
+        "wrong": 1,
+        "total": 1
+      },
+      "DirectionalTerms": {
+        "correct": 5,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 5
+      },
+      "VascularTunic": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "EarAnatomy": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "Pharynx": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "RespiratorySystem": {
+        "correct": 2,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 2
+      },
+      "RespiratoryZones": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "NasalCavity": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "BloodVessels": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "HeartAnatomy": {
+        "correct": 0,
+        "ambiguous": 0,
+        "wrong": 1,
+        "total": 1
+      },
+      "ConductionSystem": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "HeartValves": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "OralCavity": {
+        "correct": 2,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 2
+      },
+      "Liver": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 1,
+        "total": 2
+      },
+      "Esophagus": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "Urethra": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "Kidney": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "Bladder": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "Lungs": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "ThighMuscles": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "FacialMuscles": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "MuscularSystem": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      },
+      "Hamstrings": {
+        "correct": 1,
+        "ambiguous": 0,
+        "wrong": 0,
+        "total": 1
+      }
+    },
+    "per_difficulty": {
+      "unknown": {
+        "correct": 43,
+        "ambiguous": 0,
+        "wrong": 7,
+        "total": 50
+      }
+    }
+  },
+  "retrieval": {
+    "total": 399,
+    "relevant": 333,
+    "relevance_pct": 83.5,
+    "per_lab": {
+      "1": {
+        "total": 39,
+        "relevant": 31
+      },
+      "10": {
+        "total": 40,
+        "relevant": 35
+      },
+      "2": {
+        "total": 40,
+        "relevant": 39
+      },
+      "3": {
+        "total": 40,
+        "relevant": 33
+      },
+      "4": {
+        "total": 40,
+        "relevant": 36
+      },
+      "5": {
+        "total": 40,
+        "relevant": 30
+      },
+      "6": {
+        "total": 40,
+        "relevant": 35
+      },
+      "7": {
+        "total": 40,
+        "relevant": 33
+      },
+      "8": {
+        "total": 40,
+        "relevant": 33
+      },
+      "9": {
+        "total": 40,
+        "relevant": 28
+      }
+    }
+  },
+  "mcq_details": [
+    {
+      "question": "What is the standard anatomical position for describing body structures?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "difficulty": "unknown",
+      "correct_answer": "Right anterior oblique view",
+      "correct_letter": "D",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "wrong",
+      "response_time": 75.9
+    },
+    {
+      "question": "Which plane is defined as an imaginary vertical line through the center of the body?",
+      "lab": 1,
+      "tag": "Coronal",
+      "difficulty": "unknown",
+      "correct_answer": "Frontal",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 57.77
+    },
+    {
+      "question": "The skeletal system's function of providing structural support and protection for vital organs is most effectively achieved by the bones in which plane?",
+      "lab": 1,
+      "tag": "MuscleTypes",
+      "difficulty": "unknown",
+      "correct_answer": "Frontal",
+      "correct_letter": "D",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "wrong",
+      "response_time": 56.04
+    },
+    {
+      "question": "The heart's function is to pump blood throughout the body. Which plane is most relevant to this process?",
+      "lab": 1,
+      "tag": "BoneMarkings",
+      "difficulty": "unknown",
+      "correct_answer": "Transverse plane",
+      "correct_letter": "C",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "wrong",
+      "response_time": 58.08
+    },
+    {
+      "question": "A histology slide shows a cross-section of the left arm. Which plane would be used to describe its orientation?",
+      "lab": 1,
+      "tag": "Transverse",
+      "difficulty": "unknown",
+      "correct_answer": "Transverse",
+      "correct_letter": "C",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "wrong",
+      "response_time": 26.71
+    },
+    {
+      "question": "What are the bone cells that break down bone tissue called?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "difficulty": "unknown",
+      "correct_answer": "Osteoclasts",
+      "correct_letter": "B",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "correct",
+      "response_time": 53.44
+    },
+    {
+      "question": "What is the sella turcica a feature of?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "difficulty": "unknown",
+      "correct_answer": "Sphenoid bone",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 65.26
+    },
+    {
+      "question": "What is the zygomatic arch formed by?",
+      "lab": 2,
+      "tag": "SkullBones",
+      "difficulty": "unknown",
+      "correct_answer": "Zygomatic process of temporal bone and temporal process of zygomatic bone",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 53.77
+    },
+    {
+      "question": "Which bone contains the foramen magnum?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "difficulty": "unknown",
+      "correct_answer": "Occipital bone",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 57.84
+    },
+    {
+      "question": "What is the lesser trochanter a feature of?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "difficulty": "unknown",
+      "correct_answer": "Femur",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 64.03
+    },
+    {
+      "question": "Which nerve from the brachial plexus innervates the deltoid muscle?",
+      "lab": 3,
+      "tag": "NervePlexus",
+      "difficulty": "unknown",
+      "correct_answer": "Axillary nerve",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 62.9
+    },
+    {
+      "question": "Which meninx is the innermost layer that directly covers the spinal cord?",
+      "lab": 3,
+      "tag": "Meninges",
+      "difficulty": "unknown",
+      "correct_answer": "Pia mater",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 48.45
+    },
+    {
+      "question": "Which meninx is the outermost and toughest layer?",
+      "lab": 3,
+      "tag": "Meninges",
+      "difficulty": "unknown",
+      "correct_answer": "Dura mater",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 51.5
+    },
+    {
+      "question": "How many pairs of spinal nerves are there in the human body?",
+      "lab": 3,
+      "tag": "SpinalCord",
+      "difficulty": "unknown",
+      "correct_answer": "31 pairs",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 49.27
+    },
+    {
+      "question": "What type of neurons carry sensory information toward the CNS?",
+      "lab": 3,
+      "tag": "NeuronTypes",
+      "difficulty": "unknown",
+      "correct_answer": "Afferent neurons",
+      "correct_letter": "B",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "correct",
+      "response_time": 58.81
+    },
+    {
+      "question": "What is the function of the cerebellum?",
+      "lab": 4,
+      "tag": "Cerebellum",
+      "difficulty": "unknown",
+      "correct_answer": "Coordination of movement and balance",
+      "correct_letter": "B",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "correct",
+      "response_time": 24.62
+    },
+    {
+      "question": "Which brain area is responsible for speech comprehension?",
+      "lab": 4,
+      "tag": "LanguageAreas",
+      "difficulty": "unknown",
+      "correct_answer": "Wernicke's area",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 55.91
+    },
+    {
+      "question": "What are arachnoid granulations (villi) responsible for?",
+      "lab": 4,
+      "tag": "Meninges",
+      "difficulty": "unknown",
+      "correct_answer": "Returning CSF to venous blood",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 58.61
+    },
+    {
+      "question": "What is the largest part of the brain?",
+      "lab": 4,
+      "tag": "Cerebrum",
+      "difficulty": "unknown",
+      "correct_answer": "Cerebrum",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 45.99
+    },
+    {
+      "question": "What is the arbor vitae?",
+      "lab": 4,
+      "tag": "SpinalCordStructure",
+      "difficulty": "unknown",
+      "correct_answer": "White matter pattern in the cerebellum",
+      "correct_letter": "A",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "wrong",
+      "response_time": 49.85
+    },
+    {
+      "question": "What fluid is found in the anterior and posterior chambers of the eye?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "difficulty": "unknown",
+      "correct_answer": "Aqueous humor",
+      "correct_letter": "B",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "correct",
+      "response_time": 50.22
+    },
+    {
+      "question": "What is the choroid?",
+      "lab": 5,
+      "tag": "VascularTunic",
+      "difficulty": "unknown",
+      "correct_answer": "Vascular layer that nourishes the retina",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 52.49
+    },
+    {
+      "question": "Which cranial nerves carry taste information?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "difficulty": "unknown",
+      "correct_answer": "Facial (VII), Glossopharyngeal (IX), Vagus (X)",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 48.46
+    },
+    {
+      "question": "What are the three regions of the ear?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "difficulty": "unknown",
+      "correct_answer": "External, middle, inner",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 45.45
+    },
+    {
+      "question": "Which cranial nerve carries smell information?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "difficulty": "unknown",
+      "correct_answer": "Olfactory (I)",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 47.45
+    },
+    {
+      "question": "What is the function of cilia in the respiratory tract?",
+      "lab": 6,
+      "tag": "Pharynx",
+      "difficulty": "unknown",
+      "correct_answer": "Move mucus and trapped particles toward pharynx",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 40.78
+    },
+    {
+      "question": "What type of cells line the alveoli?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "difficulty": "unknown",
+      "correct_answer": "Type I and Type II pneumocytes",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 53.35
+    },
+    {
+      "question": "What are the two functional divisions of the respiratory system?",
+      "lab": 6,
+      "tag": "RespiratoryZones",
+      "difficulty": "unknown",
+      "correct_answer": "Conducting zone and respiratory zone",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 44.0
+    },
+    {
+      "question": "Which primary bronchus is wider, shorter, and more vertical?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "difficulty": "unknown",
+      "correct_answer": "Right primary bronchus",
+      "correct_letter": "A",
+      "llm_response": "A.",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 42.21
+    },
+    {
+      "question": "Which bones contain paranasal sinuses?",
+      "lab": 6,
+      "tag": "NasalCavity",
+      "difficulty": "unknown",
+      "correct_answer": "Frontal, maxillary, ethmoid, sphenoid",
+      "correct_letter": "B",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "correct",
+      "response_time": 53.69
+    },
+    {
+      "question": "What is the brachial artery?",
+      "lab": 7,
+      "tag": "NervePlexus",
+      "difficulty": "unknown",
+      "correct_answer": "Main artery of the upper arm",
+      "correct_letter": "B",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "correct",
+      "response_time": 51.08
+    },
+    {
+      "question": "What is the largest artery in the body?",
+      "lab": 7,
+      "tag": "BloodVessels",
+      "difficulty": "unknown",
+      "correct_answer": "Aorta",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 37.12
+    },
+    {
+      "question": "What vessels carry oxygenated blood from the lungs to the heart?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "difficulty": "unknown",
+      "correct_answer": "Pulmonary veins",
+      "correct_letter": "D",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "wrong",
+      "response_time": 44.07
+    },
+    {
+      "question": "What is the function of the AV node?",
+      "lab": 7,
+      "tag": "ConductionSystem",
+      "difficulty": "unknown",
+      "correct_answer": "Delays impulse to allow atrial contraction before ventricular contraction",
+      "correct_letter": "C",
+      "llm_response": "C.",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 47.08
+    },
+    {
+      "question": "What type of valves are the aortic and pulmonary valves?",
+      "lab": 7,
+      "tag": "HeartValves",
+      "difficulty": "unknown",
+      "correct_answer": "Semilunar valves",
+      "correct_letter": "D",
+      "llm_response": "D.",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 37.99
+    },
+    {
+      "question": "What are the four types of teeth?",
+      "lab": 8,
+      "tag": "OralCavity",
+      "difficulty": "unknown",
+      "correct_answer": "Incisors, canines, premolars, molars",
+      "correct_letter": "B",
+      "llm_response": "B.",
+      "parsed_letter": "B",
+      "result": "correct",
+      "response_time": 58.51
+    },
+    {
+      "question": "What forms the common bile duct?",
+      "lab": 8,
+      "tag": "Liver",
+      "difficulty": "unknown",
+      "correct_answer": "Union of common hepatic and cystic ducts",
+      "correct_letter": "B",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "wrong",
+      "response_time": 51.95
+    },
+    {
+      "question": "How many permanent teeth do adults have?",
+      "lab": 8,
+      "tag": "OralCavity",
+      "difficulty": "unknown",
+      "correct_answer": "32",
+      "correct_letter": "B",
+      "llm_response": "B",
+      "parsed_letter": "B",
+      "result": "correct",
+      "response_time": 57.66
+    },
+    {
+      "question": "What is the function of the gallbladder?",
+      "lab": 8,
+      "tag": "Liver",
+      "difficulty": "unknown",
+      "correct_answer": "Stores and concentrates bile",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 51.29
+    },
+    {
+      "question": "What connects the esophagus to the stomach?",
+      "lab": 8,
+      "tag": "Esophagus",
+      "difficulty": "unknown",
+      "correct_answer": "Cardiac sphincter (lower esophageal sphincter)",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 48.96
+    },
+    {
+      "question": "How does the male urethra differ from the female?",
+      "lab": 9,
+      "tag": "Urethra",
+      "difficulty": "unknown",
+      "correct_answer": "Male urethra is longer and passes through prostate",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 49.49
+    },
+    {
+      "question": "What is the functional unit of the kidney?",
+      "lab": 9,
+      "tag": "Kidney",
+      "difficulty": "unknown",
+      "correct_answer": "Nephron",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 42.8
+    },
+    {
+      "question": "Why is transitional epithelium important in the urinary system?",
+      "lab": 9,
+      "tag": "Bladder",
+      "difficulty": "unknown",
+      "correct_answer": "It can stretch as the bladder fills",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 42.25
+    },
+    {
+      "question": "What are juxtamedullary nephrons?",
+      "lab": 9,
+      "tag": "DirectionalTerms",
+      "difficulty": "unknown",
+      "correct_answer": "Nephrons with long loops of Henle extending deep into medulla",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 53.2
+    },
+    {
+      "question": "What is the hilum of the kidney?",
+      "lab": 9,
+      "tag": "Lungs",
+      "difficulty": "unknown",
+      "correct_answer": "Indented region where vessels and ureter enter/exit",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 43.73
+    },
+    {
+      "question": "What is the longest muscle in the body?",
+      "lab": 10,
+      "tag": "ThighMuscles",
+      "difficulty": "unknown",
+      "correct_answer": "Sartorius",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 61.04
+    },
+    {
+      "question": "What is the main muscle of mastication (chewing)?",
+      "lab": 10,
+      "tag": "FacialMuscles",
+      "difficulty": "unknown",
+      "correct_answer": "Masseter",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 53.73
+    },
+    {
+      "question": "What is a muscle antagonist?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "difficulty": "unknown",
+      "correct_answer": "A muscle that opposes the prime mover",
+      "correct_letter": "A",
+      "llm_response": "A",
+      "parsed_letter": "A",
+      "result": "correct",
+      "response_time": 49.72
+    },
+    {
+      "question": "What are the three hamstring muscles?",
+      "lab": 10,
+      "tag": "Hamstrings",
+      "difficulty": "unknown",
+      "correct_answer": "Biceps femoris, semimembranosus, semitendinosus",
+      "correct_letter": "C",
+      "llm_response": "C",
+      "parsed_letter": "C",
+      "result": "correct",
+      "response_time": 59.31
+    },
+    {
+      "question": "What is the serratus anterior?",
+      "lab": 10,
+      "tag": "DirectionalTerms",
+      "difficulty": "unknown",
+      "correct_answer": "Muscle that protracts and rotates the scapula upward",
+      "correct_letter": "D",
+      "llm_response": "D",
+      "parsed_letter": "D",
+      "result": "correct",
+      "response_time": 53.55
+    }
+  ],
+  "retrieval_details": [
+    {
+      "question": "What is the standard anatomical position?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "Which plane is defined as an imaginary vertical line through the center of the body?",
+      "lab": 1,
+      "tag": "Coronal",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is a directional term used to describe the position of an object in relation to the body?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What term refers to the upper portion of the body, including the head, neck, and trunk?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the term for a structure that lies in front of another structure?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the term for a structure that lies on the same side as another structure?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the term for a structure that lies above another structure?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the standard anatomical position for describing body structures?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which of the following planes is used to describe the position of structures in relation to the head?",
+      "lab": 1,
+      "tag": "Coronal",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Identify the correct directional term for structures located on the right side of the body when viewed from above.",
+      "lab": 1,
+      "tag": "AnatomicalLanguage",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which of the following body regions is associated with the heart, lungs, and liver?",
+      "lab": 1,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the name of the plane that includes the head and shoulders?",
+      "lab": 1,
+      "tag": "Transverse",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "A student is asked to locate the sternocleidomastoid muscle in the anatomical position. Which directional term would be used to describe its location?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "The frontal plane is an example of a what type of plane in the human body?",
+      "lab": 1,
+      "tag": "Coronal",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "A histology slide shows a cross-section of the left arm. Which plane would be used to describe its orientation?",
+      "lab": 1,
+      "tag": "Transverse",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "The heart's function is to pump blood throughout the body. Which plane is most relevant to this process?",
+      "lab": 1,
+      "tag": "BoneMarkings",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "The respiratory system's function of exchanging oxygen and carbon dioxide involves which body region?",
+      "lab": 1,
+      "tag": "BodyRegions",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "The skeletal system's function of providing structural support and protection for vital organs is most effectively achieved by the bones in which plane?",
+      "lab": 1,
+      "tag": "MuscleTypes",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "The nervous system's function of transmitting and processing neural signals involves which type of directional term?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the primary function of the abdominal muscles during breathing?",
+      "lab": 1,
+      "tag": "Breathing",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which of the following structures plays a crucial role in regulating body temperature?",
+      "lab": 1,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the primary function of the diaphragm during inhalation?",
+      "lab": 1,
+      "tag": "Breathing",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which of the following structures helps to protect internal organs during injury?",
+      "lab": 1,
+      "tag": "AnatomicalLanguage",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the standard anatomical position used to describe body location?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which plane is located at a right angle to the transverse plane?",
+      "lab": 1,
+      "tag": "Transverse",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "A structure is described as 'dorsal' and 'ventral'. What does this imply about its location?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "A patient is experiencing pain in their 'medial' leg. What region of the body does this imply?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the name of the anatomical position that refers to an individual standing with feet together and arms at their sides?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which of the following directions is used to describe a structure that lies posterior (towards the back) to the body?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "A student is asked to locate the sternum in the anatomical position. Which of the following would be a correct description of the location of the sternum?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What is the term used to describe a structure that lies superior (towards the top) to the body in the frontal plane?",
+      "lab": 1,
+      "tag": "Coronal",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which directional term indicates movement from head to feet?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the relationship between the superior mediastinum and the heart?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which anatomical region includes the liver, pancreas, and spleen?",
+      "lab": 1,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the relationship between the diaphragm and the lungs?",
+      "lab": 1,
+      "tag": "Breathing",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "In anatomical position, what plane contains the left arm and right leg?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which body plane is perpendicular to the frontal and sagittal planes?",
+      "lab": 1,
+      "tag": "Sagittal",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "In the anatomical position, what region contains the heart and lungs?",
+      "lab": 1,
+      "tag": "AnatomicalPosition",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What directional term is used to describe movement from the front of the body towards the back?",
+      "lab": 1,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three types of muscle tissue?",
+      "lab": 10,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the origin of a muscle?",
+      "lab": 10,
+      "tag": "MuscleAttachments",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.75,
+      "chunks": 6
+    },
+    {
+      "question": "What is the insertion of a muscle?",
+      "lab": 10,
+      "tag": "MuscleAttachments",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle closes the eye?",
+      "lab": 10,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle closes the mouth and purses the lips?",
+      "lab": 10,
+      "tag": "OralCavity",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What is the main muscle of mastication (chewing)?",
+      "lab": 10,
+      "tag": "FacialMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle raises the eyebrows?",
+      "lab": 10,
+      "tag": "FacialMuscles",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle turns the head to the opposite side?",
+      "lab": 10,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the main muscle of the chest that adducts the arm?",
+      "lab": 10,
+      "tag": "ChestMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle forms the 'six-pack' of the abdomen?",
+      "lab": 10,
+      "tag": "AbdominalMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the large, flat muscle of the back that extends the arm?",
+      "lab": 10,
+      "tag": "BackMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle elevates and retracts the scapula?",
+      "lab": 10,
+      "tag": "UpperLimbBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle abducts the arm at the shoulder?",
+      "lab": 10,
+      "tag": "ShoulderMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle flexes the elbow and supinates the forearm?",
+      "lab": 10,
+      "tag": "ArmMuscles",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle extends the elbow?",
+      "lab": 10,
+      "tag": "ArmMuscles",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the four muscles of the rotator cuff?",
+      "lab": 10,
+      "tag": "RotatorCuff",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the four muscles of the quadriceps?",
+      "lab": 10,
+      "tag": "Quadriceps",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What do the quadriceps muscles do?",
+      "lab": 10,
+      "tag": "Quadriceps",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three hamstring muscles?",
+      "lab": 10,
+      "tag": "Hamstrings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.75,
+      "chunks": 6
+    },
+    {
+      "question": "What do the hamstrings do?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the largest muscle in the body?",
+      "lab": 10,
+      "tag": "GlutealMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle plantar flexes the foot?",
+      "lab": 10,
+      "tag": "LegMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle dorsiflexes and inverts the foot?",
+      "lab": 10,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What is the Achilles tendon attached to?",
+      "lab": 10,
+      "tag": "LowerLimbBones",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the longest muscle in the body?",
+      "lab": 10,
+      "tag": "ThighMuscles",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle flexes the hip and is the primary hip flexor?",
+      "lab": 10,
+      "tag": "HipMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What connects muscle to bone?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What connects bone to bone?",
+      "lab": 10,
+      "tag": "SpinalLigaments",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is an aponeurosis?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What is the external oblique?",
+      "lab": 10,
+      "tag": "Oblique",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.57,
+      "chunks": 6
+    },
+    {
+      "question": "What is the linea alba?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.83,
+      "chunks": 6
+    },
+    {
+      "question": "What muscles are the hip adductors?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What does the gluteus medius do?",
+      "lab": 10,
+      "tag": "GlutealMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle protrudes the tongue?",
+      "lab": 10,
+      "tag": "OralCavity",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is a muscle synergist?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What is a muscle antagonist?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What is the prime mover (agonist)?",
+      "lab": 10,
+      "tag": "MuscularSystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What are the erector spinae muscles?",
+      "lab": 10,
+      "tag": "BackMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What is the buccinator muscle?",
+      "lab": 10,
+      "tag": "FacialMuscles",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What is the serratus anterior?",
+      "lab": 10,
+      "tag": "DirectionalTerms",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.4,
+      "chunks": 6
+    },
+    {
+      "question": "What is the purpose of LAB 2: BONES AND BONE MARKINGS?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.75,
+      "chunks": 4
+    },
+    {
+      "question": "Which bone has a greater trochanter?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of bone is the patella classified as?",
+      "lab": 2,
+      "tag": "LowerLimbBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which structure is the joint between the two pubic bones?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the name of the socket that holds the head of the femur?",
+      "lab": 2,
+      "tag": "LowerLimbBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which bone contains the foramen magnum?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the sella turcica a feature of?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which type of ossification forms bones from a cartilage model?",
+      "lab": 2,
+      "tag": "BoneHistology",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the bone cells that break down bone tissue called?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the structural unit of compact bone called?",
+      "lab": 2,
+      "tag": "BoneTypes",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which part of a long bone contains the growth plate?",
+      "lab": 2,
+      "tag": "BoneStructure",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What membrane lines the medullary cavity of bones?",
+      "lab": 2,
+      "tag": "BoneStructure",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which vertebra is known as the atlas?",
+      "lab": 2,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the dens (odontoid process) a feature of?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which foramen is unique to cervical vertebrae?",
+      "lab": 2,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the olecranon a part of?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which bone marking on the humerus articulates with the ulna?",
+      "lab": 2,
+      "tag": "UpperLimbBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the medial malleolus a feature of?",
+      "lab": 2,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which bone has the lateral malleolus?",
+      "lab": 2,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the small bones of the wrist called?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which three bones make up the hip bone (os coxae)?",
+      "lab": 2,
+      "tag": "PelvicBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the glenoid cavity a feature of?",
+      "lab": 2,
+      "tag": "UpperLimbBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which scapular process articulates with the clavicle?",
+      "lab": 2,
+      "tag": "ThoraxBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of bone marrow produces blood cells?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which suture separates the frontal and parietal bones?",
+      "lab": 2,
+      "tag": "Coronal",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What suture runs along the midline between the two parietal bones?",
+      "lab": 2,
+      "tag": "SkullBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which bone is unique because it does not articulate with any other bone?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the coronoid fossa a feature of?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which depression on the humerus receives the olecranon during elbow extension?",
+      "lab": 2,
+      "tag": "UpperLimbBones",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the concentric rings of bone matrix in an osteon called?",
+      "lab": 2,
+      "tag": "BoneHistology",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which bone cells are mature and maintain bone tissue?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the small cavities that contain osteocytes called?",
+      "lab": 2,
+      "tag": "BonesAndMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which bone forms the lower jaw?",
+      "lab": 2,
+      "tag": "SkullBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which bone forms the upper jaw?",
+      "lab": 2,
+      "tag": "SkullBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the zygomatic arch formed by?",
+      "lab": 2,
+      "tag": "SkullBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which region of the vertebral column contains 5 fused vertebrae?",
+      "lab": 2,
+      "tag": "KidneyStructure",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many vertebrae are in the cervical region?",
+      "lab": 2,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the lesser trochanter a feature of?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which bone marking serves as an attachment site for muscles?",
+      "lab": 2,
+      "tag": "BoneMarkings",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of bone is the sternum classified as?",
+      "lab": 2,
+      "tag": "ThoraxBones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three layers of meninges that protect the spinal cord?",
+      "lab": 3,
+      "tag": "Meninges",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which meninx is the outermost and toughest layer?",
+      "lab": 3,
+      "tag": "Meninges",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which meninx is the innermost layer that directly covers the spinal cord?",
+      "lab": 3,
+      "tag": "Meninges",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the tapered end of the spinal cord called?",
+      "lab": 3,
+      "tag": "SpinalCordAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the bundle of nerve roots extending from the conus medullaris called?",
+      "lab": 3,
+      "tag": "SpinalCordAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many pairs of spinal nerves are there in the human body?",
+      "lab": 3,
+      "tag": "SpinalCord",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many pairs of cervical spinal nerves are there?",
+      "lab": 3,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many pairs of thoracic spinal nerves are there?",
+      "lab": 3,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What region of gray matter contains motor neurons?",
+      "lab": 3,
+      "tag": "SpinalCordStructure",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What region of gray matter receives sensory information?",
+      "lab": 3,
+      "tag": "SpinalCordStructure",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What is a dermatome?",
+      "lab": 3,
+      "tag": "Dermatomes",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "Which spinal cord region is enlarged to serve the upper limbs?",
+      "lab": 3,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which spinal cord region is enlarged to serve the lower limbs?",
+      "lab": 3,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of neurons carry sensory information toward the CNS?",
+      "lab": 3,
+      "tag": "NeuronTypes",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What type of neurons carry motor commands away from the CNS?",
+      "lab": 3,
+      "tag": "NeuronTypes",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What is the space between the arachnoid mater and pia mater called?",
+      "lab": 3,
+      "tag": "Meninges",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Where is cerebrospinal fluid (CSF) found in relation to the spinal cord?",
+      "lab": 3,
+      "tag": "CSF",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What anchors the spinal cord to the coccyx?",
+      "lab": 3,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structures anchor the spinal cord laterally to the dura mater?",
+      "lab": 3,
+      "tag": "Meninges",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "At what vertebral level does the spinal cord typically end in adults?",
+      "lab": 3,
+      "tag": "SpinalCord",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What carries sensory information into the spinal cord?",
+      "lab": 3,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What carries motor information out of the spinal cord?",
+      "lab": 3,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Where are the cell bodies of sensory neurons located?",
+      "lab": 3,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What type of tracts carry information up the spinal cord to the brain?",
+      "lab": 3,
+      "tag": "SpinalCord",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What type of tracts carry information down from the brain to the spinal cord?",
+      "lab": 3,
+      "tag": "SpinalCord",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which plexus is formed by cervical spinal nerves C1-C4?",
+      "lab": 3,
+      "tag": "Vertebrae",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which plexus innervates the upper limb?",
+      "lab": 3,
+      "tag": "NervePlexus",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which nerve from the brachial plexus innervates the deltoid muscle?",
+      "lab": 3,
+      "tag": "NervePlexus",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which is the largest nerve in the human body?",
+      "lab": 3,
+      "tag": "SpinalCord",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which plexus gives rise to the sciatic nerve?",
+      "lab": 3,
+      "tag": "NervePlexus",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is a reflex arc?",
+      "lab": 3,
+      "tag": "Reflexes",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What is the minimum number of neurons needed for a reflex arc?",
+      "lab": 3,
+      "tag": "Reflexes",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of reflex involves only two neurons?",
+      "lab": 3,
+      "tag": "Reflexes",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "The knee-jerk reflex is an example of what type of reflex?",
+      "lab": 3,
+      "tag": "Reflexes",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the gray commissure?",
+      "lab": 3,
+      "tag": "SpinalCordStructure",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.86,
+      "chunks": 6
+    },
+    {
+      "question": "What runs through the center of the gray commissure?",
+      "lab": 3,
+      "tag": "SpinalCord",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What does the lateral horn contain?",
+      "lab": 3,
+      "tag": "DirectionalTerms",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "In which spinal cord regions is the lateral horn present?",
+      "lab": 3,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the phrenic nerve responsible for?",
+      "lab": 3,
+      "tag": "Breathing",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "From which spinal nerve roots does the phrenic nerve arise?",
+      "lab": 3,
+      "tag": "SpinalNerves",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What are the four main regions of the brain?",
+      "lab": 4,
+      "tag": "Cerebrum",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the largest part of the brain?",
+      "lab": 4,
+      "tag": "Cerebrum",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which lobe of the cerebrum is responsible for voluntary motor control?",
+      "lab": 4,
+      "tag": "Cerebrum",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which lobe contains the primary visual cortex?",
+      "lab": 4,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which lobe contains the primary auditory cortex?",
+      "lab": 4,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which lobe contains the primary somatosensory cortex?",
+      "lab": 4,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What gyrus contains the primary motor cortex?",
+      "lab": 4,
+      "tag": "CerebralGyri",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What gyrus contains the primary somatosensory cortex?",
+      "lab": 4,
+      "tag": "CerebralGyri",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three parts of the brainstem?",
+      "lab": 4,
+      "tag": "Brainstem",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which part of the brainstem is most inferior?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three parts of the diencephalon?",
+      "lab": 4,
+      "tag": "Diencephalon",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which structure serves as the main relay station for sensory information?",
+      "lab": 4,
+      "tag": "Diencephalon",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which structure controls autonomic functions and links the nervous and endocrine systems?",
+      "lab": 4,
+      "tag": "Diencephalon",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structure connects the hypothalamus to the pituitary gland?",
+      "lab": 4,
+      "tag": "Diencephalon",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the function of the cerebellum?",
+      "lab": 4,
+      "tag": "Cerebellum",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What connects the two cerebral hemispheres?",
+      "lab": 4,
+      "tag": "Cerebrum",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many ventricles are in the brain?",
+      "lab": 4,
+      "tag": "Brain",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What produces cerebrospinal fluid (CSF)?",
+      "lab": 4,
+      "tag": "CSF",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What connects the third and fourth ventricles?",
+      "lab": 4,
+      "tag": "Cerebrum",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What separates the cerebrum from the cerebellum?",
+      "lab": 4,
+      "tag": "Cerebrum",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve is responsible for smell?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve is responsible for vision?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve controls most eye movements and pupil constriction?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve innervates the superior oblique muscle?",
+      "lab": 4,
+      "tag": "Oblique",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve has three divisions and is involved in facial sensation?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve controls the lateral rectus muscle?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve controls facial expressions?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve is responsible for hearing and balance?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve has the most extensive distribution in the body?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve innervates the trapezius and sternocleidomastoid muscles?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve controls tongue movement?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which brain area is responsible for speech production?",
+      "lab": 4,
+      "tag": "LanguageAreas",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which brain area is responsible for speech comprehension?",
+      "lab": 4,
+      "tag": "LanguageAreas",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What is the pineal gland's primary function?",
+      "lab": 4,
+      "tag": "UrineFormation",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What structures make up the corpora quadrigemina?",
+      "lab": 4,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What is the arbor vitae?",
+      "lab": 4,
+      "tag": "SpinalCordStructure",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which structure regulates arousal and sleep-wake cycles?",
+      "lab": 4,
+      "tag": "Brain",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What dural fold separates the two cerebral hemispheres?",
+      "lab": 4,
+      "tag": "Cerebrum",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are arachnoid granulations (villi) responsible for?",
+      "lab": 4,
+      "tag": "Meninges",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Where is the primary gustatory cortex located?",
+      "lab": 4,
+      "tag": "Taste",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three tunics (layers) of the eye?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structures make up the fibrous tunic of the eye?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the white of the eye called?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the transparent anterior portion of the fibrous tunic?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structure gives the eye its color?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the opening in the center of the iris called?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structure changes the shape of the lens for focusing?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What photoreceptors are responsible for color vision?",
+      "lab": 5,
+      "tag": "SpecialSenses",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What photoreceptors are responsible for vision in dim light?",
+      "lab": 5,
+      "tag": "SpecialSenses",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the area of sharpest vision on the retina called?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the blind spot of the eye?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What gel-like substance fills the posterior cavity of the eye?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What fluid is found in the anterior and posterior chambers of the eye?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve carries visual information to the brain?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three regions of the ear?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three auditory ossicles?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the tympanic membrane?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What connects the middle ear to the nasopharynx?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structure contains the receptors for hearing?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the organ of Corti?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structures detect rotational movement of the head?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structures detect linear acceleration and head position?",
+      "lab": 5,
+      "tag": "SpecialSenses",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve carries hearing and balance information?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of papillae contain the most taste buds?",
+      "lab": 5,
+      "tag": "Taste",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which papillae provide friction but have no taste buds?",
+      "lab": 5,
+      "tag": "Taste",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the five basic taste sensations?",
+      "lab": 5,
+      "tag": "Taste",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.8,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerves carry taste information?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Where is the olfactory epithelium located?",
+      "lab": 5,
+      "tag": "CranialNerves",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which cranial nerve carries smell information?",
+      "lab": 5,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What bone does the olfactory nerve pass through?",
+      "lab": 5,
+      "tag": "CranialNerves",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle elevates the upper eyelid?",
+      "lab": 5,
+      "tag": "SpecialSenses",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many extrinsic eye muscles control eye movement?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What produces tears?",
+      "lab": 5,
+      "tag": "SpecialSenses",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Where do tears drain into the nasal cavity?",
+      "lab": 5,
+      "tag": "NasalCavity",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the choroid?",
+      "lab": 5,
+      "tag": "VascularTunic",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What is the function of the oval window?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.4,
+      "chunks": 6
+    },
+    {
+      "question": "What is the function of ceruminous glands?",
+      "lab": 5,
+      "tag": "SpecialSenses",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What is the macula lutea?",
+      "lab": 5,
+      "tag": "EyeAnatomy",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.2,
+      "chunks": 6
+    },
+    {
+      "question": "What is the vestibule of the inner ear?",
+      "lab": 5,
+      "tag": "EarAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Where does the optic chiasm occur?",
+      "lab": 5,
+      "tag": "SpecialSenses",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.17,
+      "chunks": 6
+    },
+    {
+      "question": "What are the two functional divisions of the respiratory system?",
+      "lab": 6,
+      "tag": "RespiratoryZones",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structures make up the upper respiratory tract?",
+      "lab": 6,
+      "tag": "NasalCavity",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three regions of the pharynx?",
+      "lab": 6,
+      "tag": "Pharynx",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What is the voice box called?",
+      "lab": 6,
+      "tag": "Larynx",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What cartilage forms the Adam's apple?",
+      "lab": 6,
+      "tag": "Larynx",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structure prevents food from entering the airway during swallowing?",
+      "lab": 6,
+      "tag": "Larynx",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What produces sound when air passes over them?",
+      "lab": 6,
+      "tag": "Larynx",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the windpipe called?",
+      "lab": 6,
+      "tag": "Trachea",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of cartilage keeps the trachea open?",
+      "lab": 6,
+      "tag": "Trachea",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What is the point where the trachea divides into two bronchi called?",
+      "lab": 6,
+      "tag": "Trachea",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which primary bronchus is wider, shorter, and more vertical?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "Why do aspirated objects more commonly enter the right bronchus?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "How many lobes does the right lung have?",
+      "lab": 6,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many lobes does the left lung have?",
+      "lab": 6,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the cardiac notch?",
+      "lab": 6,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.75,
+      "chunks": 6
+    },
+    {
+      "question": "What is the hilum of the lung?",
+      "lab": 6,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.4,
+      "chunks": 6
+    },
+    {
+      "question": "What are alveoli?",
+      "lab": 6,
+      "tag": "Alveoli",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.29,
+      "chunks": 6
+    },
+    {
+      "question": "What type of cells line the alveoli?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What do Type II alveolar cells produce?",
+      "lab": 6,
+      "tag": "Alveoli",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the function of surfactant?",
+      "lab": 6,
+      "tag": "Alveoli",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the two layers of the pleura?",
+      "lab": 6,
+      "tag": "SerousMembranes",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is found in the pleural cavity?",
+      "lab": 6,
+      "tag": "Pleura",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the primary muscle of respiration?",
+      "lab": 6,
+      "tag": "Breathing",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What happens to the diaphragm during inhalation?",
+      "lab": 6,
+      "tag": "Breathing",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which muscles assist in forced inhalation?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is normal quiet breathing called?",
+      "lab": 6,
+      "tag": "Breathing",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the paranasal sinuses?",
+      "lab": 6,
+      "tag": "NasalCavity",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "Which bones contain paranasal sinuses?",
+      "lab": 6,
+      "tag": "NasalCavity",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.75,
+      "chunks": 6
+    },
+    {
+      "question": "What structures increase surface area in the nasal cavity?",
+      "lab": 6,
+      "tag": "NasalCavity",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "How many nasal conchae are there on each side?",
+      "lab": 6,
+      "tag": "NasalCavity",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the respiratory membrane?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What separates the thoracic cavity into left and right portions?",
+      "lab": 6,
+      "tag": "BodyCavities",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the apex of the lung?",
+      "lab": 6,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.2,
+      "chunks": 6
+    },
+    {
+      "question": "What divides the lobes of the lungs?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the horizontal fissure found in?",
+      "lab": 6,
+      "tag": "Transverse",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What are bronchioles?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What type of epithelium lines most of the respiratory tract?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the function of cilia in the respiratory tract?",
+      "lab": 6,
+      "tag": "Pharynx",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What cells produce mucus in the respiratory tract?",
+      "lab": 6,
+      "tag": "RespiratorySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What nerve innervates the diaphragm?",
+      "lab": 6,
+      "tag": "Breathing",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the four chambers of the heart?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.75,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three layers of the heart wall?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which layer of the heart wall is the thickest?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What valve is located between the right atrium and right ventricle?",
+      "lab": 7,
+      "tag": "Ventricles",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What valve is located between the left atrium and left ventricle?",
+      "lab": 7,
+      "tag": "Ventricles",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of valves are the tricuspid and mitral valves?",
+      "lab": 7,
+      "tag": "HeartValves",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of valves are the aortic and pulmonary valves?",
+      "lab": 7,
+      "tag": "HeartValves",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What prevents the AV valves from inverting?",
+      "lab": 7,
+      "tag": "ValveSupport",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What vessel carries deoxygenated blood from the heart to the lungs?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What vessels carry oxygenated blood from the lungs to the heart?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which chamber of the heart has the thickest wall?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the pacemaker of the heart?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Where is the SA node located?",
+      "lab": 7,
+      "tag": "ConductionSystem",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What is the function of the AV node?",
+      "lab": 7,
+      "tag": "ConductionSystem",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.57,
+      "chunks": 6
+    },
+    {
+      "question": "What supplies blood to the heart muscle itself?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What are the two main coronary arteries?",
+      "lab": 7,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Where does venous blood from the heart wall drain?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.6,
+      "chunks": 6
+    },
+    {
+      "question": "What is the largest artery in the body?",
+      "lab": 7,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three regions of the aorta?",
+      "lab": 7,
+      "tag": "Aorta",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.8,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three major branches of the aortic arch?",
+      "lab": 7,
+      "tag": "Aorta",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.17,
+      "chunks": 6
+    },
+    {
+      "question": "What artery supplies the brain with blood?",
+      "lab": 7,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the brachial artery?",
+      "lab": 7,
+      "tag": "NervePlexus",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.75,
+      "chunks": 6
+    },
+    {
+      "question": "What artery is commonly used to measure blood pressure?",
+      "lab": 7,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What artery is palpated at the wrist to check pulse?",
+      "lab": 7,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the main artery of the thigh?",
+      "lab": 7,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the two veins that drain into the right atrium?",
+      "lab": 7,
+      "tag": "HeartChambers",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three layers of blood vessel walls?",
+      "lab": 7,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of blood vessels have valves?",
+      "lab": 7,
+      "tag": "CardiovascularSystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the hepatic portal system?",
+      "lab": 7,
+      "tag": "PortalCirculation",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.83,
+      "chunks": 6
+    },
+    {
+      "question": "What vessel drains blood from the digestive organs to the liver?",
+      "lab": 7,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What is pulmonary circulation?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is systemic circulation?",
+      "lab": 7,
+      "tag": "Circulation",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the fossa ovalis?",
+      "lab": 7,
+      "tag": "BoneMarkings",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What are the trabeculae carneae?",
+      "lab": 7,
+      "tag": "BoneTypes",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are pectinate muscles?",
+      "lab": 7,
+      "tag": "ValveSupport",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What separates the right and left ventricles?",
+      "lab": 7,
+      "tag": "CardiovascularSystem",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What surrounds and protects the heart?",
+      "lab": 7,
+      "tag": "HeartAnatomy",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What artery branches into the right common carotid and right subclavian?",
+      "lab": 7,
+      "tag": "HeadNeckVessels",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the circle of Willis?",
+      "lab": 7,
+      "tag": "CardiovascularSystem",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What drains blood from the brain?",
+      "lab": 7,
+      "tag": "HeadNeckVessels",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What are the two main divisions of the digestive system?",
+      "lab": 8,
+      "tag": "GITractWall",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the four layers of the GI tract wall?",
+      "lab": 8,
+      "tag": "GITractWall",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.8,
+      "chunks": 6
+    },
+    {
+      "question": "What are the accessory organs of digestion?",
+      "lab": 8,
+      "tag": "OralCavity",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.86,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three pairs of salivary glands?",
+      "lab": 8,
+      "tag": "SalivaryGlands",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which is the largest salivary gland?",
+      "lab": 8,
+      "tag": "SalivaryGlands",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the four types of teeth?",
+      "lab": 8,
+      "tag": "OralCavity",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many permanent teeth do adults have?",
+      "lab": 8,
+      "tag": "OralCavity",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the fauces?",
+      "lab": 8,
+      "tag": "OralCavity",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.6,
+      "chunks": 6
+    },
+    {
+      "question": "What is peristalsis?",
+      "lab": 8,
+      "tag": "GIMotility",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.38,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three regions of the stomach?",
+      "lab": 8,
+      "tag": "Stomach",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are rugae?",
+      "lab": 8,
+      "tag": "Stomach",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What sphincter controls emptying of the stomach?",
+      "lab": 8,
+      "tag": "Stomach",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three parts of the small intestine?",
+      "lab": 8,
+      "tag": "SmallIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which part of the small intestine receives bile and pancreatic secretions?",
+      "lab": 8,
+      "tag": "SmallIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What structures increase surface area in the small intestine?",
+      "lab": 8,
+      "tag": "SmallIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the parts of the large intestine in order?",
+      "lab": 8,
+      "tag": "LargeIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the appendix attached to?",
+      "lab": 8,
+      "tag": "LargeIntestine",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are haustra?",
+      "lab": 8,
+      "tag": "LargeIntestine",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the taeniae coli?",
+      "lab": 8,
+      "tag": "LargeIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What is the largest internal organ?",
+      "lab": 8,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How many lobes does the liver have?",
+      "lab": 8,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.8,
+      "chunks": 6
+    },
+    {
+      "question": "What does the liver produce?",
+      "lab": 8,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the function of the gallbladder?",
+      "lab": 8,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What duct carries bile from the liver?",
+      "lab": 8,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What forms the common bile duct?",
+      "lab": 8,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.8,
+      "chunks": 6
+    },
+    {
+      "question": "What is the hepatopancreatic ampulla (ampulla of Vater)?",
+      "lab": 8,
+      "tag": "SmallIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What are the exocrine functions of the pancreas?",
+      "lab": 8,
+      "tag": "Pancreas",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What are the endocrine functions of the pancreas?",
+      "lab": 8,
+      "tag": "Pancreas",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What is the mesentery?",
+      "lab": 8,
+      "tag": "Peritoneum",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.2,
+      "chunks": 6
+    },
+    {
+      "question": "What is the greater omentum?",
+      "lab": 8,
+      "tag": "Peritoneum",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the ileocecal valve?",
+      "lab": 8,
+      "tag": "SmallIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the function of the rectum?",
+      "lab": 8,
+      "tag": "LargeIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What sphincter controls defecation voluntarily?",
+      "lab": 8,
+      "tag": "Sphincters",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What produces hydrochloric acid in the stomach?",
+      "lab": 8,
+      "tag": "Stomach",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What cells produce pepsinogen?",
+      "lab": 8,
+      "tag": "DigestiveSystem",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is chyme?",
+      "lab": 8,
+      "tag": "Stomach",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Where is most nutrient absorption completed?",
+      "lab": 8,
+      "tag": "SmallIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the main function of the large intestine?",
+      "lab": 8,
+      "tag": "LargeIntestine",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What connects the esophagus to the stomach?",
+      "lab": 8,
+      "tag": "Esophagus",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What type of epithelium lines the esophagus?",
+      "lab": 8,
+      "tag": "Esophagus",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What are the organs of the urinary system?",
+      "lab": 9,
+      "tag": "Bladder",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.8,
+      "chunks": 6
+    },
+    {
+      "question": "What are the three regions of the kidney?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.75,
+      "chunks": 6
+    },
+    {
+      "question": "What is the functional unit of the kidney?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the two main parts of a nephron?",
+      "lab": 9,
+      "tag": "Nephron",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the glomerulus?",
+      "lab": 9,
+      "tag": "Nephron",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.2,
+      "chunks": 6
+    },
+    {
+      "question": "What surrounds the glomerulus?",
+      "lab": 9,
+      "tag": "Nephron",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What are the parts of the renal tubule in order?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.83,
+      "chunks": 6
+    },
+    {
+      "question": "What is the hilum of the kidney?",
+      "lab": 9,
+      "tag": "Lungs",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What are renal pyramids?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.75,
+      "chunks": 6
+    },
+    {
+      "question": "What are renal columns?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What collects urine from the collecting ducts?",
+      "lab": 9,
+      "tag": "KidneyStructure",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "What connects the kidney to the urinary bladder?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of muscle is in the ureter wall?",
+      "lab": 9,
+      "tag": "Ureter",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What is the trigone of the bladder?",
+      "lab": 9,
+      "tag": "Bladder",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.29,
+      "chunks": 6
+    },
+    {
+      "question": "What muscle forms the bladder wall?",
+      "lab": 9,
+      "tag": "Bladder",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "Which urethral sphincter is under voluntary control?",
+      "lab": 9,
+      "tag": "Sphincters",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "How does the male urethra differ from the female?",
+      "lab": 9,
+      "tag": "Urethra",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What three processes form urine?",
+      "lab": 9,
+      "tag": "UrineFormation",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.67,
+      "chunks": 6
+    },
+    {
+      "question": "Where does filtration occur in the nephron?",
+      "lab": 9,
+      "tag": "Nephron",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What hormone regulates water reabsorption in the kidney?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are the primary functions of the kidneys?",
+      "lab": 9,
+      "tag": "UrinarySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "What blood vessel brings blood to the kidney?",
+      "lab": 9,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 1.0,
+      "chunks": 6
+    },
+    {
+      "question": "What blood vessel takes blood away from the kidney?",
+      "lab": 9,
+      "tag": "BloodVessels",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What brings blood into the glomerulus?",
+      "lab": 9,
+      "tag": "Nephron",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What takes blood out of the glomerulus?",
+      "lab": 9,
+      "tag": "Nephron",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the juxtaglomerular apparatus?",
+      "lab": 9,
+      "tag": "UrineFormation",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What hormone do the kidneys produce for red blood cell production?",
+      "lab": 9,
+      "tag": "RenalHormones",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the average capacity of the urinary bladder?",
+      "lab": 9,
+      "tag": "Bladder",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What type of epithelium lines the urinary bladder?",
+      "lab": 9,
+      "tag": "Bladder",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "Why is transitional epithelium important in the urinary system?",
+      "lab": 9,
+      "tag": "Bladder",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What maintains the position of the kidneys?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.25,
+      "chunks": 6
+    },
+    {
+      "question": "Which kidney is slightly lower due to the liver?",
+      "lab": 9,
+      "tag": "Liver",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What are the papillae of the kidney?",
+      "lab": 9,
+      "tag": "Taste",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What is the loop of Henle important for?",
+      "lab": 9,
+      "tag": "RenalTubule",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What are juxtamedullary nephrons?",
+      "lab": 9,
+      "tag": "DirectionalTerms",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.62,
+      "chunks": 6
+    },
+    {
+      "question": "What are cortical nephrons?",
+      "lab": 9,
+      "tag": "BoneTypes",
+      "relevant": true,
+      "lab_found": false,
+      "keyword_ratio": 0.5,
+      "chunks": 6
+    },
+    {
+      "question": "What is the main waste product excreted by the kidneys?",
+      "lab": 9,
+      "tag": "UrinarySystem",
+      "relevant": true,
+      "lab_found": true,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is micturition?",
+      "lab": 9,
+      "tag": "UrinarySystem",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    },
+    {
+      "question": "What is the renal capsule?",
+      "lab": 9,
+      "tag": "Kidney",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.33,
+      "chunks": 6
+    },
+    {
+      "question": "What percentage of cardiac output goes to the kidneys?",
+      "lab": 9,
+      "tag": "HeartAnatomy",
+      "relevant": false,
+      "lab_found": false,
+      "keyword_ratio": 0.0,
+      "chunks": 6
+    }
+  ],
+  "lab_topics": {
+    "1": "Anatomical Language",
+    "2": "Bones & Bone Markings",
+    "3": "Spinal Cord & Spinal Nerves",
+    "4": "Brain & Cranial Nerves",
+    "5": "Special Senses",
+    "6": "Muscles",
+    "7": "Heart & Blood Vessels",
+    "8": "Respiratory System",
+    "9": "Digestive System",
+    "10": "Urinary & Reproductive Systems"
+  }
+}

@@ -1,0 +1,11 @@
+pdfplumber
+sentence-transformers
+faiss-cpu
+numpy
+fastapi
+uvicorn[standard]
+requests
+tqdm
+pydantic
+onnxruntime
+transformers

@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What are the two main divisions of the digestive system?",
+    "options": [
+      "Alimentary canal and accessory organs",
+      "Mechanical and chemical digestion",
+      "Upper and lower GI tract",
+      "Absorption and secretion systems"
+    ],
+    "correctIndex": 0,
+    "tag": "GITractWall"
+  },
+  {
+    "id": 2,
+    "question": "What are the four layers of the GI tract wall?",
+    "options": [
+      "Inner, middle, outer, covering",
+      "Mucosa, submucosa, muscularis externa, serosa",
+      "Endothelium, media, adventitia, serosa",
+      "Epithelium, connective tissue, muscle, adventitia"
+    ],
+    "correctIndex": 1,
+    "tag": "GITractWall"
+  },
+  {
+    "id": 3,
+    "question": "What are the accessory organs of digestion?",
+    "options": [
+      "Pharynx, larynx, trachea",
+      "Teeth, tongue, salivary glands, liver, gallbladder, pancreas",
+      "Esophagus, stomach, duodenum",
+      "Stomach, small intestine, large intestine"
+    ],
+    "correctIndex": 1,
+    "tag": "OralCavity"
+  },
+  {
+    "id": 4,
+    "question": "What are the three pairs of salivary glands?",
+    "options": [
+      "Anterior, posterior, lateral",
+      "Parotid, submandibular, sublingual",
+      "Major, minor, accessory",
+      "Superior, middle, inferior"
+    ],
+    "correctIndex": 1,
+    "tag": "SalivaryGlands"
+  },
+  {
+    "id": 5,
+    "question": "Which is the largest salivary gland?",
+    "options": [
+      "Parotid gland",
+      "Buccal gland",
+      "Submandibular gland",
+      "Sublingual gland"
+    ],
+    "correctIndex": 0,
+    "tag": "SalivaryGlands"
+  },
+  {
+    "id": 6,
+    "question": "What are the four types of teeth?",
+    "options": [
+      "Anterior, posterior, lateral, medial",
+      "Incisors, canines, premolars, molars",
+      "Sharp, flat, pointed, grinding",
+      "Primary, secondary, tertiary, permanent"
+    ],
+    "correctIndex": 1,
+    "tag": "OralCavity"
+  },
+  {
+    "id": 7,
+    "question": "How many permanent teeth do adults have?",
+    "options": [
+      "20",
+      "32",
+      "24",
+      "28"
+    ],
+    "correctIndex": 1,
+    "tag": "OralCavity"
+  },
+  {
+    "id": 8,
+    "question": "What is the fauces?",
+    "options": [
+      "The roof of the mouth",
+      "The back of the tongue",
+      "Opening between oral cavity and oropharynx",
+      "The floor of the mouth"
+    ],
+    "correctIndex": 2,
+    "tag": "OralCavity"
+  },
+  {
+    "id": 9,
+    "question": "What is peristalsis?",
+    "options": [
+      "Secretion of digestive enzymes",
+      "Wave-like muscle contractions that move food through GI tract",
+      "Mixing movements in stomach",
+      "Absorption of nutrients"
+    ],
+    "correctIndex": 1,
+    "tag": "GIMotility"
+  },
+  {
+    "id": 10,
+    "question": "What are the three regions of the stomach?",
+    "options": [
+      "Fundus, body, pylorus",
+      "Greater curvature, lesser curvature, rugae",
+      "Superior, middle, inferior",
+      "Cardia, antrum, duodenum"
+    ],
+    "correctIndex": 0,
+    "tag": "Stomach"
+  },
+  {
+    "id": 11,
+    "question": "What are rugae?",
+    "options": [
+      "Types of digestive enzymes",
+      "Cells that produce acid",
+      "Folds in the stomach lining",
+      "Valves between organs"
+    ],
+    "correctIndex": 2,
+    "tag": "Stomach"
+  },
+  {
+    "id": 12,
+    "question": "What sphincter controls emptying of the stomach?",
+    "options": [
+      "Cardiac sphincter",
+      "Ileocecal sphincter",
+      "Pyloric sphincter",
+      "Anal sphincter"
+    ],
+    "correctIndex": 2,
+    "tag": "Stomach"
+  },
+  {
+    "id": 13,
+    "question": "What are the three parts of the small intestine?",
+    "options": [
+      "Cecum, colon, rectum",
+      "Cardia, fundus, pylorus",
+      "Duodenum, jejunum, ileum",
+      "Ascending, transverse, descending"
+    ],
+    "correctIndex": 2,
+    "tag": "SmallIntestine"
+  },
+  {
+    "id": 14,
+    "question": "Which part of the small intestine receives bile and pancreatic secretions?",
+    "options": [
+      "Cecum",
+      "Duodenum",
+      "Ileum",
+      "Jejunum"
+    ],
+    "correctIndex": 1,
+    "tag": "SmallIntestine"
+  },
+  {
+    "id": 15,
+    "question": "What structures increase surface area in the small intestine?",
+    "options": [
+      "Rugae and haustra",
+      "Villi and microvilli",
+      "Plicae circulares only",
+      "Taeniae coli"
+    ],
+    "correctIndex": 1,
+    "tag": "SmallIntestine"
+  },
+  {
+    "id": 16,
+    "question": "What are the parts of the large intestine in order?",
+    "options": [
+      "Ascending, transverse, descending only",
+      "Cecum, ascending colon, transverse colon, descending colon, sigmoid colon, rectum",
+      "Stomach, small intestine, colon",
+      "Duodenum, jejunum, ileum, colon"
+    ],
+    "correctIndex": 1,
+    "tag": "LargeIntestine"
+  },
+  {
+    "id": 17,
+    "question": "What is the appendix attached to?",
+    "options": [
+      "Ileum",
+      "Ascending colon",
+      "Cecum",
+      "Sigmoid colon"
+    ],
+    "correctIndex": 2,
+    "tag": "LargeIntestine"
+  },
+  {
+    "id": 18,
+    "question": "What are haustra?",
+    "options": [
+      "Sphincters of the colon",
+      "Folds in the stomach",
+      "Pouches in the large intestine wall",
+      "Finger-like projections in small intestine"
+    ],
+    "correctIndex": 2,
+    "tag": "LargeIntestine"
+  },
+  {
+    "id": 19,
+    "question": "What are the taeniae coli?",
+    "options": [
+      "Three bands of longitudinal muscle in large intestine",
+      "Sphincters of the stomach",
+      "Valves in the intestine",
+      "Circular muscles of small intestine"
+    ],
+    "correctIndex": 0,
+    "tag": "LargeIntestine"
+  },
+  {
+    "id": 20,
+    "question": "What is the largest internal organ?",
+    "options": [
+      "Stomach",
+      "Liver",
+      "Spleen",
+      "Pancreas"
+    ],
+    "correctIndex": 1,
+    "tag": "Liver"
+  },
+  {
+    "id": 21,
+    "question": "How many lobes does the liver have?",
+    "options": [
+      "Two (right, left)",
+      "Three",
+      "Five",
+      "Four (right, left, caudate, quadrate)"
+    ],
+    "correctIndex": 3,
+    "tag": "Liver"
+  },
+  {
+    "id": 22,
+    "question": "What does the liver produce?",
+    "options": [
+      "Amylase",
+      "Insulin",
+      "Bile",
+      "Pepsin"
+    ],
+    "correctIndex": 2,
+    "tag": "Liver"
+  },
+  {
+    "id": 23,
+    "question": "What is the function of the gallbladder?",
+    "options": [
+      "Stores and concentrates bile",
+      "Produces bile",
+      "Produces insulin",
+      "Absorbs nutrients"
+    ],
+    "correctIndex": 0,
+    "tag": "Liver"
+  },
+  {
+    "id": 24,
+    "question": "What duct carries bile from the liver?",
+    "options": [
+      "Common bile duct",
+      "Common hepatic duct",
+      "Pancreatic duct",
+      "Cystic duct"
+    ],
+    "correctIndex": 1,
+    "tag": "Liver"
+  },
+  {
+    "id": 25,
+    "question": "What forms the common bile duct?",
+    "options": [
+      "Union of right and left hepatic ducts",
+      "Union of common hepatic and cystic ducts",
+      "The pancreatic duct alone",
+      "Gallbladder and liver ducts"
+    ],
+    "correctIndex": 1,
+    "tag": "Liver"
+  },
+  {
+    "id": 26,
+    "question": "What is the hepatopancreatic ampulla (ampulla of Vater)?",
+    "options": [
+      "The opening of the stomach",
+      "A part of the gallbladder",
+      "The main pancreatic artery",
+      "Where common bile duct and pancreatic duct join before entering duodenum"
+    ],
+    "correctIndex": 3,
+    "tag": "SmallIntestine"
+  },
+  {
+    "id": 27,
+    "question": "What are the exocrine functions of the pancreas?",
+    "options": [
+      "Produces insulin and glucagon",
+      "Stores bile",
+      "Absorbs nutrients",
+      "Produces digestive enzymes and bicarbonate"
+    ],
+    "correctIndex": 3,
+    "tag": "Pancreas"
+  },
+  {
+    "id": 28,
+    "question": "What are the endocrine functions of the pancreas?",
+    "options": [
+      "Stores glycogen",
+      "Produces digestive enzymes",
+      "Produces bile",
+      "Produces insulin and glucagon"
+    ],
+    "correctIndex": 3,
+    "tag": "Pancreas"
+  },
+  {
+    "id": 29,
+    "question": "What is the mesentery?",
+    "options": [
+      "Inner lining of stomach",
+      "Double layer of peritoneum supporting intestines",
+      "Muscle layer of GI tract",
+      "Outer covering of liver"
+    ],
+    "correctIndex": 1,
+    "tag": "Peritoneum"
+  },
+  {
+    "id": 30,
+    "question": "What is the greater omentum?",
+    "options": [
+      "Covering of the kidneys",
+      "Fatty apron hanging from stomach over intestines",
+      "Lining of the abdominal wall",
+      "Membrane covering the liver"
+    ],
+    "correctIndex": 1,
+    "tag": "Peritoneum"
+  },
+  {
+    "id": 31,
+    "question": "What is the ileocecal valve?",
+    "options": [
+      "Opening of the appendix",
+      "Valve in the rectum",
+      "Valve between stomach and duodenum",
+      "Sphincter between ileum and cecum"
+    ],
+    "correctIndex": 3,
+    "tag": "SmallIntestine"
+  },
+  {
+    "id": 32,
+    "question": "What is the function of the rectum?",
+    "options": [
+      "Produces mucus",
+      "Stores feces before elimination",
+      "Digests food",
+      "Absorbs water"
+    ],
+    "correctIndex": 1,
+    "tag": "LargeIntestine"
+  },
+  {
+    "id": 33,
+    "question": "What sphincter controls defecation voluntarily?",
+    "options": [
+      "Ileocecal sphincter",
+      "Internal anal sphincter",
+      "External anal sphincter",
+      "Pyloric sphincter"
+    ],
+    "correctIndex": 2,
+    "tag": "Sphincters"
+  },
+  {
+    "id": 34,
+    "question": "What produces hydrochloric acid in the stomach?",
+    "options": [
+      "Chief cells",
+      "G cells",
+      "Parietal cells",
+      "Goblet cells"
+    ],
+    "correctIndex": 2,
+    "tag": "Stomach"
+  },
+  {
+    "id": 35,
+    "question": "What cells produce pepsinogen?",
+    "options": [
+      "Parietal cells",
+      "Mucous cells",
+      "Chief cells",
+      "Enteroendocrine cells"
+    ],
+    "correctIndex": 2,
+    "tag": "DigestiveSystem"
+  },
+  {
+    "id": 36,
+    "question": "What is chyme?",
+    "options": [
+      "A digestive enzyme",
+      "Mucus from the intestines",
+      "Bile from the liver",
+      "Semi-liquid mixture of food and gastric juices"
+    ],
+    "correctIndex": 3,
+    "tag": "Stomach"
+  },
+  {
+    "id": 37,
+    "question": "Where is most nutrient absorption completed?",
+    "options": [
+      "Esophagus",
+      "Small intestine",
+      "Large intestine",
+      "Stomach"
+    ],
+    "correctIndex": 1,
+    "tag": "SmallIntestine"
+  },
+  {
+    "id": 38,
+    "question": "What is the main function of the large intestine?",
+    "options": [
+      "Absorb water and form feces",
+      "Digest proteins",
+      "Secrete hormones",
+      "Produce bile"
+    ],
+    "correctIndex": 0,
+    "tag": "LargeIntestine"
+  },
+  {
+    "id": 39,
+    "question": "What connects the esophagus to the stomach?",
+    "options": [
+      "Cardiac sphincter (lower esophageal sphincter)",
+      "Pyloric sphincter",
+      "Ileocecal valve",
+      "Hepatopancreatic sphincter"
+    ],
+    "correctIndex": 0,
+    "tag": "Esophagus"
+  },
+  {
+    "id": 40,
+    "question": "What type of epithelium lines the esophagus?",
+    "options": [
+      "Pseudostratified ciliated epithelium",
+      "Simple columnar epithelium",
+      "Transitional epithelium",
+      "Stratified squamous epithelium"
+    ],
+    "correctIndex": 3,
+    "tag": "Esophagus"
+  }
+]

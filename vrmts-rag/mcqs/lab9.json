@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What are the organs of the urinary system?",
+    "options": [
+      "Nephrons, collecting ducts, pelvis",
+      "Adrenal glands, kidneys, bladder",
+      "Kidneys, liver, bladder, urethra",
+      "Kidneys, ureters, urinary bladder, urethra"
+    ],
+    "correctIndex": 3,
+    "tag": "Bladder"
+  },
+  {
+    "id": 2,
+    "question": "What are the three regions of the kidney?",
+    "options": [
+      "Outer, inner, central",
+      "Hilum, capsule, pelvis",
+      "Cortex, medulla, renal pelvis",
+      "Superior, middle, inferior poles"
+    ],
+    "correctIndex": 2,
+    "tag": "Kidney"
+  },
+  {
+    "id": 3,
+    "question": "What is the functional unit of the kidney?",
+    "options": [
+      "Glomerulus",
+      "Renal corpuscle",
+      "Nephron",
+      "Collecting duct"
+    ],
+    "correctIndex": 2,
+    "tag": "Kidney"
+  },
+  {
+    "id": 4,
+    "question": "What are the two main parts of a nephron?",
+    "options": [
+      "Afferent and efferent arterioles",
+      "Cortex and medulla",
+      "Renal corpuscle and renal tubule",
+      "Glomerulus and collecting duct"
+    ],
+    "correctIndex": 2,
+    "tag": "Nephron"
+  },
+  {
+    "id": 5,
+    "question": "What is the glomerulus?",
+    "options": [
+      "A type of kidney stone",
+      "Capillary network where blood is filtered",
+      "A hormone-producing cell",
+      "The outer layer of the kidney"
+    ],
+    "correctIndex": 1,
+    "tag": "Nephron"
+  },
+  {
+    "id": 6,
+    "question": "What surrounds the glomerulus?",
+    "options": [
+      "Loop of Henle",
+      "Renal pelvis",
+      "Collecting duct",
+      "Bowman's capsule (glomerular capsule)"
+    ],
+    "correctIndex": 3,
+    "tag": "Nephron"
+  },
+  {
+    "id": 7,
+    "question": "What are the parts of the renal tubule in order?",
+    "options": [
+      "Afferent, glomerulus, efferent",
+      "Cortex, medulla, pelvis",
+      "Glomerulus, collecting duct, ureter",
+      "Proximal convoluted tubule, loop of Henle, distal convoluted tubule"
+    ],
+    "correctIndex": 3,
+    "tag": "Kidney"
+  },
+  {
+    "id": 8,
+    "question": "What is the hilum of the kidney?",
+    "options": [
+      "The upper pole",
+      "The functional unit",
+      "Indented region where vessels and ureter enter/exit",
+      "The outer capsule"
+    ],
+    "correctIndex": 2,
+    "tag": "Lungs"
+  },
+  {
+    "id": 9,
+    "question": "What are renal pyramids?",
+    "options": [
+      "Types of nephrons",
+      "Blood vessels in the kidney",
+      "Parts of the renal cortex",
+      "Cone-shaped structures in the renal medulla"
+    ],
+    "correctIndex": 3,
+    "tag": "Kidney"
+  },
+  {
+    "id": 10,
+    "question": "What are renal columns?",
+    "options": [
+      "Blood vessels",
+      "Extensions of cortex between pyramids",
+      "Structures in the medulla",
+      "Types of collecting ducts"
+    ],
+    "correctIndex": 1,
+    "tag": "Kidney"
+  },
+  {
+    "id": 11,
+    "question": "What collects urine from the collecting ducts?",
+    "options": [
+      "Minor and major calyces",
+      "Nephrons",
+      "Ureters",
+      "Glomerulus"
+    ],
+    "correctIndex": 0,
+    "tag": "KidneyStructure"
+  },
+  {
+    "id": 12,
+    "question": "What connects the kidney to the urinary bladder?",
+    "options": [
+      "Ureter",
+      "Renal pelvis",
+      "Urethra",
+      "Collecting duct"
+    ],
+    "correctIndex": 0,
+    "tag": "Kidney"
+  },
+  {
+    "id": 13,
+    "question": "What type of muscle is in the ureter wall?",
+    "options": [
+      "No muscle",
+      "Smooth muscle",
+      "Cardiac muscle",
+      "Skeletal muscle"
+    ],
+    "correctIndex": 1,
+    "tag": "Ureter"
+  },
+  {
+    "id": 14,
+    "question": "What is the trigone of the bladder?",
+    "options": [
+      "The dome of the bladder",
+      "The outer covering",
+      "A muscle layer",
+      "Triangular area formed by ureter openings and urethral opening"
+    ],
+    "correctIndex": 3,
+    "tag": "Bladder"
+  },
+  {
+    "id": 15,
+    "question": "What muscle forms the bladder wall?",
+    "options": [
+      "Detrusor muscle",
+      "Cremaster muscle",
+      "Bulbospongiosus",
+      "External urethral sphincter"
+    ],
+    "correctIndex": 0,
+    "tag": "Bladder"
+  },
+  {
+    "id": 16,
+    "question": "Which urethral sphincter is under voluntary control?",
+    "options": [
+      "Neither is voluntary",
+      "Internal urethral sphincter",
+      "External urethral sphincter",
+      "Both are voluntary"
+    ],
+    "correctIndex": 2,
+    "tag": "Sphincters"
+  },
+  {
+    "id": 17,
+    "question": "How does the male urethra differ from the female?",
+    "options": [
+      "Female urethra is longer",
+      "They are the same length",
+      "Male urethra is longer and passes through prostate",
+      "Male urethra is shorter"
+    ],
+    "correctIndex": 2,
+    "tag": "Urethra"
+  },
+  {
+    "id": 18,
+    "question": "What three processes form urine?",
+    "options": [
+      "Filtration, reabsorption, secretion",
+      "Diffusion, osmosis, active transport",
+      "Ingestion, digestion, absorption",
+      "Excretion, absorption, filtration"
+    ],
+    "correctIndex": 0,
+    "tag": "UrineFormation"
+  },
+  {
+    "id": 19,
+    "question": "Where does filtration occur in the nephron?",
+    "options": [
+      "Loop of Henle",
+      "Collecting duct",
+      "Proximal convoluted tubule",
+      "Glomerulus"
+    ],
+    "correctIndex": 3,
+    "tag": "Nephron"
+  },
+  {
+    "id": 20,
+    "question": "What hormone regulates water reabsorption in the kidney?",
+    "options": [
+      "Insulin",
+      "Aldosterone",
+      "Antidiuretic hormone (ADH)",
+      "Cortisol"
+    ],
+    "correctIndex": 2,
+    "tag": "Kidney"
+  },
+  {
+    "id": 21,
+    "question": "What are the primary functions of the kidneys?",
+    "options": [
+      "Produce hormones only",
+      "Digest proteins",
+      "Filter blood, regulate fluid and electrolyte balance, excrete waste",
+      "Store urine"
+    ],
+    "correctIndex": 2,
+    "tag": "UrinarySystem"
+  },
+  {
+    "id": 22,
+    "question": "What blood vessel brings blood to the kidney?",
+    "options": [
+      "Renal artery",
+      "Efferent arteriole",
+      "Renal vein",
+      "Afferent arteriole"
+    ],
+    "correctIndex": 0,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 23,
+    "question": "What blood vessel takes blood away from the kidney?",
+    "options": [
+      "Peritubular capillaries",
+      "Renal artery",
+      "Afferent arteriole",
+      "Renal vein"
+    ],
+    "correctIndex": 3,
+    "tag": "BloodVessels"
+  },
+  {
+    "id": 24,
+    "question": "What brings blood into the glomerulus?",
+    "options": [
+      "Afferent arteriole",
+      "Peritubular capillaries",
+      "Efferent arteriole",
+      "Renal artery directly"
+    ],
+    "correctIndex": 0,
+    "tag": "Nephron"
+  },
+  {
+    "id": 25,
+    "question": "What takes blood out of the glomerulus?",
+    "options": [
+      "Renal vein",
+      "Interlobar artery",
+      "Afferent arteriole",
+      "Efferent arteriole"
+    ],
+    "correctIndex": 3,
+    "tag": "Nephron"
+  },
+  {
+    "id": 26,
+    "question": "What is the juxtaglomerular apparatus?",
+    "options": [
+      "A type of nephron",
+      "A urinary sphincter",
+      "Part of the collecting duct",
+      "Specialized cells that regulate blood pressure and filtration"
+    ],
+    "correctIndex": 3,
+    "tag": "UrineFormation"
+  },
+  {
+    "id": 27,
+    "question": "What hormone do the kidneys produce for red blood cell production?",
+    "options": [
+      "ADH",
+      "Erythropoietin",
+      "Aldosterone",
+      "Renin"
+    ],
+    "correctIndex": 1,
+    "tag": "RenalHormones"
+  },
+  {
+    "id": 28,
+    "question": "What is the average capacity of the urinary bladder?",
+    "options": [
+      "100-200 mL",
+      "500-600 mL",
+      "50-100 mL",
+      "1000-1500 mL"
+    ],
+    "correctIndex": 1,
+    "tag": "Bladder"
+  },
+  {
+    "id": 29,
+    "question": "What type of epithelium lines the urinary bladder?",
+    "options": [
+      "Pseudostratified ciliated",
+      "Transitional epithelium",
+      "Stratified squamous",
+      "Simple columnar"
+    ],
+    "correctIndex": 1,
+    "tag": "Bladder"
+  },
+  {
+    "id": 30,
+    "question": "Why is transitional epithelium important in the urinary system?",
+    "options": [
+      "It can stretch as the bladder fills",
+      "It secretes mucus",
+      "It filters blood",
+      "It produces hormones"
+    ],
+    "correctIndex": 0,
+    "tag": "Bladder"
+  },
+  {
+    "id": 31,
+    "question": "What maintains the position of the kidneys?",
+    "options": [
+      "Ribs only",
+      "Ligaments only",
+      "Renal fascia and adipose capsule",
+      "Muscles of the back"
+    ],
+    "correctIndex": 2,
+    "tag": "Kidney"
+  },
+  {
+    "id": 32,
+    "question": "Which kidney is slightly lower due to the liver?",
+    "options": [
+      "Both are at same level",
+      "Left kidney",
+      "Neither",
+      "Right kidney"
+    ],
+    "correctIndex": 3,
+    "tag": "Liver"
+  },
+  {
+    "id": 33,
+    "question": "What are the papillae of the kidney?",
+    "options": [
+      "Types of nephrons",
+      "Tips of renal pyramids that project into calyces",
+      "Parts of the cortex",
+      "Blood vessels"
+    ],
+    "correctIndex": 1,
+    "tag": "Taste"
+  },
+  {
+    "id": 34,
+    "question": "What is the loop of Henle important for?",
+    "options": [
+      "Filtering blood",
+      "Secreting hormones",
+      "Storing urine",
+      "Concentrating urine"
+    ],
+    "correctIndex": 3,
+    "tag": "RenalTubule"
+  },
+  {
+    "id": 35,
+    "question": "What are juxtamedullary nephrons?",
+    "options": [
+      "Nephrons without loops",
+      "Nephrons in the cortex only",
+      "Nephrons with long loops of Henle extending deep into medulla",
+      "Damaged nephrons"
+    ],
+    "correctIndex": 2,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 36,
+    "question": "What are cortical nephrons?",
+    "options": [
+      "Nephrons with short loops of Henle mostly in cortex",
+      "Nephrons deep in medulla",
+      "Damaged nephrons",
+      "Nephrons in the pelvis"
+    ],
+    "correctIndex": 0,
+    "tag": "BoneTypes"
+  },
+  {
+    "id": 37,
+    "question": "What is the main waste product excreted by the kidneys?",
+    "options": [
+      "Glucose",
+      "Carbon dioxide",
+      "Urea",
+      "Bile"
+    ],
+    "correctIndex": 2,
+    "tag": "UrinarySystem"
+  },
+  {
+    "id": 38,
+    "question": "What is micturition?",
+    "options": [
+      "Urination",
+      "Filtration",
+      "Reabsorption",
+      "Secretion"
+    ],
+    "correctIndex": 0,
+    "tag": "UrinarySystem"
+  },
+  {
+    "id": 39,
+    "question": "What is the renal capsule?",
+    "options": [
+      "Blood vessel covering",
+      "Type of nephron",
+      "Inner part of kidney",
+      "Fibrous covering of the kidney"
+    ],
+    "correctIndex": 3,
+    "tag": "Kidney"
+  },
+  {
+    "id": 40,
+    "question": "What percentage of cardiac output goes to the kidneys?",
+    "options": [
+      "50%",
+      "20-25%",
+      "1-2%",
+      "5-10%"
+    ],
+    "correctIndex": 1,
+    "tag": "HeartAnatomy"
+  }
+]

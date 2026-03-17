@@ -1,0 +1,470 @@
+[
+  {
+    "id": 1,
+    "question": "What is the standard anatomical position?",
+    "options": [
+      "Sitting upright with arms at sides",
+      "Standing upright with feet shoulder-width apart",
+      "Bending forward at the waist",
+      "Lying supine on a flat surface"
+    ],
+    "correctIndex": 0,
+    "tag": "AnatomicalPosition"
+  },
+  {
+    "id": 2,
+    "question": "Which plane is defined as an imaginary vertical line through the center of the body?",
+    "options": [
+      "Coronal",
+      "Transverse",
+      "Frontal",
+      "Sagittal"
+    ],
+    "correctIndex": 2,
+    "tag": "Coronal"
+  },
+  {
+    "id": 3,
+    "question": "What is a directional term used to describe the position of an object in relation to the body?",
+    "options": [
+      "Distal",
+      "Proximal",
+      "Lateral",
+      "Medial"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 4,
+    "question": "What term refers to the upper portion of the body, including the head, neck, and trunk?",
+    "options": [
+      "Superior",
+      "Caudal",
+      "Inferior",
+      "Dorsal"
+    ],
+    "correctIndex": 1,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 5,
+    "question": "What is the term for a structure that lies in front of another structure?",
+    "options": [
+      "Anterior to",
+      "Lateral to",
+      "Posterior to",
+      "Medial to"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 6,
+    "question": "What is the term for a structure that lies on the same side as another structure?",
+    "options": [
+      "Same side as",
+      "Homolateral to",
+      "Contralateral to",
+      "Opposite side of"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 7,
+    "question": "What is the term for a structure that lies above another structure?",
+    "options": [
+      "Superior to",
+      "Medial to",
+      "Lateral to",
+      "Inferior to"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 8,
+    "question": "What is the standard anatomical position for describing body structures?",
+    "options": [
+      "Left posterior oblique view",
+      "Supine position with arms at sides",
+      "Left lateral view",
+      "Right anterior oblique view"
+    ],
+    "correctIndex": 3,
+    "tag": "AnatomicalPosition"
+  },
+  {
+    "id": 9,
+    "question": "Which of the following planes is used to describe the position of structures in relation to the head?",
+    "options": [
+      "Coronal plane",
+      "Sagittal plane",
+      "Transverse plane",
+      "Frontal plane"
+    ],
+    "correctIndex": 0,
+    "tag": "Coronal"
+  },
+  {
+    "id": 10,
+    "question": "Identify the correct directional term for structures located on the right side of the body when viewed from above.",
+    "options": [
+      "Lateral",
+      "Right",
+      "Left",
+      "Medial"
+    ],
+    "correctIndex": 1,
+    "tag": "AnatomicalLanguage"
+  },
+  {
+    "id": 11,
+    "question": "Which of the following body regions is associated with the heart, lungs, and liver?",
+    "options": [
+      "Pelvic",
+      "Thoracic",
+      "Cranial",
+      "Abdominal"
+    ],
+    "correctIndex": 3,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 12,
+    "question": "What is the name of the plane that includes the head and shoulders?",
+    "options": [
+      "Sagittal",
+      "Coronal",
+      "Frontal",
+      "Transverse"
+    ],
+    "correctIndex": 3,
+    "tag": "Transverse"
+  },
+  {
+    "id": 13,
+    "question": "A student is asked to locate the sternocleidomastoid muscle in the anatomical position. Which directional term would be used to describe its location?",
+    "options": [
+      "Distal",
+      "Proximal",
+      "Deep",
+      "Superficial"
+    ],
+    "correctIndex": 0,
+    "tag": "AnatomicalPosition"
+  },
+  {
+    "id": 14,
+    "question": "The frontal plane is an example of a what type of plane in the human body?",
+    "options": [
+      "Longitudinal",
+      "Oblique",
+      "Transverse",
+      "Sagittal"
+    ],
+    "correctIndex": 2,
+    "tag": "Coronal"
+  },
+  {
+    "id": 15,
+    "question": "A histology slide shows a cross-section of the left arm. Which plane would be used to describe its orientation?",
+    "options": [
+      "Frontal",
+      "Sagittal",
+      "Transverse",
+      "Coronal"
+    ],
+    "correctIndex": 2,
+    "tag": "Transverse"
+  },
+  {
+    "id": 16,
+    "question": "The heart's function is to pump blood throughout the body. Which plane is most relevant to this process?",
+    "options": [
+      "Frontal plane",
+      "Sagittal plane",
+      "Transverse plane",
+      "Coronal plane"
+    ],
+    "correctIndex": 2,
+    "tag": "BoneMarkings"
+  },
+  {
+    "id": 17,
+    "question": "The respiratory system's function of exchanging oxygen and carbon dioxide involves which body region?",
+    "options": [
+      "Thoracic",
+      "Cervical",
+      "Abdominal",
+      "Pelvic"
+    ],
+    "correctIndex": 0,
+    "tag": "BodyRegions"
+  },
+  {
+    "id": 18,
+    "question": "The skeletal system's function of providing structural support and protection for vital organs is most effectively achieved by the bones in which plane?",
+    "options": [
+      "Transverse",
+      "Coronal",
+      "Sagittal",
+      "Frontal"
+    ],
+    "correctIndex": 3,
+    "tag": "MuscleTypes"
+  },
+  {
+    "id": 19,
+    "question": "The nervous system's function of transmitting and processing neural signals involves which type of directional term?",
+    "options": [
+      "Distal",
+      "Proximal",
+      "Posterior",
+      "Anterior"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 20,
+    "question": "What is the primary function of the abdominal muscles during breathing?",
+    "options": [
+      "Stabilizing the pelvis",
+      "Facilitating rib movement",
+      "Assisting in chest expansion",
+      "Supporting the spine"
+    ],
+    "correctIndex": 2,
+    "tag": "Breathing"
+  },
+  {
+    "id": 21,
+    "question": "Which of the following structures plays a crucial role in regulating body temperature?",
+    "options": [
+      "Skeletal muscle",
+      "Smooth muscle",
+      "Cardiac muscle",
+      "Connective tissue"
+    ],
+    "correctIndex": 2,
+    "tag": "HeartAnatomy"
+  },
+  {
+    "id": 22,
+    "question": "What is the primary function of the diaphragm during inhalation?",
+    "options": [
+      "Facilitating breathing",
+      "Supporting the lungs",
+      "Assisting in rib movement",
+      "Separating the chest and abdominal cavities"
+    ],
+    "correctIndex": 0,
+    "tag": "Breathing"
+  },
+  {
+    "id": 23,
+    "question": "Which of the following structures helps to protect internal organs during injury?",
+    "options": [
+      "Connective tissue",
+      "Smooth muscle",
+      "Cardiac muscle",
+      "Skeletal muscle"
+    ],
+    "correctIndex": 0,
+    "tag": "AnatomicalLanguage"
+  },
+  {
+    "id": 24,
+    "question": "What is the standard anatomical position used to describe body location?",
+    "options": [
+      "Frontal plane",
+      "Sagittal plane",
+      "Elevated",
+      "Transverse plane"
+    ],
+    "correctIndex": 3,
+    "tag": "AnatomicalPosition"
+  },
+  {
+    "id": 25,
+    "question": "Which plane is located at a right angle to the transverse plane?",
+    "options": [
+      "Horizontal plane",
+      "Frontal plane",
+      "Sagittal plane",
+      "Elevated"
+    ],
+    "correctIndex": 2,
+    "tag": "Transverse"
+  },
+  {
+    "id": 26,
+    "question": "A structure is described as 'dorsal' and 'ventral'. What does this imply about its location?",
+    "options": [
+      "Left lateral",
+      "Right medial",
+      "Distal from the heart",
+      "Proximal to the heart"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 27,
+    "question": "A patient is experiencing pain in their 'medial' leg. What region of the body does this imply?",
+    "options": [
+      "Deep",
+      "Superficial",
+      "Anterior",
+      "Posterior"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 28,
+    "question": "What is the name of the anatomical position that refers to an individual standing with feet together and arms at their sides?",
+    "options": [
+      "Transverse plane",
+      "Frontal plane",
+      "Sagittal plane",
+      "Superior-inferior"
+    ],
+    "correctIndex": 2,
+    "tag": "AnatomicalPosition"
+  },
+  {
+    "id": 29,
+    "question": "Which of the following directions is used to describe a structure that lies posterior (towards the back) to the body?",
+    "options": [
+      "Posterior",
+      "Superior",
+      "Medial",
+      "Lateral"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 30,
+    "question": "A student is asked to locate the sternum in the anatomical position. Which of the following would be a correct description of the location of the sternum?",
+    "options": [
+      "Behind the right shoulder",
+      "In front of the left clavicle",
+      "In line with the sagittal plane",
+      "To the left of the midline"
+    ],
+    "correctIndex": 1,
+    "tag": "AnatomicalPosition"
+  },
+  {
+    "id": 31,
+    "question": "What is the term used to describe a structure that lies superior (towards the top) to the body in the frontal plane?",
+    "options": [
+      "Superior-inferior",
+      "Medial",
+      "Anterior-posterior",
+      "Lateral"
+    ],
+    "correctIndex": 0,
+    "tag": "Coronal"
+  },
+  {
+    "id": 32,
+    "question": "Which directional term indicates movement from head to feet?",
+    "options": [
+      "Distal",
+      "Proximal",
+      "Inferior",
+      "Superior"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 33,
+    "question": "What is the relationship between the superior mediastinum and the heart?",
+    "options": [
+      "Below the thoracic cavity",
+      "Adjacent to the heart",
+      "Part of the diaphragm",
+      "Located above the heart"
+    ],
+    "correctIndex": 1,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 34,
+    "question": "Which anatomical region includes the liver, pancreas, and spleen?",
+    "options": [
+      "Cranial cavity",
+      "Abdominal cavity",
+      "Pelvic cavity",
+      "Thoracic cavity"
+    ],
+    "correctIndex": 1,
+    "tag": "Liver"
+  },
+  {
+    "id": 35,
+    "question": "What is the relationship between the diaphragm and the lungs?",
+    "options": [
+      "The diaphragm connects to the sternum",
+      "The diaphragm supports the lungs within the thoracic cavity",
+      "The diaphragm surrounds the esophagus",
+      "The diaphragm separates the thoracic cavity from"
+    ],
+    "correctIndex": 1,
+    "tag": "Breathing"
+  },
+  {
+    "id": 36,
+    "question": "In anatomical position, what plane contains the left arm and right leg?",
+    "options": [
+      "Frontal",
+      "Coronal",
+      "Sagittal",
+      "Transverse"
+    ],
+    "correctIndex": 3,
+    "tag": "AnatomicalPosition"
+  },
+  {
+    "id": 37,
+    "question": "Which body plane is perpendicular to the frontal and sagittal planes?",
+    "options": [
+      "Frontal",
+      "Transverse",
+      "Sagittal",
+      "Horizontal"
+    ],
+    "correctIndex": 3,
+    "tag": "Sagittal"
+  },
+  {
+    "id": 38,
+    "question": "In the anatomical position, what region contains the heart and lungs?",
+    "options": [
+      "Pelvic",
+      "Thoracic",
+      "Cranial",
+      "Abdominal"
+    ],
+    "correctIndex": 3,
+    "tag": "AnatomicalPosition"
+  },
+  {
+    "id": 39,
+    "question": "What directional term is used to describe movement from the front of the body towards the back?",
+    "options": [
+      "Distal",
+      "Proximal",
+      "Lateral",
+      "Medial"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  }
+]

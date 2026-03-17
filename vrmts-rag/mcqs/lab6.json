@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What are the two functional divisions of the respiratory system?",
+    "options": [
+      "Conducting zone and respiratory zone",
+      "Ventilation and perfusion zones",
+      "Inhalation and exhalation zones",
+      "Upper and lower respiratory tract"
+    ],
+    "correctIndex": 0,
+    "tag": "RespiratoryZones"
+  },
+  {
+    "id": 2,
+    "question": "What structures make up the upper respiratory tract?",
+    "options": [
+      "Trachea, bronchi, lungs",
+      "Bronchioles, alveoli",
+      "Nose, nasal cavity, pharynx, larynx",
+      "Diaphragm, intercostal muscles"
+    ],
+    "correctIndex": 2,
+    "tag": "NasalCavity"
+  },
+  {
+    "id": 3,
+    "question": "What are the three regions of the pharynx?",
+    "options": [
+      "Superior, middle, inferior",
+      "Upper, middle, lower",
+      "Anterior, posterior, lateral",
+      "Nasopharynx, oropharynx, laryngopharynx"
+    ],
+    "correctIndex": 3,
+    "tag": "Pharynx"
+  },
+  {
+    "id": 4,
+    "question": "What is the voice box called?",
+    "options": [
+      "Pharynx",
+      "Trachea",
+      "Bronchus",
+      "Larynx"
+    ],
+    "correctIndex": 3,
+    "tag": "Larynx"
+  },
+  {
+    "id": 5,
+    "question": "What cartilage forms the Adam's apple?",
+    "options": [
+      "Arytenoid cartilage",
+      "Cricoid cartilage",
+      "Thyroid cartilage",
+      "Epiglottis"
+    ],
+    "correctIndex": 2,
+    "tag": "Larynx"
+  },
+  {
+    "id": 6,
+    "question": "What structure prevents food from entering the airway during swallowing?",
+    "options": [
+      "Cricoid cartilage",
+      "Thyroid cartilage",
+      "Vocal cords",
+      "Epiglottis"
+    ],
+    "correctIndex": 3,
+    "tag": "Larynx"
+  },
+  {
+    "id": 7,
+    "question": "What produces sound when air passes over them?",
+    "options": [
+      "Nasal conchae",
+      "Epiglottis",
+      "Tracheal rings",
+      "Vocal folds (cords)"
+    ],
+    "correctIndex": 3,
+    "tag": "Larynx"
+  },
+  {
+    "id": 8,
+    "question": "What is the windpipe called?",
+    "options": [
+      "Trachea",
+      "Larynx",
+      "Pharynx",
+      "Bronchus"
+    ],
+    "correctIndex": 0,
+    "tag": "Trachea"
+  },
+  {
+    "id": 9,
+    "question": "What type of cartilage keeps the trachea open?",
+    "options": [
+      "C-shaped hyaline cartilage rings",
+      "Complete rings of elastic cartilage",
+      "Irregular cartilage masses",
+      "Fibrocartilage plates"
+    ],
+    "correctIndex": 0,
+    "tag": "Trachea"
+  },
+  {
+    "id": 10,
+    "question": "What is the point where the trachea divides into two bronchi called?",
+    "options": [
+      "Hilum",
+      "Carina",
+      "Bifurcation",
+      "Apex"
+    ],
+    "correctIndex": 1,
+    "tag": "Trachea"
+  },
+  {
+    "id": 11,
+    "question": "Which primary bronchus is wider, shorter, and more vertical?",
+    "options": [
+      "Right primary bronchus",
+      "They are identical",
+      "Left primary bronchus",
+      "Neither is wider"
+    ],
+    "correctIndex": 0,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 12,
+    "question": "Why do aspirated objects more commonly enter the right bronchus?",
+    "options": [
+      "It has more blood supply",
+      "It is more vertical and wider",
+      "It is longer",
+      "It has fewer cilia"
+    ],
+    "correctIndex": 1,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 13,
+    "question": "How many lobes does the right lung have?",
+    "options": [
+      "Five",
+      "Two",
+      "Four",
+      "Three"
+    ],
+    "correctIndex": 3,
+    "tag": "Lungs"
+  },
+  {
+    "id": 14,
+    "question": "How many lobes does the left lung have?",
+    "options": [
+      "Four",
+      "Two",
+      "One",
+      "Three"
+    ],
+    "correctIndex": 1,
+    "tag": "Lungs"
+  },
+  {
+    "id": 15,
+    "question": "What is the cardiac notch?",
+    "options": [
+      "Part of the right lung",
+      "An indentation in the left lung for the heart",
+      "A valve in the heart",
+      "A bronchial structure"
+    ],
+    "correctIndex": 1,
+    "tag": "Lungs"
+  },
+  {
+    "id": 16,
+    "question": "What is the hilum of the lung?",
+    "options": [
+      "The base of the lung",
+      "The apex of the lung",
+      "The fissure between lobes",
+      "Entry point for bronchi, vessels, and nerves"
+    ],
+    "correctIndex": 3,
+    "tag": "Lungs"
+  },
+  {
+    "id": 17,
+    "question": "What are alveoli?",
+    "options": [
+      "Large airways",
+      "Tiny air sacs where gas exchange occurs",
+      "Muscle tissue",
+      "Cartilage rings"
+    ],
+    "correctIndex": 1,
+    "tag": "Alveoli"
+  },
+  {
+    "id": 18,
+    "question": "What type of cells line the alveoli?",
+    "options": [
+      "Squamous keratinized cells",
+      "Goblet cells",
+      "Type I and Type II pneumocytes",
+      "Ciliated columnar cells"
+    ],
+    "correctIndex": 2,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 19,
+    "question": "What do Type II alveolar cells produce?",
+    "options": [
+      "Histamine",
+      "Mucus",
+      "Surfactant",
+      "Pepsin"
+    ],
+    "correctIndex": 2,
+    "tag": "Alveoli"
+  },
+  {
+    "id": 20,
+    "question": "What is the function of surfactant?",
+    "options": [
+      "Produces mucus",
+      "Transports oxygen",
+      "Reduces surface tension in alveoli",
+      "Traps pathogens"
+    ],
+    "correctIndex": 2,
+    "tag": "Alveoli"
+  },
+  {
+    "id": 21,
+    "question": "What are the two layers of the pleura?",
+    "options": [
+      "Superior and inferior",
+      "Superficial and deep",
+      "Inner and outer",
+      "Visceral and parietal"
+    ],
+    "correctIndex": 3,
+    "tag": "SerousMembranes"
+  },
+  {
+    "id": 22,
+    "question": "What is found in the pleural cavity?",
+    "options": [
+      "Air",
+      "Lymph",
+      "Blood",
+      "Serous fluid"
+    ],
+    "correctIndex": 3,
+    "tag": "Pleura"
+  },
+  {
+    "id": 23,
+    "question": "What is the primary muscle of respiration?",
+    "options": [
+      "Diaphragm",
+      "External intercostals",
+      "Abdominal muscles",
+      "Internal intercostals"
+    ],
+    "correctIndex": 0,
+    "tag": "Breathing"
+  },
+  {
+    "id": 24,
+    "question": "What happens to the diaphragm during inhalation?",
+    "options": [
+      "It remains stationary",
+      "It moves laterally",
+      "It relaxes and moves upward",
+      "It contracts and moves downward"
+    ],
+    "correctIndex": 3,
+    "tag": "Breathing"
+  },
+  {
+    "id": 25,
+    "question": "Which muscles assist in forced inhalation?",
+    "options": [
+      "Abdominal muscles",
+      "Diaphragm only",
+      "External intercostals and accessory muscles",
+      "Internal intercostals"
+    ],
+    "correctIndex": 2,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 26,
+    "question": "What is normal quiet breathing called?",
+    "options": [
+      "Dyspnea",
+      "Apnea",
+      "Hyperpnea",
+      "Eupnea"
+    ],
+    "correctIndex": 3,
+    "tag": "Breathing"
+  },
+  {
+    "id": 27,
+    "question": "What are the paranasal sinuses?",
+    "options": [
+      "Lobes of the lungs",
+      "Sections of the larynx",
+      "Air-filled spaces in skull bones that open into nasal cavity",
+      "Parts of the pharynx"
+    ],
+    "correctIndex": 2,
+    "tag": "NasalCavity"
+  },
+  {
+    "id": 28,
+    "question": "Which bones contain paranasal sinuses?",
+    "options": [
+      "Nasal, lacrimal, vomer",
+      "Frontal, maxillary, ethmoid, sphenoid",
+      "Temporal, parietal, occipital",
+      "Mandible, maxilla, zygomatic"
+    ],
+    "correctIndex": 1,
+    "tag": "NasalCavity"
+  },
+  {
+    "id": 29,
+    "question": "What structures increase surface area in the nasal cavity?",
+    "options": [
+      "Nares",
+      "Nasal conchae (turbinates)",
+      "Paranasal sinuses",
+      "Nasal septum"
+    ],
+    "correctIndex": 1,
+    "tag": "NasalCavity"
+  },
+  {
+    "id": 30,
+    "question": "How many nasal conchae are there on each side?",
+    "options": [
+      "Four",
+      "Two",
+      "Three (superior, middle, inferior)",
+      "One"
+    ],
+    "correctIndex": 2,
+    "tag": "NasalCavity"
+  },
+  {
+    "id": 31,
+    "question": "What is the respiratory membrane?",
+    "options": [
+      "The tracheal lining",
+      "The pleural membrane",
+      "The thin barrier between alveolar air and blood",
+      "The bronchial wall"
+    ],
+    "correctIndex": 2,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 32,
+    "question": "What separates the thoracic cavity into left and right portions?",
+    "options": [
+      "Mediastinum",
+      "Diaphragm",
+      "Pleura",
+      "Sternum"
+    ],
+    "correctIndex": 0,
+    "tag": "BodyCavities"
+  },
+  {
+    "id": 33,
+    "question": "What is the apex of the lung?",
+    "options": [
+      "Inferior surface resting on diaphragm",
+      "Superior tip extending above the clavicle",
+      "Medial surface at the hilum",
+      "Lateral surface against ribs"
+    ],
+    "correctIndex": 1,
+    "tag": "Lungs"
+  },
+  {
+    "id": 34,
+    "question": "What divides the lobes of the lungs?",
+    "options": [
+      "Pleura",
+      "Fissures",
+      "Septa",
+      "Bronchi"
+    ],
+    "correctIndex": 1,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 35,
+    "question": "What is the horizontal fissure found in?",
+    "options": [
+      "Both lungs",
+      "Neither lung",
+      "Left lung only",
+      "Right lung only"
+    ],
+    "correctIndex": 3,
+    "tag": "Transverse"
+  },
+  {
+    "id": 36,
+    "question": "What are bronchioles?",
+    "options": [
+      "Large airways with cartilage",
+      "Mucus-producing glands",
+      "Small airways less than 1mm in diameter",
+      "Air sacs for gas exchange"
+    ],
+    "correctIndex": 2,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 37,
+    "question": "What type of epithelium lines most of the respiratory tract?",
+    "options": [
+      "Pseudostratified ciliated columnar",
+      "Transitional",
+      "Stratified squamous",
+      "Simple squamous"
+    ],
+    "correctIndex": 0,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 38,
+    "question": "What is the function of cilia in the respiratory tract?",
+    "options": [
+      "Absorb oxygen",
+      "Secrete hormones",
+      "Produce surfactant",
+      "Move mucus and trapped particles toward pharynx"
+    ],
+    "correctIndex": 3,
+    "tag": "Pharynx"
+  },
+  {
+    "id": 39,
+    "question": "What cells produce mucus in the respiratory tract?",
+    "options": [
+      "Goblet cells",
+      "Type I pneumocytes",
+      "Clara cells",
+      "Type II pneumocytes"
+    ],
+    "correctIndex": 0,
+    "tag": "RespiratorySystem"
+  },
+  {
+    "id": 40,
+    "question": "What nerve innervates the diaphragm?",
+    "options": [
+      "Thoracic splanchnic nerves",
+      "Phrenic nerve",
+      "Intercostal nerves",
+      "Vagus nerve"
+    ],
+    "correctIndex": 1,
+    "tag": "Breathing"
+  }
+]

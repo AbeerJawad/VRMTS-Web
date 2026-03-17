@@ -1,0 +1,34 @@
+======================================================================
+  VRMTS-RAG THESIS EVALUATION (Fast MCQ Mode)
+  Model: Llama 3.2 | Embeddings: all-MiniLM-L6-v2 | FAISS | Top-K: 6
+  Timestamp: 20260310_054417
+======================================================================
+
+[1/4] Checking RAG server...
+  RAG server OK.
+
+[2/4] Checking Ollama LLM...
+  Ollama OK. Available models: ['llama3.2:latest']
+
+[3/4] Loading MCQ bank...
+  Loaded 399 questions from 10 labs:
+    Lab 1: 39 questions
+    Lab 2: 40 questions
+    Lab 3: 40 questions
+    Lab 4: 40 questions
+    Lab 5: 40 questions
+    Lab 6: 40 questions
+    Lab 7: 40 questions
+    Lab 8: 40 questions
+    Lab 9: 40 questions
+    Lab 10: 40 questions
+
+======================================================================
+  PHASE 1: RETRIEVAL RELEVANCE EVALUATION (no LLM)
+======================================================================
+  [10/399] Progress... (8/10 relevant)
+  [20/399] Progress... (15/20 relevant)
+  [30/399] Progress... (24/30 relevant)
+  [40/399] Progress... (32/40 relevant)
+  [50/399] Progress... (41/50 relevant)
+  [60/399] Progress... (51/60 relevant)

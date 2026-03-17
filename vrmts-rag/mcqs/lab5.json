@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What are the three tunics (layers) of the eye?",
+    "options": [
+      "Fibrous, vascular, neural",
+      "Outer, middle, inner",
+      "Sclera, cornea, retina",
+      "Iris, lens, pupil"
+    ],
+    "correctIndex": 0,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 2,
+    "question": "What structures make up the fibrous tunic of the eye?",
+    "options": [
+      "Lens and ciliary body",
+      "Choroid and iris",
+      "Sclera and cornea",
+      "Retina and optic nerve"
+    ],
+    "correctIndex": 2,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 3,
+    "question": "What is the white of the eye called?",
+    "options": [
+      "Conjunctiva",
+      "Sclera",
+      "Choroid",
+      "Cornea"
+    ],
+    "correctIndex": 1,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 4,
+    "question": "What is the transparent anterior portion of the fibrous tunic?",
+    "options": [
+      "Lens",
+      "Sclera",
+      "Iris",
+      "Cornea"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 5,
+    "question": "What structure gives the eye its color?",
+    "options": [
+      "Iris",
+      "Sclera",
+      "Cornea",
+      "Pupil"
+    ],
+    "correctIndex": 0,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 6,
+    "question": "What is the opening in the center of the iris called?",
+    "options": [
+      "Fovea",
+      "Optic disc",
+      "Macula",
+      "Pupil"
+    ],
+    "correctIndex": 3,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 7,
+    "question": "What structure changes the shape of the lens for focusing?",
+    "options": [
+      "Iris",
+      "Choroid",
+      "Retina",
+      "Ciliary body"
+    ],
+    "correctIndex": 3,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 8,
+    "question": "What photoreceptors are responsible for color vision?",
+    "options": [
+      "Bipolar cells",
+      "Rods",
+      "Ganglion cells",
+      "Cones"
+    ],
+    "correctIndex": 3,
+    "tag": "SpecialSenses"
+  },
+  {
+    "id": 9,
+    "question": "What photoreceptors are responsible for vision in dim light?",
+    "options": [
+      "Cones",
+      "Ganglion cells",
+      "Horizontal cells",
+      "Rods"
+    ],
+    "correctIndex": 3,
+    "tag": "SpecialSenses"
+  },
+  {
+    "id": 10,
+    "question": "What is the area of sharpest vision on the retina called?",
+    "options": [
+      "Ora serrata",
+      "Fovea centralis",
+      "Optic disc",
+      "Macula lutea"
+    ],
+    "correctIndex": 1,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 11,
+    "question": "What is the blind spot of the eye?",
+    "options": [
+      "Macula",
+      "Fovea",
+      "Optic disc",
+      "Ora serrata"
+    ],
+    "correctIndex": 2,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 12,
+    "question": "What gel-like substance fills the posterior cavity of the eye?",
+    "options": [
+      "Vitreous humor",
+      "Aqueous humor",
+      "Lymph",
+      "Tears"
+    ],
+    "correctIndex": 0,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 13,
+    "question": "What fluid is found in the anterior and posterior chambers of the eye?",
+    "options": [
+      "Cerebrospinal fluid",
+      "Aqueous humor",
+      "Tears",
+      "Vitreous humor"
+    ],
+    "correctIndex": 1,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 14,
+    "question": "Which cranial nerve carries visual information to the brain?",
+    "options": [
+      "Oculomotor nerve (CN III)",
+      "Optic nerve (CN II)",
+      "Trigeminal nerve (CN V)",
+      "Olfactory nerve (CN I)"
+    ],
+    "correctIndex": 1,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 15,
+    "question": "What are the three regions of the ear?",
+    "options": [
+      "External, middle, inner",
+      "Superior, inferior, lateral",
+      "Auricle, canal, cochlea",
+      "Outer, central, deep"
+    ],
+    "correctIndex": 0,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 16,
+    "question": "What are the three auditory ossicles?",
+    "options": [
+      "Utricle, saccule, ampulla",
+      "Cochlea, vestibule, semicircular canals",
+      "Auricle, canal, tympanum",
+      "Malleus, incus, stapes"
+    ],
+    "correctIndex": 3,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 17,
+    "question": "What is the tympanic membrane?",
+    "options": [
+      "Eardrum",
+      "Oval window",
+      "Cochlear membrane",
+      "Round window"
+    ],
+    "correctIndex": 0,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 18,
+    "question": "What connects the middle ear to the nasopharynx?",
+    "options": [
+      "Cochlear duct",
+      "External auditory meatus",
+      "Eustachian tube",
+      "Vestibular duct"
+    ],
+    "correctIndex": 2,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 19,
+    "question": "What structure contains the receptors for hearing?",
+    "options": [
+      "Vestibule",
+      "Cochlea",
+      "Auricle",
+      "Semicircular canals"
+    ],
+    "correctIndex": 1,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 20,
+    "question": "What is the organ of Corti?",
+    "options": [
+      "A balance organ",
+      "A middle ear bone",
+      "Part of the external ear",
+      "The sensory receptor for hearing"
+    ],
+    "correctIndex": 3,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 21,
+    "question": "What structures detect rotational movement of the head?",
+    "options": [
+      "Utricle",
+      "Cochlea",
+      "Saccule",
+      "Semicircular canals"
+    ],
+    "correctIndex": 3,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 22,
+    "question": "What structures detect linear acceleration and head position?",
+    "options": [
+      "Utricle and saccule",
+      "Organ of Corti",
+      "Cochlea",
+      "Semicircular canals"
+    ],
+    "correctIndex": 0,
+    "tag": "SpecialSenses"
+  },
+  {
+    "id": 23,
+    "question": "Which cranial nerve carries hearing and balance information?",
+    "options": [
+      "Trigeminal (V)",
+      "Glossopharyngeal (IX)",
+      "Facial (VII)",
+      "Vestibulocochlear (VIII)"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 24,
+    "question": "What type of papillae contain the most taste buds?",
+    "options": [
+      "Circumvallate papillae",
+      "Fungiform papillae",
+      "Foliate papillae",
+      "Filiform papillae"
+    ],
+    "correctIndex": 0,
+    "tag": "Taste"
+  },
+  {
+    "id": 25,
+    "question": "Which papillae provide friction but have no taste buds?",
+    "options": [
+      "Fungiform papillae",
+      "Foliate papillae",
+      "Circumvallate papillae",
+      "Filiform papillae"
+    ],
+    "correctIndex": 3,
+    "tag": "Taste"
+  },
+  {
+    "id": 26,
+    "question": "What are the five basic taste sensations?",
+    "options": [
+      "Sweet, salty, sour, bitter, spicy",
+      "Sweet, sour, bitter, savory, minty",
+      "Sweet, salty, sour, bitter, umami",
+      "Sweet, salty, bitter, umami, metallic"
+    ],
+    "correctIndex": 2,
+    "tag": "Taste"
+  },
+  {
+    "id": 27,
+    "question": "Which cranial nerves carry taste information?",
+    "options": [
+      "Hypoglossal (XII), Vagus (X)",
+      "Trigeminal (V), Facial (VII)",
+      "Facial (VII), Glossopharyngeal (IX), Vagus (X)",
+      "Olfactory (I), Optic (II)"
+    ],
+    "correctIndex": 2,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 28,
+    "question": "Where is the olfactory epithelium located?",
+    "options": [
+      "Inferior nasal concha",
+      "Nasal septum only",
+      "Middle nasal concha",
+      "Superior nasal concha"
+    ],
+    "correctIndex": 3,
+    "tag": "CranialNerves"
+  },
+  {
+    "id": 29,
+    "question": "Which cranial nerve carries smell information?",
+    "options": [
+      "Facial (VII)",
+      "Trigeminal (V)",
+      "Optic (II)",
+      "Olfactory (I)"
+    ],
+    "correctIndex": 3,
+    "tag": "DirectionalTerms"
+  },
+  {
+    "id": 30,
+    "question": "What bone does the olfactory nerve pass through?",
+    "options": [
+      "Frontal bone",
+      "Sphenoid bone",
+      "Temporal bone",
+      "Cribriform plate of ethmoid"
+    ],
+    "correctIndex": 3,
+    "tag": "CranialNerves"
+  },
+  {
+    "id": 31,
+    "question": "What muscle elevates the upper eyelid?",
+    "options": [
+      "Levator palpebrae superioris",
+      "Superior rectus",
+      "Frontalis",
+      "Orbicularis oculi"
+    ],
+    "correctIndex": 0,
+    "tag": "SpecialSenses"
+  },
+  {
+    "id": 32,
+    "question": "How many extrinsic eye muscles control eye movement?",
+    "options": [
+      "Six",
+      "Three",
+      "Four",
+      "Eight"
+    ],
+    "correctIndex": 0,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 33,
+    "question": "What produces tears?",
+    "options": [
+      "Ciliary body",
+      "Lacrimal gland",
+      "Tarsal glands",
+      "Conjunctiva"
+    ],
+    "correctIndex": 1,
+    "tag": "SpecialSenses"
+  },
+  {
+    "id": 34,
+    "question": "Where do tears drain into the nasal cavity?",
+    "options": [
+      "Lacrimal sac",
+      "Eustachian tube",
+      "Nasolacrimal duct",
+      "Lacrimal canaliculi"
+    ],
+    "correctIndex": 2,
+    "tag": "NasalCavity"
+  },
+  {
+    "id": 35,
+    "question": "What is the choroid?",
+    "options": [
+      "The inner neural layer",
+      "The white outer layer",
+      "The lens covering",
+      "Vascular layer that nourishes the retina"
+    ],
+    "correctIndex": 3,
+    "tag": "VascularTunic"
+  },
+  {
+    "id": 36,
+    "question": "What is the function of the oval window?",
+    "options": [
+      "Detects sound waves",
+      "Transmits vibrations from stapes to inner ear",
+      "Produces endolymph",
+      "Equalizes pressure in middle ear"
+    ],
+    "correctIndex": 1,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 37,
+    "question": "What is the function of ceruminous glands?",
+    "options": [
+      "Produce saliva",
+      "Produce mucus",
+      "Produce tears",
+      "Produce earwax"
+    ],
+    "correctIndex": 3,
+    "tag": "SpecialSenses"
+  },
+  {
+    "id": 38,
+    "question": "What is the macula lutea?",
+    "options": [
+      "Part of the choroid",
+      "Yellow spot on retina containing the fovea",
+      "Blind spot of the eye",
+      "Attachment point of eye muscles"
+    ],
+    "correctIndex": 1,
+    "tag": "EyeAnatomy"
+  },
+  {
+    "id": 39,
+    "question": "What is the vestibule of the inner ear?",
+    "options": [
+      "Central chamber containing utricle and saccule",
+      "The spiral hearing organ",
+      "The opening to the cochlea",
+      "The three semicircular canals"
+    ],
+    "correctIndex": 0,
+    "tag": "EarAnatomy"
+  },
+  {
+    "id": 40,
+    "question": "Where does the optic chiasm occur?",
+    "options": [
+      "In the occipital lobe",
+      "In the retina",
+      "At the base of the brain where optic nerves cross",
+      "In the thalamus"
+    ],
+    "correctIndex": 2,
+    "tag": "SpecialSenses"
+  }
+]
