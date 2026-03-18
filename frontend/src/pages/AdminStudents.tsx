@@ -12,6 +12,7 @@ export default function AdminStudents() {
   const [searchTerm, setSearchTerm] = useState('');
   const [assigningTo, setAssigningTo] = useState<any>(null);
   const [showBulkUpload, setShowBulkUpload] = useState(false);
+  const [showCreating, setShowCreating] = useState(false);
 
   const fetchData = async () => {
     setLoading(true);
@@ -66,7 +67,6 @@ export default function AdminStudents() {
     { key: 'dashboard' as const, label: 'Overview', path: '/admindashboard' },
     { key: 'students' as const, label: 'Students', path: '/admin/students' },
     { key: 'faculty' as const, label: 'Faculty', path: '/admin/faculty' },
-    { key: 'announcements' as const, label: 'Announcements', path: '/admin/announcements' },
     { key: 'audit' as const, label: 'Audit Logs', path: '/admin/audit' },
   ];
 
@@ -92,13 +92,22 @@ export default function AdminStudents() {
               className="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors"
             />
           </div>
-          <button 
-            onClick={() => setShowBulkUpload(true)}
-            className="flex items-center gap-2 px-6 py-2.5 bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-lg text-xs font-bold uppercase tracking-widest text-white transition-all shadow-lg"
-          >
-            <Upload className="w-4 h-4 text-emerald-500" />
-            Bulk Upload
-          </button>
+          <div className="flex gap-3 w-full md:w-auto">
+            <button 
+              onClick={() => setShowCreating(true)}
+              className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-bold uppercase tracking-widest text-white transition-all shadow-lg"
+            >
+              <Users className="w-4 h-4" />
+              Add Student
+            </button>
+            <button 
+              onClick={() => setShowBulkUpload(true)}
+              className="flex items-center gap-2 px-6 py-2.5 bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-lg text-xs font-bold uppercase tracking-widest text-white transition-all shadow-lg"
+            >
+              <Upload className="w-4 h-4 text-emerald-500" />
+              Bulk Upload
+            </button>
+          </div>
         </div>
 
         {loading ? (
@@ -167,6 +176,12 @@ export default function AdminStudents() {
       </div>
 
       {/* Modals */}
+      {showCreating && (
+        <CreateStudentModal 
+          onClose={() => setShowCreating(false)} 
+          onRefresh={fetchData} 
+        />
+      )}
       {assigningTo && (
         <AssignmentModal 
           student={assigningTo} 
@@ -182,6 +197,53 @@ export default function AdminStudents() {
         />
       )}
     </PageLayout>
+  );
+}
+
+function CreateStudentModal({ onClose, onRefresh }: any) {
+  const [form, setForm] = useState({ name: '', email: '', enrollmentNumber: '', className: '', password: '' });
+  const [saving, setSaving] = useState(false);
+
+  const handleCreate = async () => {
+    setSaving(true);
+    try {
+      await axios.post(`${API_BASE_URL}/student`, form, { withCredentials: true });
+      onRefresh();
+      onClose();
+    } catch (err) {
+      alert('Failed to register student');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-neutral-950/90 backdrop-blur-md flex items-center justify-center z-[200] p-4">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl max-w-xl w-full p-10 space-y-8 animate-in slide-in-from-bottom-10 duration-500">
+        <div className="text-center">
+          <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-6 shadow-xl">
+            <Users className="w-8 h-8 text-emerald-400" />
+          </div>
+          <h3 className="text-xl font-bold text-white tracking-tighter uppercase">Add Individual Student</h3>
+          <p className="text-neutral-500 text-[10px] font-bold uppercase tracking-widest mt-2">Create a new academic record</p>
+        </div>
+        <div className="space-y-4">
+          <input className="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-4 text-sm outline-none focus:border-emerald-500/50" placeholder="Full Name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
+          <input className="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-4 text-sm outline-none focus:border-emerald-500/50" placeholder="Email Address" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
+          <div className="grid grid-cols-2 gap-4">
+            <input className="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-4 text-sm outline-none focus:border-emerald-500/50" placeholder="Enrollment #" value={form.enrollmentNumber} onChange={e => setForm({...form, enrollmentNumber: e.target.value})} />
+            <input className="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-4 text-sm outline-none focus:border-emerald-500/50" placeholder="Class (e.g. B1)" value={form.className} onChange={e => setForm({...form, className: e.target.value})} />
+          </div>
+          <input className="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-4 text-sm outline-none focus:border-emerald-500/50" type="password" placeholder="Initial Password" value={form.password} onChange={e => setForm({...form, password: e.target.value})} />
+        </div>
+        <div className="flex gap-4">
+          <button onClick={handleCreate} disabled={!form.name || !form.email || !form.password || saving} className="flex-1 py-4 bg-emerald-600 rounded-lg text-white font-bold uppercase text-[10px] tracking-widest shadow-xl hover:bg-emerald-500 transition-all">
+            {saving ? 'Registering...' : 'Add Student'}
+          </button>
+          <button onClick={onClose} className="px-10 py-4 bg-neutral-800 rounded-lg text-neutral-400 font-bold uppercase text-[10px] tracking-widest">Cancel</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -273,7 +335,18 @@ function BulkUploadModal({ onClose, onRefresh }: any) {
   return (
     <div className="fixed inset-0 bg-neutral-950/90 backdrop-blur-md flex items-center justify-center z-[200] p-4">
       <div className="bg-neutral-900 border border-neutral-800 rounded-2xl max-w-4xl w-full p-10 space-y-8 animate-in zoom-in duration-300">
-        <h3 className="text-2xl font-bold text-white tracking-tighter uppercase">Bulk Student Upload</h3>
+        <div className="flex justify-between items-start">
+          <div>
+            <h3 className="text-2xl font-bold text-white tracking-tighter uppercase">Bulk Student Upload</h3>
+            <p className="text-neutral-500 text-[10px] font-bold uppercase tracking-widest mt-2">Provision multiple accounts via CSV</p>
+          </div>
+          <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-lg p-4 max-w-xs">
+            <p className="text-[9px] font-bold text-emerald-500 uppercase tracking-widest mb-2">Required CSV Format:</p>
+            <code className="text-[10px] text-neutral-400 font-mono block bg-black/40 p-2 rounded">
+              name, email, enrollmentNumber, className, password
+            </code>
+          </div>
+        </div>
         <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-8 border-dashed flex flex-col items-center justify-center relative">
           <input type="file" accept=".csv" onChange={handleFile} className="absolute inset-0 opacity-0 cursor-pointer" />
           <Upload className="w-12 h-12 text-neutral-800 mb-4" />

@@ -44,4 +44,11 @@ router.post('/create', quizController.createQuiz);
 // Get custom quizzes for a module
 router.get('/module/:moduleId/custom', quizController.getCustomQuizzesByModule);
 
+// Get questions for a specific quiz (instructor preview)
+router.get('/:quizId/questions', quizController.getQuizQuestions);
+
+// Teacher: Generate quiz from RAG MCQ bank
+const ragQuizController = require('../controllers/ragQuiz.controller');
+router.post('/generate-rag-quiz', ragQuizController.generateQuizFromRAG);
+
 module.exports = router;

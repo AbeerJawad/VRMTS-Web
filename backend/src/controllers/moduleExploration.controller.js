@@ -238,39 +238,68 @@ const logInteraction = async (req, res) => {
   }
 };
 
-// AI Chat endpoint
+// RAG Server URL - uses Localhost by default for host-to-container communication
+const RAG_SERVER_URL = process.env.RAG_SERVER_URL || 'http://localhost:8000';
+
+// AI Chat endpoint - integrated with RAG server
 const chatWithAI = async (req, res) => {
   try {
     const studentId = req.session.user.userId;
     const { moduleId } = req.params;
     const { question } = req.body;
 
-    const connection = await db();
-
-    // Simple AI response based on question keywords
-    let response = 'I\'m here to help you learn about this topic. Could you please rephrase your question?';
-
-    if (question.toLowerCase().includes('heart')) {
-      response = 'The heart is a muscular organ that pumps blood throughout the body. It has four chambers: two atria and two ventricles.';
-    } else if (question.toLowerCase().includes('blood')) {
-      response = 'Blood carries oxygen and nutrients to tissues and removes waste products. It flows through arteries, capillaries, and veins.';
-    } else if (question.toLowerCase().includes('valve')) {
-      response = 'Heart valves ensure blood flows in one direction. The four main valves are the tricuspid, pulmonary, mitral, and aortic valves.';
+    if (!question || !question.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Question is required'
+      });
     }
 
-    // Log chat
-    await connection.execute(
-      'INSERT INTO AIChat (studentId, moduleId, question, response, timestamp, sentiment, optResponse, rateResponse) VALUES (?, ?, ?, ?, NOW(), "neutral", ?, 0.8)',
-      [studentId, moduleId, question, response, JSON.stringify({ response })]
-    );
+    let response = '';
+    let citations = [];
+    let questionType = 'general';
+    let confidence = 0.8;
 
+    try {
+      // Call RAG server
+      const ragResponse = await fetch(`${RAG_SERVER_URL}/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ q: question, k: 6, use_llm: true }),
+        signal: AbortSignal.timeout(120000)
+      });
+
+      if (ragResponse.ok) {
+        const ragData = await ragResponse.json();
+        response = ragData.answer || '';
+        citations = ragData.citations || [];
+        questionType = ragData.question_type || 'general';
+        confidence = 0.9;
+      } else {
+        response = 'The AI service is temporarily unavailable. Please try again in a moment.';
+        confidence = 0;
+      }
+    } catch (ragError) {
+      console.error('RAG server error:', ragError.message);
+      response = 'The AI assistant is currently offline. Please ensure the RAG server is running and try again.';
+      confidence = 0;
+    }
+
+    // Log chat to database
+    const connection = await db();
+    await connection.execute(
+      'INSERT INTO AIChat (studentId, moduleId, question, response, timestamp, sentiment, optResponse, rateResponse) VALUES (?, ?, ?, ?, NOW(), "neutral", ?, ?)',
+      [studentId, moduleId, question, response, JSON.stringify({ response, citations, questionType }), confidence]
+    );
     await connection.end();
 
     res.json({
       success: true,
       data: {
         response,
-        confidence: 0.8
+        citations,
+        questionType,
+        confidence
       }
     });
 
@@ -279,6 +308,33 @@ const chatWithAI = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to process chat request',
+      error: error.message
+    });
+  }
+};
+
+// Get chat history for a module
+const getChatHistory = async (req, res) => {
+  try {
+    const studentId = req.session.user.userId;
+    const { moduleId } = req.params;
+
+    const connection = await db();
+    const [chats] = await connection.execute(
+      'SELECT question, response, timestamp FROM AIChat WHERE studentId = ? AND moduleId = ? ORDER BY timestamp ASC LIMIT 50',
+      [studentId, moduleId]
+    );
+    await connection.end();
+
+    res.json({
+      success: true,
+      data: chats
+    });
+  } catch (error) {
+    console.error('Error fetching chat history:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch chat history',
       error: error.message
     });
   }
@@ -362,6 +418,7 @@ module.exports = {
   saveNotes,
   logInteraction,
   chatWithAI,
+  getChatHistory,
   getProgress,
   updateProgress
 };

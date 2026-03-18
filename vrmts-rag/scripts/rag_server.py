@@ -33,45 +33,65 @@ app.add_middleware(
 print(f">>> RAG_SERVER.PY LOADED from: {os.path.abspath(__file__)}")
 
 # ---------------------------------------------------------
-# Load FAISS index + metadata
+# Load FAISS index + metadata (Safe Load)
 # ---------------------------------------------------------
+index = None
+metas = []
+is_index_loaded = False
+
 index_path = os.path.join(INDEX_DIR, "faiss.index")
 meta_path = os.path.join(INDEX_DIR, "metas.pkl")
 
-index = faiss.read_index(index_path)
-metas = pickle.load(open(meta_path, "rb"))
+try:
+    if os.path.exists(index_path) and os.path.exists(meta_path):
+        index = faiss.read_index(index_path)
+        with open(meta_path, "rb") as f:
+            metas = pickle.load(f)
+        is_index_loaded = True
+        print(f"✅ Loaded {len(metas)} chunks from FAISS index")
+    else:
+        print(f"⚠️ Warning: Index files not found at {index_path}. Assistant will run in Knowledge-Lite mode.")
+except Exception as e:
+    print(f"⚠️ Error loading index: {e}")
 
-print(f"DEBUG: Loaded {len(metas)} chunks from FAISS index")
-
-# Load ALL chunks into memory once (for lexical lab search)
+# Load chunks into memory if possible
 ALL_CHUNKS = []
-for m in metas:
-    path = os.path.join(DOCS_DIR, m["file"])
-    with open(path, "r", encoding="utf-8") as fh:
-        d = json.load(fh)
-    ALL_CHUNKS.append(d)
-
-# Build a mapping from lab number -> list of chunks that mention that lab
-LAB_CHUNKS = {}  # e.g. 1 -> [chunk_dicts...]
-for ch in ALL_CHUNKS:
-    text_low = ch.get("text", "").lower()
-    for n in range(1, 11):
-        if f"lab {n}:" in text_low:
-            LAB_CHUNKS.setdefault(n, []).append(ch)
-
-print("DEBUG: Lab mapping:")
-for n in sorted(LAB_CHUNKS.keys()):
-    print(f"  Lab {n}: {len(LAB_CHUNKS[n])} chunks")
-
+LAB_CHUNKS = {}
+if is_index_loaded:
+    try:
+        for m in metas:
+            p = os.path.join(DOCS_DIR, m["file"])
+            if os.path.exists(p):
+                with open(p, "r", encoding="utf-8") as fh:
+                    d = json.load(fh)
+                ALL_CHUNKS.append(d)
+        
+        # Build lab mapping
+        for ch in ALL_CHUNKS:
+            text_low = ch.get("text", "").lower()
+            for n in range(1, 11):
+                if f"lab {n}:" in text_low:
+                    LAB_CHUNKS.setdefault(n, []).append(ch)
+    except Exception as e:
+        print(f"⚠️ Error mapping chunks: {e}")
 
 # ---------------------------------------------------------
-# Embedding model (local ONNX + tokenizer)
+# Embedding model (local ONNX + tokenizer - Safe Load)
 # ---------------------------------------------------------
-tokenizer = AutoTokenizer.from_pretrained(
-    "sentence-transformers/all-MiniLM-L6-v2"
-)
-onnx_session = ort.InferenceSession(EMBED_MODEL)
-onnx_input_names = [i.name for i in onnx_session.get_inputs()]
+tokenizer = None
+onnx_session = None
+onnx_input_names = []
+
+try:
+    tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
+    if os.path.exists(EMBED_MODEL):
+        onnx_session = ort.InferenceSession(EMBED_MODEL)
+        onnx_input_names = [i.name for i in onnx_session.get_inputs()]
+        print("✅ ONNX embedding model loaded.")
+    else:
+        print(f"⚠️ Warning: ONNX model not found at {EMBED_MODEL}.")
+except Exception as e:
+    print(f"⚠️ Error loading embedding model: {e}")
 
 
 def embed_query(text: str):
@@ -130,6 +150,15 @@ Include steps and expected observations when available.""",
     "general": """Answer this question using the context provided.
 Be helpful, accurate, and educational."""
 }
+
+@app.get("/health")
+def health_check():
+    return {
+        "status": "online",
+        "knowledge_index": "loaded" if is_index_loaded else "missing",
+        "embedding_model": "loaded" if onnx_session else "missing",
+        "chunks_count": len(metas)
+    }
 
 def detect_question_type(question: str) -> str:
     """Detect the type of question to use appropriate prompt."""
@@ -242,20 +271,33 @@ def retrieve_chunks(question: str, k: int = TOP_K):
             return chunks[:max(k, len(lab_nums))]
 
     # Fallback: normal vector search
-    q_emb = embed_query(question)
-    D, I = index.search(q_emb, min(k, index.ntotal))
-    for idx in I[0]:
-        if 0 <= idx < len(metas):
-            meta = metas[idx]
-            # find corresponding chunk (we already loaded them)
-            fname = meta["file"]
-            for ch in ALL_CHUNKS:
-                if ch["id"] == meta["id"]:
-                    chunks.append(ch)
-                    break
+    # Retrieve chunks (Safe retrieval)
+    retrieved_chunks = []
+    
+    if not is_index_loaded or not onnx_session:
+        print("⚠️ Search attempted but index/model not loaded.")
+        # We can't do RAG, but maybe we can still use Ollama for a general answer?
+        # For now, let's just use a fallback or an empty context.
+    else:
+        try:
+            q_vec = embed_query(question) # Changed 'q' to 'question'
+            D, I = index.search(q_vec, k)
+            
+            for idx in I[0]:
+                if 0 <= idx < len(metas): # Added bounds check
+                    meta = metas[idx]
+                    # find corresponding chunk (we already loaded them)
+                    # The original code was trying to load from file, but ALL_CHUNKS is already loaded.
+                    # We need to find the chunk in ALL_CHUNKS based on meta["id"]
+                    for ch in ALL_CHUNKS:
+                        if ch["id"] == meta["id"]:
+                            retrieved_chunks.append(ch)
+                            break
+        except Exception as e:
+            print(f"⚠️ Search error: {e}")
 
-    print(f"DEBUG: Vector retrieval, got {len(chunks)} chunks for query: {question}")
-    return chunks
+    print(f"DEBUG: Vector retrieval, got {len(retrieved_chunks)} chunks for query: {question}")
+    return retrieved_chunks
 
 
 # ---------------------------------------------------------
@@ -372,16 +414,75 @@ def home():
     return FileResponse(index_path)
 
 
+def ensure_model_pulled():
+    """Ensure the required LLM model is pulled in Ollama with streaming progress."""
+    import time
+    max_retries = 10
+    retry_delay = 5
+    
+    print(f"🔍 Checking Ollama connection at {_OLLAMA_HOST}...")
+    
+    # Wait for Ollama to be ready
+    for attempt in range(max_retries):
+        try:
+            tags_url = f"{_OLLAMA_HOST}/api/tags"
+            response = requests.get(tags_url, timeout=10)
+            if response.status_code == 200:
+                print("✅ Ollama is reachable.")
+                break
+        except Exception:
+            if attempt < max_retries - 1:
+                print(f"⏳ Waiting for Ollama (attempt {attempt+1}/{max_retries})...")
+                time.sleep(retry_delay)
+            else:
+                print(f"❌ Error: Could not connect to Ollama after {max_retries} attempts.")
+                return
+
+    try:
+        # Check if model exists
+        response = requests.get(f"{_OLLAMA_HOST}/api/tags", timeout=10)
+        models = response.json().get("models", [])
+        if any(m.get("name").startswith(MODEL_NAME) for m in models):
+            print(f"✅ Model {MODEL_NAME} is already available.")
+            return
+
+        print(f"🚀 Pulling model {MODEL_NAME}... This will take a few minutes (approx 2GB).")
+        pull_url = f"{_OLLAMA_HOST}/api/pull"
+        
+        # Use streaming to show progress
+        with requests.post(pull_url, json={"name": MODEL_NAME}, stream=True, timeout=1800) as r:
+            last_status = ""
+            for line in r.iter_lines():
+                if line:
+                    status = json.loads(line)
+                    if "status" in status:
+                        current_status = status["status"]
+                        # Only print if status changed to avoid spamming
+                        if current_status != last_status:
+                            if "completed" in status and "total" in status:
+                                percent = (status["completed"] / status["total"]) * 100
+                                print(f"📦 {current_status}: {percent:.1f}%")
+                            else:
+                                print(f"📦 {current_status}")
+                            last_status = current_status
+                            
+        print(f"✅ Model {MODEL_NAME} pulled successfully.")
+    except Exception as e:
+        print(f"⚠️ Warning: Could not verify/pull model {MODEL_NAME}: {e}")
+
 # ---------------------------------------------------------
 # Run (for python -m scripts.rag_server)
 # ---------------------------------------------------------
 if __name__ == "__main__":
     import uvicorn
 
+    # Ensure model is available before starting
+    ensure_model_pulled()
+
     print("🚀 RAG Server running at: http://127.0.0.1:8000")
     uvicorn.run(
         "scripts.rag_server:app",
-        host="127.0.0.1",
+        host="0.0.0.0",
         port=8000,
         log_level="info",
     )

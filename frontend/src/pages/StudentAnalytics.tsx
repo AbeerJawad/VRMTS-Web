@@ -119,6 +119,8 @@ export default function StudentAnalytics() {
         const result = await response.json();
         if (result.success && result.data) {
           setAnalyticsData(result.data);
+          // Mark analytics as viewed for the guided checklist
+          localStorage.setItem('vrmts_analytics_viewed', 'true');
         } else {
           throw new Error(result.message || 'Failed to load analytics data');
         }

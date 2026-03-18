@@ -13,6 +13,7 @@ router.post('/:moduleId/bookmarks', moduleExplorationController.saveBookmark);
 router.get('/:moduleId/notes', moduleExplorationController.getNotes);
 router.post('/:moduleId/notes', moduleExplorationController.saveNotes);
 router.post('/:moduleId/interactions', moduleExplorationController.logInteraction);
+router.get('/:moduleId/chat/history', moduleExplorationController.getChatHistory);
 router.post('/:moduleId/chat', moduleExplorationController.chatWithAI);
 router.get('/:moduleId/progress', moduleExplorationController.getProgress);
 router.put('/:moduleId/progress', moduleExplorationController.updateProgress);

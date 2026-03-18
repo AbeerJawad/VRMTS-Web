@@ -1553,16 +1553,31 @@ const createQuiz = async (req, res) => {
       // Based on dbtables.sql, QuizQuestion has questionText but relies on bankId for options/correctAnswer.
       // Let's create a QuestionBank entry for each question if it's a new manual one.
 
+      // Validation: convert undefined to null for DB
+      const questionType = q.type === 'mcq' ? 'multiple_choice' : q.type === 'short' ? 'short_answer' : 'short_answer';
+      const difficulty = 'medium';
+      const topic = title ? title.substring(0, 100) : '';
+      const questionText = q.question ?? null;
+      // If correctAnswer is undefined but correctIndex and options exist, set correctAnswer
+      let correctAnswer = q.correctAnswer;
+      if (correctAnswer === undefined && Array.isArray(q.options) && typeof q.correctIndex === 'number') {
+        correctAnswer = q.options[q.correctIndex] ?? null;
+      }
+      if (correctAnswer === undefined) correctAnswer = null;
+      const options = q.options ? JSON.stringify(q.options) : null;
+      const moduleIdVal = moduleId ?? null;
+      const points = q.points !== undefined ? q.points : 1;
+
       const [bankResult] = await connection.execute(
         'INSERT INTO QuestionBank (questionType, difficulty, topic, questionText, correctAnswer, options, moduleId) VALUES (?, ?, ?, ?, ?, ?, ?)',
         [
-          q.type === 'mcq' ? 'multiple_choice' : q.type === 'short' ? 'short_answer' : 'short_answer',
-          'medium',
-          title.substring(0, 100),
-          q.question,
-          q.correctAnswer,
-          q.options ? JSON.stringify(q.options) : null,
-          moduleId
+          questionType,
+          difficulty,
+          topic,
+          questionText,
+          correctAnswer,
+          options,
+          moduleIdVal
         ]
       );
 
@@ -1570,7 +1585,14 @@ const createQuiz = async (req, res) => {
 
       await connection.execute(
         'INSERT INTO QuizQuestion (quizId, bankId, questionText, difficulty, points, displayOrder) VALUES (?, ?, ?, ?, ?, ?)',
-        [quizId, bankId, q.question, 'medium', q.points || 1, i + 1]
+        [
+          quizId,
+          bankId,
+          questionText,
+          difficulty,
+          points,
+          i + 1
+        ]
       );
     }
 
@@ -1600,6 +1622,30 @@ const createQuiz = async (req, res) => {
       message: 'Failed to create quiz',
       error: error.message
     });
+  }
+};
+
+// Get questions for a specific quiz (for instructor preview)
+const getQuizQuestions = async (req, res) => {
+  try {
+    const { quizId } = req.params;
+    const connection = await db();
+
+    const [questions] = await connection.execute(
+      `SELECT qq.questionId, qq.questionText, qq.difficulty, qq.points, qq.displayOrder,
+              qb.options, qb.correctAnswer
+       FROM quizquestion qq
+       LEFT JOIN questionbank qb ON qq.bankId = qb.bankId
+       WHERE qq.quizId = ?
+       ORDER BY qq.displayOrder ASC`,
+      [quizId]
+    );
+
+    await connection.end();
+    res.json({ success: true, data: questions });
+  } catch (error) {
+    console.error('Error fetching quiz questions:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch quiz questions', error: error.message });
   }
 };
 
@@ -1643,5 +1689,6 @@ module.exports = {
   finishQuiz,
   getQuizAttempt,
   createQuiz,
-  getCustomQuizzesByModule
+  getCustomQuizzesByModule,
+  getQuizQuestions
 };

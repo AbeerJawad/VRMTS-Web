@@ -32,7 +32,11 @@ A comprehensive Virtual Reality Medical Training System for anatomy education wi
 - **InstructorSettings** (`/instructorsettings`) - Instructor settings and preferences
 
 ### Admin Screens
-- **AdminDashboard** (`/admindashboard`) - Admin main dashboard
+- **AdminOverview** (`/admindashboard`) - System health and resource monitoring
+- **AdminStudents** (`/admin/students`) - Student directory and bulk upload management
+- **AdminFaculty** (`/admin/faculty`) - Faculty directory and account creation
+- **AdminAnnouncements** (`/admin/announcements`) - Global announcement dispatch system
+- **AdminAuditLogs** (`/admin/audit`) - System-wide administrative audit registry
 
 ### Additional Pages (Not Routed)
 - AssignModule - Module assignment interface
@@ -92,6 +96,17 @@ The following API endpoints are implemented in the backend:
 
 ### Analytics (`/api/analytics`)
 - `GET /student` - Get detailed student analytics (overview, score progress, study time, module performance, question type performance, recent activity, strengths, weaknesses, learning patterns, achievements)
+
+### Administration (`/api/admin`)
+- `GET /stats` - Get real-time system stats and metrics
+- `GET /students` - List all students with teacher and class info
+- `GET /teachers` - List all active faculty members
+- `POST /faculty` - Create new faculty account
+- `POST /bulk-upload` - Process bulk student CSV data
+- `POST /update-status` - Toggle user active status
+- `POST /assign-teacher` - Assign teacher and class to student
+- `POST /announce` - Send global system announcement
+- `GET /logs` - Fetch administrative audit logs
 
 ### Test
 - `GET /api/test` - API test endpoint

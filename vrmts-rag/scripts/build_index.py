@@ -38,8 +38,7 @@ def embed_texts(texts):
 
     # local tokenizer only (already cached on your machine)
     tokenizer = AutoTokenizer.from_pretrained(
-        "sentence-transformers/all-MiniLM-L6-v2",
-        local_files_only=True
+        "sentence-transformers/all-MiniLM-L6-v2"
     )
 
     embeddings = []

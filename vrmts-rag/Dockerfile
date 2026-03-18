@@ -2,9 +2,10 @@
 FROM python:3.10-slim
 
 WORKDIR /app
+ENV PYTHONUNBUFFERED=1
 
 COPY requirements.txt ./
-RUN pip install --default-timeout=100 --no-cache-dir -r requirements.txt
+RUN pip install --default-timeout=1000 --no-cache-dir --retries 10 -r requirements.txt
 
 COPY . .
 

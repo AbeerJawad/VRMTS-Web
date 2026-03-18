@@ -30,7 +30,6 @@ export default function AdminFaculty() {
     { key: 'dashboard' as const, label: 'Overview', path: '/admindashboard' },
     { key: 'students' as const, label: 'Students', path: '/admin/students' },
     { key: 'faculty' as const, label: 'Faculty', path: '/admin/faculty' },
-    { key: 'announcements' as const, label: 'Announcements', path: '/admin/announcements' },
     { key: 'audit' as const, label: 'Audit Logs', path: '/admin/audit' },
   ];
 

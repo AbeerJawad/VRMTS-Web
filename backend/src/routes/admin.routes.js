@@ -10,6 +10,7 @@ router.get('/stats', adminController.getDashboardStats);
 router.get('/students', adminController.getStudents);
 router.get('/teachers', adminController.getTeachers);
 
+router.post('/student', adminController.createStudentAccount);
 router.post('/faculty', adminController.createFacultyAccount);
 router.post('/bulk-upload', adminController.bulkUploadStudents);
 router.post('/update-status', adminController.updateStudentStatus);

@@ -8,7 +8,7 @@ import InstructorDashboard from "./pages/InstructorDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminStudents from "./pages/AdminStudents";
 import AdminFaculty from "./pages/AdminFaculty";
-import AdminAnnouncements from "./pages/AdminAnnouncements";
+
 import AdminAuditLogs from "./pages/AdminAuditLogs";
 import AdminSettings from "./pages/AdminSettings";
 import InstructorManageStudents from "./pages/InstructorManageStudents";
@@ -42,7 +42,7 @@ const App = () => (
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/admin/students" element={<AdminStudents />} />
           <Route path="/admin/faculty" element={<AdminFaculty />} />
-          <Route path="/admin/announcements" element={<AdminAnnouncements />} />
+
           <Route path="/admin/audit" element={<AdminAuditLogs />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/instructor/students" element={<InstructorManageStudents />} />

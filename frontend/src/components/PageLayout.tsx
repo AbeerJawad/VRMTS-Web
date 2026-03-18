@@ -78,6 +78,9 @@ export function PageLayout({
                 {userType === 'instructor' && (
                   <span className="text-emerald-500 ml-1.5 uppercase">INSTRUCTOR</span>
                 )}
+                {userType === 'admin' && (
+                  <span className="text-emerald-500 ml-1.5 uppercase font-bold tracking-widest">ADMIN</span>
+                )}
               </h1>
               <nav className="hidden md:flex gap-6 text-sm">
                 {navItems.map((item) => (

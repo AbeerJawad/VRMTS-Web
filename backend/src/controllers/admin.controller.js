@@ -46,9 +46,7 @@ const getDashboardStats = async (req, res) => {
       ...dbStats[0],
       system: {
         cpu: cpuLoad > 100 ? 99 : cpuLoad,
-        memory: memUsage,
-        network: Math.floor(Math.random() * 30) + 10, // Simulated network load
-        disk: 65 // Simulated disk usage
+        memory: memUsage
       }
     };
 
@@ -78,7 +76,6 @@ const getStudents = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
-
 // Create Faculty Account
 const createFacultyAccount = async (req, res) => {
   const { name, email, department, password } = req.body;
@@ -106,6 +103,43 @@ const createFacultyAccount = async (req, res) => {
 
       await connection.commit();
       res.json({ success: true, message: 'Faculty account created' });
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      await connection.end();
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const createStudentAccount = async (req, res) => {
+  const { name, email, enrollmentNumber, className, password } = req.body;
+  const adminId = req.session.user.userId;
+
+  try {
+    const connection = await db();
+    await connection.beginTransaction();
+
+    try {
+      // Create user entry
+      const [userResult] = await connection.execute(
+        'INSERT INTO user (email, passwordHash, name, userType) VALUES (?, ?, ?, ?)',
+        [email, password, name, 'student']
+      );
+      const userId = userResult.insertId;
+
+      // Create student entry
+      const [studentResult] = await connection.execute(
+        'INSERT INTO student (userId, enrollmentNumber, enrollmentDate, className) VALUES (?, ?, NOW(), ?)',
+        [userId, enrollmentNumber, className || null]
+      );
+
+      await logAction(connection, adminId, 'CREATE_STUDENT', 'student', studentResult.insertId, `Created student ${name}`);
+
+      await connection.commit();
+      res.json({ success: true, message: 'Student account created' });
     } catch (error) {
       await connection.rollback();
       throw error;
@@ -259,5 +293,6 @@ module.exports = {
   assignTeacherToStudent,
   sendGlobalAnnouncement,
   getTeachers,
-  getAuditLogs
+  getAuditLogs,
+  createStudentAccount
 };
