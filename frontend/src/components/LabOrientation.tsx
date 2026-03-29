@@ -62,8 +62,8 @@ export const LabOrientation: React.FC<LabOrientationProps> = ({ onComplete, miss
   }
 
   return (
-    <div className="fixed top-24 right-8 z-[9999] w-80 animate-in slide-in-from-right-4 duration-500">
-      <div className="bg-neutral-900/95 backdrop-blur-xl border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden">
+    <div className="fixed top-24 left-8 z-[9999] w-80 animate-in slide-in-from-left-4 duration-500 pointer-events-none">
+      <div className="bg-neutral-900/95 backdrop-blur-xl border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden pointer-events-auto">
         <div className="p-5 border-b border-neutral-800 flex items-center justify-between bg-emerald-500/5">
           <div className="flex items-center gap-2">
             <Zap className="w-4 h-4 text-emerald-500" />

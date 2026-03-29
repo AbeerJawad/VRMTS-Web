@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Layers, MessageSquare, Info, Brain, Activity, Search, FileText, Maximize2, Eye, EyeOff, X, MousePointer2, Move3D } from 'lucide-react';
 import { PageLayout } from '../components/PageLayout';
 import { LabOrientation } from '../components/LabOrientation';
+import { StudyAssistant } from '../components/StudyAssistant';
 
 export default function Lab1Explore() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -351,6 +352,13 @@ export default function Lab1Explore() {
           isDragging = false;
         };
 
+        const onMouseLeave = () => {
+          setHoveredPart(null);
+          if (renderer.domElement) {
+            renderer.domElement.style.cursor = 'default';
+          }
+        };
+
         const onClick = (e: MouseEvent) => {
           const currentModel = sceneRef.current?.models?.[activeModel];
           if (!currentModel) return;
@@ -417,6 +425,7 @@ export default function Lab1Explore() {
         renderer.domElement.addEventListener('mousedown', onMouseDown);
         renderer.domElement.addEventListener('mousemove', onMouseMove);
         renderer.domElement.addEventListener('mouseup', onMouseUp);
+        renderer.domElement.addEventListener('mouseleave', onMouseLeave);
         renderer.domElement.addEventListener('click', onClick);
         renderer.domElement.addEventListener('wheel', onWheel);
 
@@ -443,6 +452,7 @@ export default function Lab1Explore() {
           renderer.domElement.removeEventListener('mousedown', onMouseDown);
           renderer.domElement.removeEventListener('mousemove', onMouseMove);
           renderer.domElement.removeEventListener('mouseup', onMouseUp);
+          renderer.domElement.removeEventListener('mouseleave', onMouseLeave);
           renderer.domElement.removeEventListener('click', onClick);
           renderer.domElement.removeEventListener('wheel', onWheel);
           window.removeEventListener('resize', handleResize);
@@ -925,27 +935,8 @@ export default function Lab1Explore() {
             </div>
           </div>
 
-          {/* AI Assistant */}
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
-                <MessageSquare className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-white">AI Assistant</h4>
-                <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Orientation specialist ready</p>
-              </div>
-            </div>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Ask about directions..."
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg pl-3 pr-10 py-2 text-xs placeholder:text-neutral-700 focus:outline-none focus:border-green-500/50 transition-all text-white font-medium"
-              />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-green-500 hover:text-green-400 transition-colors">
-                <Search size={14} />
-              </button>
-            </div>
+          <div className="bg-neutral-900 border border-neutral-800 rounded-xl">
+             <StudyAssistant labId={1} compact={true} />
           </div>
 
           {/* Selected Part Info */}
@@ -969,7 +960,7 @@ export default function Lab1Explore() {
       {/* Root-Level Tooltip */}
       {hoveredPart && (
         <div
-          className="fixed bg-neutral-950 border border-green-500/30 text-white text-[11px] font-bold px-2 py-1.5 rounded-md pointer-events-none z-[9999] shadow-2xl translate-x-1 translate-y-1 transition-transform duration-75"
+          className="fixed bg-neutral-950 border border-green-500/30 text-white text-[11px] font-bold px-2 py-1.5 rounded-md pointer-events-none z-[9999] shadow-2xl translate-x-4 translate-y-4 transition-transform duration-75"
           style={{
             left: `${mousePos.x}px`,
             top: `${mousePos.y}px`,

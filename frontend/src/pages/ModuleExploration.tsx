@@ -5,6 +5,7 @@ import {
   Layers, BookOpen, MessageSquare, Bookmark, Share2, Flag, Info,
   X, ChevronLeft, Play, FileText, Activity, Brain
 } from 'lucide-react';
+import { StudyAssistant } from '../components/StudyAssistant';
 
 interface AnatomyPart {
   id: number;
@@ -802,22 +803,8 @@ export default function ModuleExploration() {
 
           {/* Right Sidebar */}
           <div className="col-span-3 space-y-4">
-            {/* AI Assistant */}
-            <div className="bg-gradient-to-br from-cyan-500/10 to-teal-500/10 border border-cyan-500/30 rounded-xl p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-teal-400 flex items-center justify-center">
-                  <MessageSquare className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold">AI Assistant</h4>
-                  <p className="text-xs text-slate-400">Ask me anything</p>
-                </div>
-              </div>
-              <input
-                type="text"
-                placeholder="What is the function of the femur?"
-                className="w-full bg-slate-900/50 border border-white/10 rounded-lg px-3 py-2 text-sm placeholder:text-slate-500 focus:outline-none focus:border-cyan-400/50"
-              />
+            <div className="bg-slate-900/50 border border-white/10 rounded-xl">
+              <StudyAssistant labId={id === '1' ? 1 : id === '2' ? 2 : undefined} compact={true} />
             </div>
 
             {/* Selected Part Info */}

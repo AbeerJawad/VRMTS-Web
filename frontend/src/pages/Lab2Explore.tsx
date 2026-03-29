@@ -4,6 +4,7 @@ import {
   ChevronRight, Home, Search, Filter, Play, Activity, X, FileText
 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
+import { StudyAssistant } from '@/components/StudyAssistant';
 
 export default function Lab2Explore() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -762,22 +763,8 @@ export default function Lab2Explore() {
             </div>
           </div>
 
-          {/* AI Assistant */}
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
-                <MessageSquare className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-white">AI Assistant</h4>
-                <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Bone specialist ready</p>
-              </div>
-            </div>
-            <input
-              type="text"
-              placeholder="Ask about these bones..."
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-xs placeholder:text-neutral-700 focus:outline-none focus:border-green-500/50 text-white font-medium"
-            />
+          <div className="bg-neutral-900 border border-neutral-800 rounded-xl">
+            <StudyAssistant labId={2} compact={true} />
           </div>
 
           {/* Part Info */}

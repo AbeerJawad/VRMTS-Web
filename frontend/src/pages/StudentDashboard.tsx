@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BookOpen, Trophy, Clock, Zap, Target, MessageSquare, Settings, Bell, ChevronRight, Lock, Play, BarChart3, Calendar, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
 import { GuidedChecklist } from '@/components/GuidedChecklist';
+import { StudyAssistant } from '@/components/StudyAssistant';
 
 interface Module {
   moduleId: number;
@@ -79,11 +80,7 @@ export default function VRDashboard() {
     setLab1Interacted(localStorage.getItem('vrmts_lab1_interacted') === 'true');
   }, []);
 
-  // AI Assistant State
-  const [isAssistantExpanded, setIsAssistantExpanded] = useState(false);
-  const [aiQuestion, setAiQuestion] = useState('');
-  const [aiAnswer, setAiAnswer] = useState('');
-  const [aiLoading, setAiLoading] = useState(false);
+  // AI Assistant State (Removed, handled by StudyAssistant component)
 
   const achievements = [
     { name: 'First Steps', Icon: Target, unlocked: true },
@@ -153,24 +150,7 @@ export default function VRDashboard() {
 
   // Transform stats for display
 
-  const handleAskAI = async () => {
-    if (!aiQuestion.trim()) return;
-    setAiLoading(true);
-    setAiAnswer('');
-    try {
-      const response = await axios.post(RAG_API_URL, {
-        q: aiQuestion,
-        k: 6,
-        use_llm: true
-      });
-      setAiAnswer(response.data.answer || 'No answer found.');
-    } catch (err) {
-      console.error('AI Error:', err);
-      setAiAnswer('The AI assistant is currently offline. Please ensure the RAG server is running and try again.');
-    } finally {
-      setAiLoading(false);
-    }
-  };
+  // AI Assistant logic handled by StudyAssistant component
 
   if (loading) {
     return (
@@ -369,84 +349,7 @@ export default function VRDashboard() {
         </div>
 
         <aside className="bg-neutral-900 border border-neutral-800 rounded-lg h-fit divide-y divide-neutral-800/50">
-          <div className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded bg-neutral-950 flex items-center justify-center border border-neutral-800">
-                  <MessageSquare className="w-4 h-4 text-emerald-500" />
-                </div>
-                <h4 className="text-sm font-bold text-neutral-200">Study Assistant</h4>
-              </div>
-              {isAssistantExpanded && (
-                <button 
-                  onClick={() => {
-                    setIsAssistantExpanded(false);
-                    setAiQuestion('');
-                    setAiAnswer('');
-                  }}
-                  className="text-[10px] font-bold text-neutral-500 hover:text-white uppercase tracking-wider transition-colors"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-
-            {!isAssistantExpanded ? (
-              <>
-                <p className="text-xs text-neutral-500 mb-6 leading-relaxed">
-                  Have questions about your anatomy modules? Our AI assistant is here to help you study.
-                </p>
-                <button
-                  onClick={() => setIsAssistantExpanded(true)}
-                  className="w-full py-2 px-3 bg-neutral-950 hover:bg-neutral-800 rounded-md text-xs font-bold text-neutral-200 transition-colors border border-neutral-800 hover:border-neutral-700"
-                >
-                  Ask a question
-                </button>
-              </>
-            ) : (
-              <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                <div>
-                  <textarea
-                    value={aiQuestion}
-                    onChange={(e) => setAiQuestion(e.target.value)}
-                    placeholder="e.g., How does the aortic valve work?"
-                    className="w-full h-24 bg-neutral-950 border border-neutral-800 rounded-lg p-3 text-xs text-neutral-100 placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/50 transition-colors resize-none"
-                    disabled={aiLoading}
-                  />
-                </div>
-
-                {aiAnswer && (
-                  <div className="animate-in slide-in-from-top-1 duration-300">
-                    <div className="bg-neutral-950 border border-neutral-800 rounded-lg p-3 text-xs text-neutral-400 leading-relaxed max-h-40 overflow-y-auto">
-                      {aiAnswer}
-                    </div>
-                  </div>
-                )}
-
-                <button
-                  onClick={handleAskAI}
-                  disabled={!aiQuestion.trim() || aiLoading}
-                  className={`w-full py-2.5 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-2 ${
-                    !aiQuestion.trim() || aiLoading
-                      ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed'
-                      : 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                  }`}
-                >
-                  {aiLoading ? (
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                      Analyzing...
-                    </div>
-                  ) : (
-                    <>
-                      <Zap className="w-3.5 h-3.5" />
-                      Ask AI
-                    </>
-                  )}
-                </button>
-              </div>
-            )}
-          </div>
+          <StudyAssistant />
 
           <div className="p-6">
             <h4 className="text-xs font-bold text-neutral-400 mb-6 tracking-tight flex items-center gap-2">

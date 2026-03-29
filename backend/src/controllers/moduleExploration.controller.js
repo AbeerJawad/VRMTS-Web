@@ -238,7 +238,7 @@ const logInteraction = async (req, res) => {
   }
 };
 
-// RAG Server URL - uses Localhost by default for host-to-container communication
+// RAG Server URL 
 const RAG_SERVER_URL = process.env.RAG_SERVER_URL || 'http://localhost:8000';
 
 // AI Chat endpoint - integrated with RAG server
