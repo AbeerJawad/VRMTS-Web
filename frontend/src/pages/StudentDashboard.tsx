@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { BookOpen, Trophy, Clock, Zap, Target, MessageSquare, Settings, Bell, ChevronRight, Lock, Play, BarChart3, Calendar, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { BookOpen, Trophy, Clock, Zap, Target, MessageSquare, Settings, Bell, ChevronRight, Lock, Play, BarChart3, Calendar, CheckCircle2, AlertTriangle, TrendingUp } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
 import { GuidedChecklist } from '@/components/GuidedChecklist';
 import { StudyAssistant } from '@/components/StudyAssistant';
@@ -55,7 +55,7 @@ interface Deadline {
 const API_BASE_URL = 'http://localhost:8080/api';
 const RAG_API_URL = 'http://localhost:8000/ask';
 
-export default function VRDashboard() {
+export default function StudentDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('modules');
   const [showNotifications, setShowNotifications] = useState(false);
@@ -85,9 +85,9 @@ export default function VRDashboard() {
   const achievements = [
     { name: 'First Steps', Icon: Target, unlocked: true },
     { name: 'Quiz Master', Icon: Trophy, unlocked: true },
-    { name: 'Week Warrior', Icon: Zap, unlocked: true },
+    { name: 'Study Streak', Icon: TrendingUp, unlocked: true },
     { name: 'Perfect Score', Icon: Target, unlocked: false },
-    { name: 'Marathon', Icon: Zap, unlocked: false }
+    { name: 'Consistent Study', Icon: Calendar, unlocked: false }
   ];
 
   // Fetch dashboard data

@@ -59,12 +59,29 @@ export function PageLayout({
         ? '/admindashboard'
         : '/studentdashboard';
 
-  const defaultNav: NavItemConfig[] = [
-    { key: 'dashboard', label: 'Dashboard', path: dashboardPath },
-    { key: 'modules', label: 'Modules', path: '/modules' },
-    { key: 'quiz', label: 'Quiz', path: '/quizselection' },
-    ...(userType === 'student' ? [{ key: 'analytics' as const, label: 'Analytics', path: '/studentanalytics' }] : []),
-  ];
+  const defaultNav: NavItemConfig[] = 
+    userType === 'instructor' 
+      ? [
+          { key: 'dashboard', label: 'Dashboard', path: '/instructordashboard' },
+          { key: 'students', label: 'Students', path: '/instructor/students' },
+          { key: 'modules', label: 'Modules', path: '/instructor/modules' },
+          { key: 'quiz', label: 'Quiz', path: '/instructor/create-quiz' },
+          { key: 'analytics', label: 'Analytics', path: '/instructor/analytics' },
+        ]
+      : userType === 'admin'
+        ? [
+            { key: 'dashboard', label: 'Dashboard', path: '/admindashboard' },
+            { key: 'students', label: 'Students', path: '/admin/students' },
+            { key: 'faculty', label: 'Faculty', path: '/admin/faculty' },
+            { key: 'audit', label: 'Audit', path: '/admin/audit' },
+          ]
+        : [
+            { key: 'dashboard', label: 'Dashboard', path: dashboardPath },
+            { key: 'modules', label: 'Modules', path: '/modules' },
+            { key: 'quiz', label: 'Quiz', path: '/quizselection' },
+            { key: 'analytics', label: 'Analytics', path: '/studentanalytics' },
+          ];
+
   const navItems = navItemsProp ?? defaultNav;
 
   return (

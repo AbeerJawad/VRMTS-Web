@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { MessageSquare, Zap, Clock, Calendar } from 'lucide-react';
+import { MessageSquare, Search, Clock, Calendar, Brain } from 'lucide-react';
 
 interface StudyAssistantProps {
   labId?: number;
@@ -104,12 +104,12 @@ export const StudyAssistant: React.FC<StudyAssistantProps> = ({ labId, compact =
             {aiLoading ? (
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                Analyzing...
+                Retrieving...
               </div>
             ) : (
               <>
-                <Zap className="w-3.5 h-3.5" />
-                Ask AI
+                <Search className="w-3.5 h-3.5" />
+                Consult Assistant
               </>
             )}
           </button>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Layers, MessageSquare, Info, Brain, Maximize2, Eye, EyeOff,
-  ChevronRight, Home, Search, Filter, Play, Activity, X, FileText
+  ChevronRight, Home, Search, Filter, Play, List, X, FileText
 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
 import { StudyAssistant } from '@/components/StudyAssistant';
@@ -630,8 +630,8 @@ export default function Lab2Explore() {
 
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 overflow-hidden flex flex-col max-h-[450px]">
             <h3 className="font-semibold mb-3 text-sm flex items-center gap-2">
-              <Activity className="w-4 h-4 text-green-500" />
-              Model Hierarchy
+              <List className="w-4 h-4 text-green-500" />
+              Anatomical Structure
             </h3>
             <div className="space-y-2 overflow-y-auto pr-2 custom-scrollbar">
               {groupList.map(group => (

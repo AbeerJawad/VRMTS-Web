@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   Home, ChevronRight, Maximize2, Eye, EyeOff,
   Layers, BookOpen, MessageSquare, Bookmark, Share2, Flag, Info,
-  X, ChevronLeft, Play, FileText, Activity, Brain
+  X, ChevronLeft, Play, FileText, Activity, Brain, List
 } from 'lucide-react';
 import { StudyAssistant } from '../components/StudyAssistant';
 
@@ -669,7 +669,10 @@ export default function ModuleExploration() {
             </div>
 
             <div className="bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-4 overflow-hidden flex flex-col max-h-[400px]">
-              <h3 className="font-semibold mb-3 text-sm">Model Hierarchy</h3>
+              <h3 className="font-semibold mb-3 text-sm flex items-center gap-2">
+                <List className="w-4 h-4 text-cyan-400" />
+                Anatomical Structure
+              </h3>
               <div className="space-y-2 overflow-y-auto pr-2 custom-scrollbar">
                 {groupList.map(group => (
                   <div key={group.uuid} className="bg-slate-800/40 p-2 rounded border border-white/5 group">

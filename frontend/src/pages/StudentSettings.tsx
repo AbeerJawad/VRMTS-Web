@@ -407,11 +407,11 @@ export default function ProfileSettings() {
 
                 <div className="space-y-4">
                   {[
-                    { label: 'High contrast protocol', desc: 'Maximize luminance differential for core elements' },
-                    { label: 'Motion suppression', desc: 'Deactivate transition cycles and kinetic effects' },
+                    { label: 'High Contrast Mode', desc: 'Increase visibility for interface elements' },
+                    { label: 'Reduce Motion', desc: 'Disable animations and transitions' },
                     { label: 'Screen reader optimization', desc: 'Optimize structural metadata for screen readers' },
-                    { label: 'Extended terminal controls', desc: 'Visualize keyboard focus and shortcut identifiers' },
-                    { label: 'Automatic captioning', desc: 'Force text overlay on video playback streams' }
+                    { label: 'Keyboard Navigation', desc: 'Show visual indicators for keyboard focus' },
+                    { label: 'Closed Captions', desc: 'Display subtitles during video playback' }
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between p-6 bg-neutral-950 border border-neutral-800 rounded group hover:border-neutral-700 transition-all">
                       <div className="space-y-1">
@@ -467,7 +467,7 @@ export default function ProfileSettings() {
 
                 <div className="space-y-4">
                   <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
-                    Digest recurrence
+                    Notification Frequency
                   </label>
                   <select
                     value={notifications.emailDigest}
@@ -475,9 +475,9 @@ export default function ProfileSettings() {
                     className="w-full px-4 py-3 bg-neutral-950 border border-neutral-800 rounded text-white text-xs font-bold uppercase tracking-widest focus:outline-none focus:border-emerald-500/50 transition-all appearance-none"
                   >
                     <option value="realtime">Real-time notifications</option>
-                    <option value="daily">Daily synchronization</option>
+                    <option value="daily">Daily Summary</option>
                     <option value="weekly">Weekly summary</option>
-                    <option value="never">Suspend transmission</option>
+                    <option value="never">Disabled</option>
                   </select>
                 </div>
 

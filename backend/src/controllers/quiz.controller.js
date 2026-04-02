@@ -1155,27 +1155,6 @@ const finishQuiz = async (req, res) => {
       [JSON.stringify({ answeredQuestions, totalPointsEarned, totalQuestions, correctAnswers, incorrectAnswers, skippedQuestions }), score, attemptId]
     );
 
-    // Generate AI feedback if enabled
-    let feedback = null;
-    try {
-      const [feedbackResult] = await connection.execute(
-        'INSERT INTO AIFeedback (attemptId, studentId, feedbackText, improvementSuggestions, confidenceScore, generateAttempt) VALUES (?, ?, ?, ?, ?, TRUE)',
-        [attemptId, studentId, `You scored ${score}% on this quiz. ${passed ? 'Great job!' : 'Keep practicing to improve your score.'}`, 'Focus on reviewing the questions you got wrong.', 0.8]
-      );
-
-      if (feedbackResult.insertId) {
-        feedback = {
-          feedbackId: feedbackResult.insertId,
-          feedbackText: `You scored ${score}% on this quiz. ${passed ? 'Great job!' : 'Keep practicing to improve your score.'}`,
-          improvementSuggestions: 'Focus on reviewing the questions you got wrong.',
-          confidenceScore: 0.8
-        };
-      }
-    } catch (feedbackError) {
-      console.error('Error generating AI feedback:', feedbackError);
-      // Continue without feedback if it fails
-    }
-
     // Format questions for frontend
     const mapQuestionType = (questionType) => {
       if (!questionType) return 'MCQ';
@@ -1242,8 +1221,7 @@ const finishQuiz = async (req, res) => {
         quizTitle: moduleTitle,
         module: moduleTitle,
         questionBreakdown: Object.values(questionBreakdown),
-        detailedQuestions,
-        feedback
+        detailedQuestions
       }
     });
 

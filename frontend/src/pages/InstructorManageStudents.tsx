@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Users, Search, Filter, Download, Upload, Mail, MoreVertical, TrendingUp, TrendingDown, Clock, Target, BookOpen, Award, AlertTriangle, CheckCircle, XCircle, Eye, Edit, Trash2, Send, X, Calendar, BarChart3, Activity, MessageSquare, Loader2 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
+import axios from 'axios';
 
 interface Activity {
   type: 'quiz' | 'study';
@@ -29,182 +30,62 @@ interface Student {
   recentActivity: Activity[];
 }
 
+const API_BASE_URL = 'http://localhost:8080/api';
+
 export default function VRMTSStudentManagement() {
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState<'all' | Student['status']>('all');
+  
+  const [students, setStudents] = useState<Student[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const students: Student[] = [
-    {
-      id: 1,
-      name: 'Sarah Johnson',
-      email: 'sarah.j@university.edu',
-      avatar: 'SJ',
-      enrolled: 'Aug 2024',
-      modulesCompleted: 8,
-      totalModules: 12,
-      avgScore: 94,
-      lastActive: '2 hours ago',
-      status: 'excellent',
-      trend: 'up',
-      studyTime: '48.5h',
-      quizzesTaken: 24,
-      achievements: 12,
-      weakAreas: ['None identified'],
-      recentActivity: [
-        { type: 'quiz', module: 'Cardiovascular', score: 96, date: '2 hours ago' },
-        { type: 'study', module: 'Nervous System', duration: '2.5h', date: '1 day ago' }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Michael Chen',
-      email: 'michael.c@university.edu',
-      avatar: 'MC',
-      enrolled: 'Aug 2024',
-      modulesCompleted: 5,
-      totalModules: 12,
-      avgScore: 62,
-      lastActive: '2 days ago',
-      status: 'at-risk',
-      trend: 'down',
-      studyTime: '18.2h',
-      quizzesTaken: 12,
-      achievements: 4,
-      weakAreas: ['Muscular System', 'Cardiovascular System'],
-      recentActivity: [
-        { type: 'quiz', module: 'Muscular System', score: 45, date: '2 days ago' },
-        { type: 'study', module: 'Skeletal System', duration: '1h', date: '3 days ago' }
-      ]
-    },
-    {
-      id: 3,
-      name: 'Emma Davis',
-      email: 'emma.d@university.edu',
-      avatar: 'ED',
-      enrolled: 'Aug 2024',
-      modulesCompleted: 7,
-      totalModules: 12,
-      avgScore: 88,
-      lastActive: '5 hours ago',
-      status: 'good',
-      trend: 'up',
-      studyTime: '42.3h',
-      quizzesTaken: 21,
-      achievements: 9,
-      weakAreas: ['Respiratory System'],
-      recentActivity: [
-        { type: 'quiz', module: 'Skeletal System', score: 91, date: '5 hours ago' },
-        { type: 'study', module: 'Respiratory System', duration: '3h', date: '1 day ago' }
-      ]
-    },
-    {
-      id: 4,
-      name: 'James Wilson',
-      email: 'james.w@university.edu',
-      avatar: 'JW',
-      enrolled: 'Aug 2024',
-      modulesCompleted: 4,
-      totalModules: 12,
-      avgScore: 58,
-      lastActive: '5 days ago',
-      status: 'at-risk',
-      trend: 'down',
-      studyTime: '15.7h',
-      quizzesTaken: 9,
-      achievements: 3,
-      weakAreas: ['Cardiovascular System', 'Nervous System', 'Muscular System'],
-      recentActivity: [
-        { type: 'quiz', module: 'Cardiovascular', score: 42, date: '5 days ago' },
-        { type: 'study', module: 'Nervous System', duration: '45m', date: '1 week ago' }
-      ]
-    },
-    {
-      id: 5,
-      name: 'Olivia Brown',
-      email: 'olivia.b@university.edu',
-      avatar: 'OB',
-      enrolled: 'Aug 2024',
-      modulesCompleted: 7,
-      totalModules: 12,
-      avgScore: 91,
-      lastActive: '1 hour ago',
-      status: 'excellent',
-      trend: 'up',
-      studyTime: '45.8h',
-      quizzesTaken: 22,
-      achievements: 11,
-      weakAreas: ['None identified'],
-      recentActivity: [
-        { type: 'quiz', module: 'Respiratory System', score: 94, date: '1 hour ago' },
-        { type: 'study', module: 'Digestive System', duration: '2h', date: '6 hours ago' }
-      ]
-    },
-    {
-      id: 6,
-      name: 'Sophia Lee',
-      email: 'sophia.l@university.edu',
-      avatar: 'SL',
-      enrolled: 'Aug 2024',
-      modulesCompleted: 8,
-      totalModules: 12,
-      avgScore: 89,
-      lastActive: '3 hours ago',
-      status: 'good',
-      trend: 'up',
-      studyTime: '51.2h',
-      quizzesTaken: 25,
-      achievements: 10,
-      weakAreas: ['Muscular System'],
-      recentActivity: [
-        { type: 'quiz', module: 'Nervous System', score: 87, date: '3 hours ago' },
-        { type: 'study', module: 'Cardiovascular', duration: '3.5h', date: '1 day ago' }
-      ]
-    },
-    {
-      id: 7,
-      name: 'Liam Martinez',
-      email: 'liam.m@university.edu',
-      avatar: 'LM',
-      enrolled: 'Aug 2024',
-      modulesCompleted: 6,
-      totalModules: 12,
-      avgScore: 75,
-      lastActive: '1 day ago',
-      status: 'average',
-      trend: 'neutral',
-      studyTime: '32.4h',
-      quizzesTaken: 18,
-      achievements: 7,
-      weakAreas: ['Nervous System', 'Respiratory System'],
-      recentActivity: [
-        { type: 'quiz', module: 'Skeletal System', score: 78, date: '1 day ago' },
-        { type: 'study', module: 'Muscular System', duration: '2h', date: '2 days ago' }
-      ]
-    },
-    {
-      id: 8,
-      name: 'Ava Thompson',
-      email: 'ava.t@university.edu',
-      avatar: 'AT',
-      enrolled: 'Aug 2024',
-      modulesCompleted: 6,
-      totalModules: 12,
-      avgScore: 83,
-      lastActive: '4 hours ago',
-      status: 'good',
-      trend: 'up',
-      studyTime: '38.9h',
-      quizzesTaken: 19,
-      achievements: 8,
-      weakAreas: ['Cardiovascular System'],
-      recentActivity: [
-        { type: 'quiz', module: 'Respiratory System', score: 85, date: '4 hours ago' },
-        { type: 'study', module: 'Cardiovascular', duration: '2.5h', date: '1 day ago' }
-      ]
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const fetchStudents = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`${API_BASE_URL}/instructor/my-students`, { withCredentials: true });
+      
+      const mappedStudents: Student[] = res.data.data.map((s: any) => {
+        const avgScore = Math.round(s.avgScore || 0);
+        let status: Student['status'] = 'average';
+        if (avgScore >= 85) status = 'excellent';
+        else if (avgScore >= 70) status = 'good';
+        else if (avgScore < 60 && avgScore > 0) status = 'at-risk';
+
+        return {
+          id: s.studentId,
+          name: s.name,
+          email: s.email,
+          avatar: s.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase(),
+          enrolled: s.className || 'Medical Batch 2024',
+          modulesCompleted: s.modulesCompleted || 0,
+          totalModules: s.totalModules || 12,
+          avgScore: avgScore,
+          lastActive: s.lastActive ? new Date(s.lastActive).toLocaleDateString() : 'Never',
+          status: status,
+          trend: 'neutral',
+          studyTime: '---',
+          quizzesTaken: 0,
+          achievements: 0,
+          weakAreas: ['None identified'],
+          recentActivity: []
+        };
+      });
+
+      setStudents(mappedStudents);
+    } catch (err: any) {
+      console.error('Failed to fetch students:', err);
+      setError('Failed to load students. Please try again.');
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   const getStatusColor = (status: Student['status']): string => {
     const colors: Record<Student['status'], string> = {
@@ -318,6 +199,24 @@ export default function VRMTSStudentManagement() {
           </div>
         </div>
 
+        {/* Loading/Error State */}
+        {loading && (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 text-emerald-500 animate-spin" />
+          </div>
+        )}
+
+        {error && (
+          <div className="bg-rose-500/10 border border-rose-500/20 p-4 rounded-lg text-rose-500 text-xs font-bold uppercase tracking-widest text-center mb-8">
+            {error}
+          </div>
+        )}
+
+        {!loading && filteredStudents.length === 0 && (
+          <div className="bg-neutral-900 border border-neutral-800 p-20 rounded-lg text-neutral-500 text-xs font-bold uppercase tracking-widest text-center mb-8">
+            No students found in your registry.
+          </div>
+        )}
 
         {/* Students Grid/Table View */}
         {viewMode === 'grid' ? (

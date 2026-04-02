@@ -4,51 +4,61 @@ const db = require('../config/db');
 const getClassStats = async (req, res) => {
   let connection;
   try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
     connection = await db();
 
-    // Total students
+    // Total students assigned to this teacher
     const [totalStudentsResult] = await connection.execute(
-      'SELECT COUNT(*) as total FROM Student s INNER JOIN User u ON s.userId = u.userId WHERE u.userType = "student" AND u.isActive = TRUE'
+      'SELECT COUNT(*) as total FROM Student s INNER JOIN User u ON s.userId = u.userId WHERE s.assignedTeacherId = ? AND u.userType = "student" AND u.isActive = TRUE',
+      [teacherId]
     );
 
-    // Average performance from QuizAttempt.getScore
+    // Average performance of students assigned to this teacher
     const [avgPerformanceResult] = await connection.execute(`
-      SELECT AVG(getScore) as avgScore
-      FROM QuizAttempt
-      WHERE status = 'completed' AND getScore IS NOT NULL
-    `);
+      SELECT AVG(qa.getScore) as avgScore
+      FROM QuizAttempt qa
+      INNER JOIN Student s ON qa.studentId = s.studentId
+      WHERE qa.status = 'completed' AND qa.getScore IS NOT NULL AND s.assignedTeacherId = ?
+    `, [teacherId]);
 
-    // Modules assigned
+    // Modules assigned to students of this teacher
     const [modulesAssignedResult] = await connection.execute(
-      'SELECT COUNT(DISTINCT moduleId) as assignedModules FROM StudentModuleAssignment'
+      'SELECT COUNT(DISTINCT sma.moduleId) as assignedModules FROM StudentModuleAssignment sma INNER JOIN Student s ON sma.studentId = s.studentId WHERE s.assignedTeacherId = ?',
+      [teacherId]
     );
 
-    // Total modules
+    // Total modules (global)
     const [totalModulesResult] = await connection.execute(
       'SELECT COUNT(*) as total FROM Module'
     );
 
-    // At-risk students: score < 60 OR missed deadlines
+    // At-risk students assigned to this teacher
     const [atRiskResult] = await connection.execute(`
       SELECT COUNT(DISTINCT s.studentId) as atRiskCount
       FROM Student s
       INNER JOIN User u ON s.userId = u.userId
-      WHERE s.studentId IN (
-        SELECT studentId
-        FROM QuizAttempt
-        WHERE status = 'completed' AND getScore IS NOT NULL
-        GROUP BY studentId
-        HAVING AVG(getScore) < 60
-      ) OR s.studentId IN (
-        SELECT studentId
-        FROM StudentModuleAssignment
-        WHERE status != 'completed' AND status != 'archived'
-        AND assignedAt IS NOT NULL
-        AND assignedAt < DATE_SUB(NOW(), INTERVAL 14 DAY)
-        GROUP BY studentId
-        HAVING COUNT(*) >= 2
+      WHERE s.assignedTeacherId = ? AND (
+        s.studentId IN (
+          SELECT studentId
+          FROM QuizAttempt
+          WHERE status = 'completed' AND getScore IS NOT NULL
+          GROUP BY studentId
+          HAVING AVG(getScore) < 60
+        ) OR s.studentId IN (
+          SELECT studentId
+          FROM StudentModuleAssignment
+          WHERE status != 'completed' AND status != 'archived'
+          AND assignedAt IS NOT NULL
+          AND assignedAt < DATE_SUB(NOW(), INTERVAL 14 DAY)
+          GROUP BY studentId
+          HAVING COUNT(*) >= 2
+        )
       )
-    `);
+    `, [teacherId]);
 
     await connection.end();
 
@@ -78,6 +88,11 @@ const getClassStats = async (req, res) => {
 const getModulePerformance = async (req, res) => {
   let connection;
   try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
     connection = await db();
 
     const [modulePerformance] = await connection.execute(`
@@ -90,15 +105,18 @@ const getModulePerformance = async (req, res) => {
         COUNT(DISTINCT sma.studentId) as totalAssigned
       FROM Module m
       LEFT JOIN StudentModuleAssignment sma ON m.moduleId = sma.moduleId
+      INNER JOIN Student s ON sma.studentId = s.studentId
       LEFT JOIN Quiz q ON m.moduleId = q.moduleId
       LEFT JOIN QuizAttempt qa ON q.quizId = qa.quizId AND qa.status = 'completed' AND qa.getScore IS NOT NULL
+      WHERE s.assignedTeacherId = ?
       GROUP BY m.moduleId, m.title
       ORDER BY avgScore DESC, completed DESC
       LIMIT 10
-    `);
+    `, [teacherId]);
 
     const [totalStudentsResult] = await connection.execute(
-      'SELECT COUNT(*) as total FROM Student'
+      'SELECT COUNT(*) as total FROM Student WHERE assignedTeacherId = ?',
+      [teacherId]
     );
     const totalStudents = totalStudentsResult[0]?.total || 1;
 
@@ -146,6 +164,11 @@ const getModulePerformance = async (req, res) => {
 const getRecentSubmissions = async (req, res) => {
   let connection;
   try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
     connection = await db();
 
     const [submissions] = await connection.execute(`
@@ -162,9 +185,10 @@ const getRecentSubmissions = async (req, res) => {
       WHERE qa.status = 'completed' 
       AND qa.finishAt IS NOT NULL 
       AND qa.getScore IS NOT NULL
+      AND s.assignedTeacherId = ?
       ORDER BY qa.finishAt DESC
       LIMIT 10
-    `);
+    `, [teacherId]);
 
     await connection.end();
 
@@ -205,6 +229,11 @@ const getRecentSubmissions = async (req, res) => {
 const getAtRiskStudents = async (req, res) => {
   let connection;
   try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
     connection = await db();
 
     const [atRiskStudents] = await connection.execute(`
@@ -225,6 +254,7 @@ const getAtRiskStudents = async (req, res) => {
       LEFT JOIN QuizAttempt qa ON s.studentId = qa.studentId AND qa.status = 'completed' AND qa.getScore IS NOT NULL
       LEFT JOIN StudentModuleAssignment sma ON s.studentId = sma.studentId
       LEFT JOIN LearningSession ls ON s.studentId = ls.studentId
+      WHERE s.assignedTeacherId = ?
       GROUP BY s.studentId, u.name
       HAVING (
         AVG(CASE WHEN qa.status = 'completed' AND qa.getScore IS NOT NULL THEN qa.getScore END) < 60
@@ -240,7 +270,7 @@ const getAtRiskStudents = async (req, res) => {
       )
       ORDER BY avgScore ASC, missedDeadlines DESC
       LIMIT 10
-    `);
+    `, [teacherId]);
 
     await connection.end();
 
@@ -291,6 +321,11 @@ const getAtRiskStudents = async (req, res) => {
 const getTopPerformers = async (req, res) => {
   let connection;
   try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
     connection = await db();
 
     const [topPerformers] = await connection.execute(`
@@ -303,11 +338,12 @@ const getTopPerformers = async (req, res) => {
       INNER JOIN User u ON s.userId = u.userId
       LEFT JOIN QuizAttempt qa ON s.studentId = qa.studentId AND qa.status = 'completed' AND qa.getScore IS NOT NULL
       LEFT JOIN StudentModuleAssignment sma ON s.studentId = sma.studentId
+      WHERE s.assignedTeacherId = ?
       GROUP BY s.studentId, u.name
       HAVING COUNT(qa.attemptId) > 0
       ORDER BY avgScore DESC, modules DESC
       LIMIT 10
-    `);
+    `, [teacherId]);
 
     await connection.end();
 
@@ -354,6 +390,11 @@ const getTopPerformers = async (req, res) => {
 const getUpcomingDeadlines = async (req, res) => {
   let connection;
   try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
     connection = await db();
 
     const [deadlines] = await connection.execute(`
@@ -364,14 +405,16 @@ const getUpcomingDeadlines = async (req, res) => {
         COUNT(DISTINCT sma.studentId) as totalStudents
       FROM StudentModuleAssignment sma
       INNER JOIN Module m ON sma.moduleId = m.moduleId
+      INNER JOIN Student s ON sma.studentId = s.studentId
       WHERE sma.status != 'completed' 
       AND sma.status != 'archived'
       AND sma.assignedAt IS NOT NULL
+      AND s.assignedTeacherId = ?
       AND DATE_ADD(sma.assignedAt, INTERVAL 14 DAY) >= CURDATE()
       GROUP BY m.moduleId, m.title, DATE_ADD(sma.assignedAt, INTERVAL 14 DAY)
       ORDER BY dueDate ASC
       LIMIT 10
-    `);
+    `, [teacherId]);
 
     await connection.end();
 
@@ -435,11 +478,342 @@ function getTimeAgo(date) {
   }
 }
 
+// Get students assigned to this instructor with stats
+const getMyStudents = async (req, res) => {
+  let connection;
+  try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
+    connection = await db();
+    const [students] = await connection.execute(`
+      SELECT 
+        s.studentId, 
+        u.name, 
+        u.email, 
+        s.enrollmentNumber, 
+        s.className,
+        (SELECT AVG(getScore) FROM QuizAttempt WHERE studentId = s.studentId AND status = 'completed') as avgScore,
+        (SELECT COUNT(DISTINCT moduleId) FROM StudentModuleAssignment WHERE studentId = s.studentId AND status = 'completed') as modulesCompleted,
+        (SELECT COUNT(*) FROM Module) as totalModules,
+        (SELECT MAX(startTime) FROM LearningSession WHERE studentId = s.studentId) as lastActive
+      FROM Student s
+      INNER JOIN User u ON s.userId = u.userId
+      WHERE s.assignedTeacherId = ? AND u.isActive = TRUE
+    `, [teacherId]);
+
+    await connection.end();
+    res.json({ success: true, data: students });
+  } catch (error) {
+    console.error('Error in getMyStudents:', error);
+    if (connection) await connection.end().catch(() => {});
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Assign a module to a student
+const assignModuleToStudent = async (req, res) => {
+  let connection;
+  try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
+    const { studentId, moduleId } = req.body;
+    if (!studentId || !moduleId) {
+      return res.status(400).json({ success: false, message: 'Student ID and Module ID are required' });
+    }
+
+    connection = await db();
+
+    // Verify student belongs to this teacher
+    const [studentBatch] = await connection.execute(
+      'SELECT studentId FROM Student WHERE studentId = ? AND assignedTeacherId = ?',
+      [studentId, teacherId]
+    );
+
+    if (studentBatch.length === 0) {
+      await connection.end();
+      return res.status(403).json({ success: false, message: 'You can only assign modules to your own students' });
+    }
+
+    // Create assignment
+    await connection.execute(
+      'INSERT INTO StudentModuleAssignment (studentId, moduleId, status, assignedAt) VALUES (?, ?, "not_started", NOW()) ON DUPLICATE KEY UPDATE status = "not_started", assignedAt = NOW()',
+      [studentId, moduleId]
+    );
+
+    await connection.end();
+    res.json({ success: true, message: 'Module assigned successfully' });
+  } catch (error) {
+    console.error('Error in assignModuleToStudent:', error);
+    if (connection) await connection.end().catch(() => {});
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Assign a module to an entire class (Batch)
+const assignModuleToClass = async (req, res) => {
+  let connection;
+  try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
+    const { className, moduleId } = req.body;
+    if (!className || !moduleId) {
+      return res.status(400).json({ success: false, message: 'Class Name and Module ID are required' });
+    }
+
+    connection = await db();
+
+    // Get all students in this class assigned to this teacher
+    const [students] = await connection.execute(
+      'SELECT studentId FROM Student WHERE className = ? AND assignedTeacherId = ?',
+      [className, teacherId]
+    );
+
+    if (students.length === 0) {
+      await connection.end();
+      return res.status(404).json({ success: false, message: 'No students found for the specified class' });
+    }
+
+    // Bulk insert using individual queries in a loop for simplicity and safety with ON DUPLICATE KEY 
+    // (Actual bulk insert would be more complex with ON DUPLICATE KEY)
+    for (const student of students) {
+      await connection.execute(
+        'INSERT INTO StudentModuleAssignment (studentId, moduleId, status, assignedAt) VALUES (?, ?, "not_started", NOW()) ON DUPLICATE KEY UPDATE status = "not_started", assignedAt = NOW()',
+        [student.studentId, moduleId]
+      );
+    }
+
+    await connection.end();
+    res.json({ success: true, message: `Module assigned to ${students.length} students in ${className}` });
+  } catch (error) {
+    console.error('Error in assignModuleToClass:', error);
+    if (connection) await connection.end().catch(() => {});
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Get active assignments for the tracking list
+const getActiveAssignments = async (req, res) => {
+  let connection;
+  try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
+    connection = await db();
+    const [assignments] = await connection.execute(`
+      SELECT 
+        m.moduleId as id, 
+        m.title as module, 
+        COUNT(DISTINCT sma.studentId) as students, 
+        DATE_FORMAT(MIN(sma.assignedAt), '%Y-%m-%d') as date
+      FROM StudentModuleAssignment sma
+      INNER JOIN Module m ON sma.moduleId = m.moduleId
+      INNER JOIN Student s ON sma.studentId = s.studentId
+      WHERE s.assignedTeacherId = ?
+      GROUP BY m.moduleId, m.title
+      ORDER BY MIN(sma.assignedAt) DESC
+    `, [teacherId]);
+
+    await connection.end();
+    res.json({ success: true, data: assignments });
+  } catch (error) {
+    console.error('Error in getActiveAssignments:', error);
+    if (connection) await connection.end().catch(() => {});
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Unassign a module from all students of this teacher (Batch)
+const unassignModuleFromBatch = async (req, res) => {
+  let connection;
+  try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
+    const { moduleId } = req.body;
+    if (!moduleId) {
+      return res.status(400).json({ success: false, message: 'Module ID is required' });
+    }
+
+    connection = await db();
+    
+    // Delete all assignments for this module where students belong to this teacher
+    await connection.execute(`
+      DELETE sma FROM StudentModuleAssignment sma
+      INNER JOIN Student s ON sma.studentId = s.studentId
+      WHERE s.assignedTeacherId = ? AND sma.moduleId = ?
+    `, [teacherId, moduleId]);
+
+    await connection.end();
+    res.json({ success: true, message: 'Module unassigned from all students' });
+  } catch (error) {
+    console.error('Error in unassignModuleFromBatch:', error);
+    if (connection) await connection.end().catch(() => {});
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Unassign a specific student from a module
+const unassignModuleFromStudent = async (req, res) => {
+  let connection;
+  try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
+    const { studentId, moduleId } = req.body;
+    if (!studentId || !moduleId) {
+      return res.status(400).json({ success: false, message: 'Student ID and Module ID are required' });
+    }
+
+    connection = await db();
+
+    // Verify student belongs to this teacher
+    const [studentCheck] = await connection.execute(
+      'SELECT studentId FROM Student WHERE studentId = ? AND assignedTeacherId = ?',
+      [studentId, teacherId]
+    );
+
+    if (studentCheck.length === 0) {
+      await connection.end();
+      return res.status(403).json({ success: false, message: 'Unauthorized' });
+    }
+
+    await connection.execute(
+      'DELETE FROM StudentModuleAssignment WHERE studentId = ? AND moduleId = ?',
+      [studentId, moduleId]
+    );
+
+    await connection.end();
+    res.json({ success: true, message: 'Module unassigned from student' });
+  } catch (error) {
+    console.error('Error in unassignModuleFromStudent:', error);
+    if (connection) await connection.end().catch(() => {});
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const getClassAnalytics = async (req, res) => {
+  let connection;
+  try {
+    const teacherId = req.session.user.teacherId;
+    if (!teacherId) {
+      return res.status(403).json({ success: false, message: 'Teacher ID not found in session' });
+    }
+
+    connection = await db();
+
+    // 1. Overview Stats
+    const [overview] = await connection.execute(`
+      SELECT 
+        COUNT(DISTINCT s.studentId) as totalStudents,
+        IFNULL(AVG(latest_scores.avg_score), 0) as avgGrade,
+        COUNT(DISTINCT sma.moduleId) as modulesAssigned,
+        IFNULL(SUM(CASE WHEN sma.status = 'completed' THEN 1 ELSE 0 END) / NULLIF(COUNT(sma.studentId), 0) * 100, 0) as completionRate,
+        IFNULL(SUM(COALESCE(sma.hoursSpent, 0)), 0) as totalStudyHours
+      FROM Student s
+      LEFT JOIN StudentModuleAssignment sma ON s.studentId = sma.studentId
+      LEFT JOIN (
+        SELECT studentId, AVG(getScore) as avg_score 
+        FROM QuizAttempt 
+        WHERE status = 'completed'
+        GROUP BY studentId
+      ) latest_scores ON s.studentId = latest_scores.studentId
+      WHERE s.assignedTeacherId = ?
+    `, [teacherId]);
+
+    // 2. Performance Trend (last 6 months)
+    const [performanceTrend] = await connection.execute(`
+      SELECT 
+        DATE_FORMAT(finishAt, '%b') as month,
+        AVG(getScore) as score
+      FROM QuizAttempt qa
+      INNER JOIN Student s ON qa.studentId = s.studentId
+      WHERE s.assignedTeacherId = ?
+      AND qa.status = 'completed'
+      AND qa.finishAt >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
+      GROUP BY DATE_FORMAT(finishAt, '%Y-%m'), month
+      ORDER BY MIN(finishAt) ASC
+    `, [teacherId]);
+
+    // 3. Module Breakdown
+    const [moduleBreakdown] = await connection.execute(`
+      SELECT 
+        m.title as name,
+        IFNULL(SUM(CASE WHEN sma.status = 'completed' THEN 1 ELSE 0 END) / NULLIF(COUNT(sma.studentId), 0) * 100, 0) as completion,
+        IFNULL(AVG(qa_avg.avg_score), 0) as avgScore
+      FROM Module m
+      INNER JOIN StudentModuleAssignment sma ON m.moduleId = sma.moduleId
+      INNER JOIN Student s ON sma.studentId = s.studentId
+      LEFT JOIN (
+        SELECT q.moduleId, qa.studentId, AVG(qa.getScore) as avg_score
+        FROM QuizAttempt qa
+        JOIN Quiz q ON qa.quizId = q.quizId
+        WHERE qa.status = 'completed'
+        GROUP BY q.moduleId, qa.studentId
+      ) qa_avg ON (m.moduleId = qa_avg.moduleId AND s.studentId = qa_avg.studentId)
+      WHERE s.assignedTeacherId = ?
+      GROUP BY m.moduleId
+    `, [teacherId]);
+
+    // 4. Batch Comparison
+    const [batchPerformance] = await connection.execute(`
+      SELECT 
+        s.className as name,
+        COUNT(DISTINCT s.studentId) as students,
+        IFNULL(AVG(qa.getScore), 0) as avgPerformance,
+        IFNULL(SUM(CASE WHEN sma.status = 'completed' THEN 1 ELSE 0 END) / NULLIF(COUNT(sma.studentId), 0) * 100, 0) as completionRate
+      FROM Student s
+      LEFT JOIN StudentModuleAssignment sma ON s.studentId = sma.studentId
+      LEFT JOIN QuizAttempt qa ON s.studentId = qa.studentId
+      WHERE s.assignedTeacherId = ?
+      GROUP BY s.className
+    `, [teacherId]);
+
+    await connection.end();
+
+    res.json({
+      success: true,
+      data: {
+        overview: overview[0],
+        performanceTrend,
+        moduleBreakdown,
+        batchPerformance
+      }
+    });
+
+  } catch (error) {
+    console.error('Error in getClassAnalytics:', error);
+    if (connection) await connection.end().catch(() => {});
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   getClassStats,
   getModulePerformance,
   getRecentSubmissions,
   getAtRiskStudents,
   getTopPerformers,
-  getUpcomingDeadlines
+  getUpcomingDeadlines,
+  getMyStudents,
+  assignModuleToStudent,
+  assignModuleToClass,
+  getActiveAssignments,
+  unassignModuleFromBatch,
+  unassignModuleFromStudent,
+  getClassAnalytics
 };

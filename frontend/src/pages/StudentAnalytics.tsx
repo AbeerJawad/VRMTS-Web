@@ -135,6 +135,25 @@ export default function StudentAnalytics() {
     fetchAnalytics();
   }, []);
 
+  const downloadCSV = () => {
+    if (!analyticsData) return;
+    
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Module,Progress,Avg Score,Time Spent,Status\n";
+    
+    analyticsData.modulePerformance.forEach(row => {
+      csvContent += `${row.module},${row.progress}%,${row.avgScore}%,${row.timeSpent},${row.status}\n`;
+    });
+    
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `Student_Analytics_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
@@ -157,7 +176,7 @@ export default function StudentAnalytics() {
             onClick={() => navigate('/studentdashboard')}
             className="px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-lg text-xs font-bold text-white transition-all uppercase tracking-widest"
           >
-            Terminal Return
+            Go Back
           </button>
         </div>
       </div>
@@ -186,7 +205,10 @@ export default function StudentAnalytics() {
       activeNav="analytics"
       userType="student"
       headerRight={
-        <button className="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-md text-[10px] font-bold uppercase tracking-widest text-white transition-all flex items-center gap-2">
+        <button 
+          onClick={downloadCSV}
+          className="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-md text-[10px] font-bold uppercase tracking-widest text-white transition-all flex items-center gap-2"
+        >
           <Download className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Export record</span>
         </button>
@@ -227,10 +249,10 @@ export default function StudentAnalytics() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {[
-          { icon: Clock, value: `${analyticsData.overview.totalStudyTime}h`, label: 'Active engagement', trend: <TrendingUp className="w-3.5 h-3.5 text-emerald-500" /> },
-          { icon: Target, value: `${analyticsData.overview.averageScore}%`, label: 'Precision rating', trend: <span className="text-[8px] font-bold text-emerald-500">+5.2%</span> },
-          { icon: BookOpen, value: `${analyticsData.overview.modulesCompleted}/${analyticsData.overview.totalModules}`, label: 'Module verification' },
-          { icon: Zap, value: analyticsData.overview.currentStreak, label: 'Synchronous days' }
+          { icon: Clock, value: `${analyticsData.overview.totalStudyTime}h`, label: 'Total Study Time', trend: <TrendingUp className="w-3.5 h-3.5 text-emerald-500" /> },
+          { icon: Target, value: `${analyticsData.overview.averageScore}%`, label: 'Average Accuracy', trend: <span className="text-[8px] font-bold text-emerald-500">+5.2%</span> },
+          { icon: BookOpen, value: `${analyticsData.overview.modulesCompleted}/${analyticsData.overview.totalModules}`, label: 'Modules Completed' },
+          { icon: Zap, value: analyticsData.overview.currentStreak, label: 'Daily Streak' }
         ].map((stat, i) => (
           <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-lg p-6">
             <div className="flex items-start justify-between mb-4">
@@ -273,7 +295,7 @@ export default function StudentAnalytics() {
         <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8">
           <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
             <Activity className="w-4 h-4 text-emerald-500" />
-            Synchronous activity cycle
+            Weekly Engagement
           </h3>
           <div className="flex items-end justify-between gap-3 h-48 mb-8">
             {analyticsData.studyTime.map((item, idx) => (
@@ -302,18 +324,18 @@ export default function StudentAnalytics() {
       </div>
 
       <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 mb-8">
-        <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
-          <Brain className="w-4 h-4 text-emerald-500" />
-          Module proficiency index
-        </h3>
+          <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
+            <BarChart3 className="w-4 h-4 text-emerald-500" />
+            Module Performance Summary
+          </h3>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-neutral-800">
                 <th className="text-left py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-neutral-600">Module</th>
                 <th className="text-left py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-neutral-600">Completion</th>
-                <th className="text-left py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-neutral-600">Avg Precision</th>
-                <th className="text-left py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-neutral-600">Session load</th>
+                 <th className="text-left py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-neutral-600">Avg Accuracy</th>
+                <th className="text-left py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-neutral-600">Total Time</th>
                 <th className="text-left py-4 px-4 text-[10px] font-bold uppercase tracking-widest text-neutral-600">Status</th>
               </tr>
             </thead>
@@ -358,7 +380,7 @@ export default function StudentAnalytics() {
         <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8">
           <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
             <Target className="w-4 h-4 text-emerald-500" />
-            Taxonomy performance
+            Performance by Category
           </h3>
           <div className="space-y-6">
             {analyticsData.questionTypePerformance.map((item, idx) => (
@@ -387,14 +409,14 @@ export default function StudentAnalytics() {
         <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8">
           <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
             <Eye className="w-4 h-4 text-emerald-500" />
-            Cognitive patterns
+            Study Insights
           </h3>
           <div className="space-y-4">
             {[
-              { label: 'Active node', value: analyticsData.learningPattern.mostActiveDay },
-              { label: 'Peak frequency', value: analyticsData.learningPattern.mostActiveTime },
-              { label: 'Load duration', value: analyticsData.learningPattern.avgSessionLength },
-              { label: 'Protocol', value: analyticsData.learningPattern.preferredFormat }
+              { label: 'Peak Day', value: analyticsData.learningPattern.mostActiveDay },
+              { label: 'Active Window', value: analyticsData.learningPattern.mostActiveTime },
+              { label: 'Session Length', value: analyticsData.learningPattern.avgSessionLength },
+              { label: 'Methodology', value: analyticsData.learningPattern.preferredFormat }
             ].map((pattern, idx) => (
               <div key={idx} className="p-4 bg-neutral-950 border border-neutral-800 rounded flex items-center justify-between group">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-600 group-hover:text-neutral-400 transition-colors">{pattern.label}</span>
@@ -452,10 +474,10 @@ export default function StudentAnalytics() {
       </div>
 
       <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 mb-8">
-        <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
-          <Clock className="w-4 h-4 text-emerald-500" />
-          Neural activity log
-        </h3>
+          <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
+            <Clock className="w-4 h-4 text-emerald-500" />
+            Activity History
+          </h3>
         <div className="space-y-3">
           {analyticsData.recentActivity.map((activity, idx) => (
             <div key={idx} className="flex gap-4 p-4 bg-neutral-950/40 border border-neutral-800/50 rounded-lg hover:border-neutral-700 transition-all group">
@@ -476,10 +498,10 @@ export default function StudentAnalytics() {
       </div>
 
       <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 mb-8">
-        <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
-          <Trophy className="w-4 h-4 text-emerald-500" />
-          Milestone decryption
-        </h3>
+          <h3 className="text-sm font-bold text-white uppercase tracking-tight mb-8 flex items-center gap-3">
+            <Trophy className="w-4 h-4 text-emerald-500" />
+            Achievements
+          </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {analyticsData.achievements.map((achievement, idx) => {
             const IconComponent = getAchievementIcon(achievement.icon);
@@ -510,37 +532,6 @@ export default function StudentAnalytics() {
         </div>
       </div>
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-10">
-        <div className="flex items-start gap-8">
-          <div className="w-12 h-12 rounded bg-neutral-950 border border-neutral-800 flex items-center justify-center flex-shrink-0 shadow-inner">
-            <Brain className="w-6 h-6 text-emerald-500" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="text-base font-bold text-white uppercase tracking-tight mb-8">Adaptive proficiency analysis</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-              {[
-                { icon: TrendingUp, label: 'Velocity report', desc: 'Sustained score elevation of 20% over 90 cycles. Peak identification accuracy detected.' },
-                { icon: Clock, label: 'Temporal sync', desc: 'Maximum cognitive performance observed between 14:00 and 18:00. Schedule primary tests accordingly.' },
-                { icon: AlertCircle, label: 'Deviation alert', desc: 'Heart valve metrics showing sub-baseline precision. Critical topic review recommended.' },
-                { icon: Zap, label: 'Neural consistency', desc: '12-day active sequence maintained. Retention probability increased by 25%.' }
-              ].map((insight, i) => (
-                <div key={i} className="p-5 bg-neutral-950 border border-neutral-800 rounded-lg group hover:border-emerald-500/50 transition-all">
-                  <div className="flex items-center gap-3 mb-3">
-                    <insight.icon className="w-4 h-4 text-emerald-500" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-white">{insight.label}</span>
-                  </div>
-                  <p className="text-[11px] leading-relaxed text-neutral-500 font-medium">
-                    {insight.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <button type="button" className="px-8 py-3 bg-white hover:bg-neutral-200 text-black text-[10px] font-bold uppercase tracking-widest rounded transition-all shadow-lg active:scale-95">
-              Protocol: Generate study plan
-            </button>
-          </div>
-        </div>
-      </div>
     </PageLayout>
   );
 }

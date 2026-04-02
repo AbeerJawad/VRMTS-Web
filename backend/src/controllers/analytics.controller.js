@@ -318,6 +318,25 @@ const getStudentAnalytics = async (req, res) => {
       WHERE ls.studentId = ?
     `, [studentId]);
 
+    const [preferredFormatData] = await connection.execute(`
+      SELECT sessionType, COUNT(*) as count
+      FROM LearningSession
+      WHERE studentId = ?
+      GROUP BY sessionType
+      ORDER BY count DESC
+      LIMIT 1
+    `, [studentId]);
+
+    const preferredFormat = preferredFormatData.length > 0 
+      ? (preferredFormatData[0].sessionType === 'vr' ? 'VR Session' : 'Web Module')
+      : 'Web Module';
+
+    const [perfectScores] = await connection.execute(`
+      SELECT COUNT(*) as count
+      FROM QuizAttempt
+      WHERE studentId = ? AND getScore = 100 AND status = 'completed'
+    `, [studentId]);
+
     await connection.end();
 
     // Format last attempt dates
@@ -387,15 +406,15 @@ const getStudentAnalytics = async (req, res) => {
         mostActiveDay: learningPattern[0]?.mostActiveDay || 'N/A',
         mostActiveTime: timeRangeFormatted,
         avgSessionLength: avgSession[0]?.avgSessionLength ? `${Math.round(parseFloat(avgSession[0].avgSessionLength))} mins` : 'N/A',
-        preferredFormat: 'VR Sessions'
+        preferredFormat: preferredFormat
       },
       achievements: [
-        { name: 'First Quiz Completed', icon: 'Trophy', unlocked: (overviewResult[0].quizzesTaken || 0) > 0, date: undefined },
-        { name: 'Week Streak', icon: 'Zap', unlocked: currentStreak >= 7, date: undefined },
-        { name: 'Perfect Score', icon: 'Award', unlocked: (overviewResult[0].averageScore || 0) >= 100, date: undefined },
-        { name: 'Module Master', icon: 'Brain', unlocked: (overviewResult[0].modulesCompleted || 0) >= 5, date: undefined },
-        { name: 'Consistency King', icon: 'Target', unlocked: longestStreak >= 14, date: undefined },
-        { name: 'Speed Demon', icon: 'Clock', unlocked: false, date: undefined }
+        { name: 'Course Initiated', icon: 'Trophy', unlocked: (overviewResult[0].quizzesTaken || 0) > 0, date: undefined },
+        { name: 'Consistent Learner', icon: 'Zap', unlocked: currentStreak >= 7, date: undefined },
+        { name: 'Excellence Attained', icon: 'Award', unlocked: (perfectScores[0]?.count || 0) > 0, date: undefined },
+        { name: 'Subject Specialist', icon: 'BookOpen', unlocked: (overviewResult[0].modulesCompleted || 0) >= 5, date: undefined },
+        { name: 'Dedicated Scholar', icon: 'Target', unlocked: longestStreak >= 14, date: undefined },
+        { name: 'Efficiency Expert', icon: 'Clock', unlocked: (avgSession[0]?.avgSessionLength || 0) > 0 && (avgSession[0]?.avgSessionLength || 0) < 30, date: undefined }
       ]
     };
 

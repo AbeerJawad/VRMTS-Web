@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Target, Clock, TrendingUp, ChevronRight, ChevronDown, ChevronUp, RotateCcw, Home, BarChart3, CheckCircle2, XCircle, AlertCircle, Brain, BookOpen, Share2, Download, Loader2 } from 'lucide-react';
+import { Target, Clock, TrendingUp, ChevronRight, ChevronDown, RotateCcw, Home, BarChart3, CheckCircle2, XCircle, AlertCircle, BookOpen, Share2, Download, Loader2 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
 
 const API_BASE_URL = 'http://localhost:8080/api';
@@ -128,10 +128,7 @@ export default function QuizResults() {
             totalStudents: 0, // Not available from current API
             weakAreas: [],
             strongAreas: [],
-            recommendations: (() => {
-              const s = attempt.feedback?.improvementSuggestions;
-              return Array.isArray(s) ? s : (s ? [String(s)] : []);
-            })(),
+            recommendations: [],
             badges: []
           };
 
@@ -244,7 +241,7 @@ export default function QuizResults() {
                   : 'bg-neutral-950 text-rose-500 border border-rose-500/20'
                   }`}>
                   {resultsData.passed ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
-                  {resultsData.passed ? 'Status: Passed' : 'Status: Failed'}
+                  {resultsData.passed ? 'Outcome: Academic Pass' : 'Outcome: Needs Review'}
                 </div>
 
                 <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">
@@ -275,11 +272,10 @@ export default function QuizResults() {
             </div>
           </div>
 
-          {/* Benchmarking & Global Stats */}
           <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 flex flex-col">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-8 flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-emerald-500" />
-              Benchmarks
+              Performance Analysis
             </h3>
 
             <div className="space-y-8 flex-1">
@@ -324,25 +320,6 @@ export default function QuizResults() {
           </div>
         </div>
 
-        {/* AI Insights Bar */}
-        <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 flex flex-col md:flex-row items-center gap-6 group hover:border-neutral-700 transition-all">
-          <div className="w-12 h-12 rounded-lg bg-neutral-950 border border-neutral-800 flex items-center justify-center shadow-lg flex-shrink-0">
-            <Brain className="w-6 h-6 text-emerald-500" />
-          </div>
-          <div className="flex-1 text-center md:text-left">
-            <h3 className="text-sm font-bold text-white mb-1 flex items-center justify-center md:justify-start gap-2 tracking-tight">
-              Performance Analysis
-            </h3>
-            <p className="text-neutral-500 text-sm font-medium leading-relaxed">
-              {resultsData.recommendations.length > 0
-                ? resultsData.recommendations[0]
-                : "Performance patterns suggest further focus on anatomical spatial relationships in the next module."}
-            </p>
-          </div>
-          <button className="px-6 py-2.5 bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-white rounded-md text-[10px] font-bold uppercase tracking-widest transition-all">
-            Open roadmap
-          </button>
-        </div>
 
         {/* Detailed Question Review */}
         <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8">

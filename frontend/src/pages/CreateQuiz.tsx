@@ -32,6 +32,16 @@ interface ModuleOption {
     title: string;
 }
 
+interface StagedQuestion {
+    id: string;
+    question: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+    difficulty: string;
+    approved: boolean;
+}
+
 const API_BASE_URL = 'http://localhost:8080/api';
 
 export default function CreateQuiz() {
@@ -43,6 +53,19 @@ export default function CreateQuiz() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [moduleList, setModuleList] = useState<ModuleOption[]>([]);
     const [isLoadingModules, setIsLoadingModules] = useState(false);
+
+    // AI Generation State
+    const [aiStep, setAiStep] = useState<'config' | 'generating' | 'review'>('config');
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [aiConfig, setAiConfig] = useState({
+        labNum: 1,
+        count: 10,
+        difficulty: 'medium',
+        topicHint: ''
+    });
+    const [ragResult, setRagResult] = useState<{ quizId: number, totalQuestions: number } | null>(null);
+    const [stagedQuestions, setStagedQuestions] = useState<StagedQuestion[]>([]);
+    const [showRagQuestions, setShowRagQuestions] = useState(false);
 
     useEffect(() => {
         const fetchModules = async () => {
@@ -63,6 +86,19 @@ export default function CreateQuiz() {
 
         fetchModules();
     }, []);
+
+    // Auto-select module based on Lab Number in AI mode
+    useEffect(() => {
+        if (moduleList.length > 0 && mode === 'ai') {
+            const labPrefix = `Lab ${aiConfig.labNum}`;
+            const matchingModule = moduleList.find(m => 
+                m.title.startsWith(labPrefix) || m.title.includes(labPrefix)
+            );
+            if (matchingModule) {
+                setSelectedModule(matchingModule.moduleId.toString());
+            }
+        }
+    }, [aiConfig.labNum, moduleList, mode]);
 
     const instructorNav = [
         { key: 'dashboard' as const, label: 'Dashboard', path: '/instructordashboard' },
@@ -125,6 +161,136 @@ export default function CreateQuiz() {
         } catch (error: any) {
             console.error('Error creating quiz:', error);
             alert(error.response?.data?.message || "Failed to publish quiz. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const handleGenerateAI = async () => {
+        if (!aiConfig.labNum) {
+            alert("Please select a source lab.");
+            return;
+        }
+
+        if (!selectedModule) {
+            alert("Please select a target module.");
+            return;
+        }
+
+        setIsGenerating(true);
+        setAiStep('generating');
+        setStagedQuestions([]);
+        
+        try {
+            const response = await axios.post(`${API_BASE_URL}/quiz/preview-rag-questions`, {
+                labNumber: aiConfig.labNum,
+                questionCount: aiConfig.count
+            }, {
+                withCredentials: true
+            });
+
+            if (response.data.success) {
+                const questions = response.data.data.map((q: any) => ({
+                    id: Math.random().toString(36).substr(2, 9),
+                    ...q,
+                    approved: true
+                }));
+                setStagedQuestions(questions);
+                setAiStep('review');
+            } else {
+                alert(response.data.message || "Failed to generate questions.");
+                setAiStep('config');
+            }
+        } catch (error: any) {
+            console.error('Error generating AI questions:', error);
+            alert(error.response?.data?.message || "Critical error during generation. Please try again.");
+            setAiStep('config');
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+
+    const handleGenerateMoreAI = async () => {
+        setIsGenerating(true);
+        try {
+            const response = await axios.post(`${API_BASE_URL}/quiz/preview-rag-questions`, {
+                labNumber: aiConfig.labNum,
+                questionCount: aiConfig.count
+            }, {
+                withCredentials: true
+            });
+
+            if (response.data.success) {
+                const additionalQuestions = response.data.data.map((q: any) => ({
+                    id: Math.random().toString(36).substr(2, 9),
+                    ...q,
+                    approved: true
+                }));
+                setStagedQuestions((prev) => [...prev, ...additionalQuestions]);
+            }
+        } catch (error: any) {
+            console.error('Error generating more AI questions:', error);
+            alert("Failed to generate additional questions.");
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+
+    const handlePublishFromStaging = async () => {
+        const approved = stagedQuestions.filter(q => q.approved);
+        if (approved.length === 0) {
+            alert("Please approve at least one question.");
+            return;
+        }
+
+        let effectiveModuleId = selectedModule;
+        
+        // If selectedModule is still empty, attempt one last auto-resolve
+        if (!effectiveModuleId && moduleList.length > 0) {
+            const labPrefix = `Lab ${aiConfig.labNum}`;
+            const matchingModule = moduleList.find(m => 
+                m.title.startsWith(labPrefix) || m.title.includes(labPrefix)
+            );
+            if (matchingModule) {
+                effectiveModuleId = matchingModule.moduleId.toString();
+                setSelectedModule(effectiveModuleId);
+            }
+        }
+
+        if (!effectiveModuleId) {
+            alert(`Target module for Lab ${aiConfig.labNum} not found. Please select it manually.`);
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            const payload = {
+                title: quizTitle || `Lab ${aiConfig.labNum} Assessment`,
+                description: `AI-generated quiz for lab ${aiConfig.labNum}`,
+                moduleId: parseInt(effectiveModuleId),
+                questions: approved.map(q => ({
+                    question: q.question,
+                    type: 'mcq' as const,
+                    options: q.options,
+                    correctAnswer: q.options[q.correctIndex],
+                    points: 1
+                })),
+                timeLimit: 30,
+                passingScore: 60
+            };
+
+            const response = await axios.post(`${API_BASE_URL}/quiz/create`, payload, {
+                withCredentials: true
+            });
+
+            if (response.data.success) {
+                setRagResult(response.data);
+                setAiStep('config');
+                setStagedQuestions([]);
+            }
+        } catch (error: any) {
+            console.error('Error publishing quiz:', error);
+            alert(error.response?.data?.message || "Failed to publish quiz.");
         } finally {
             setIsSubmitting(false);
         }
@@ -337,52 +503,325 @@ export default function CreateQuiz() {
     );
 
     const renderAIMode = () => (
-        <div className="max-w-2xl mx-auto mt-12">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-10">
-                <div className="w-16 h-16 bg-neutral-950 border border-neutral-800 rounded-lg flex items-center justify-center mb-6">
-                    <Sparkles className="w-8 h-8 text-neutral-400" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 uppercase tracking-tight">AI Quiz Generator</h3>
-                <p className="text-neutral-500 text-[10px] font-bold uppercase tracking-widest mb-8 leading-relaxed">Describe the topic or paste the content you want to generate a quiz from.</p>
-
-                <div className="space-y-6">
-                    <div>
-                        <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-2">Topic / Content Description</label>
-                        <textarea
-                            rows={6}
-                            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-4 text-neutral-200 text-sm font-bold uppercase tracking-tight focus:outline-none focus:border-emerald-500/50 transition-colors placeholder:text-neutral-800"
-                            placeholder="e.g. Generate 10 MCQs about cellular respiration and its stages..."
-                        />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-6">
-                        <div>
-                            <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-2">Questions Count</label>
-                            <input type="number" defaultValue={10} className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-neutral-200 text-sm font-bold uppercase tracking-tight outline-none focus:border-emerald-500/50" />
+        <div className="max-w-4xl mx-auto mt-12">
+            {aiStep === 'config' && (
+                <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-10">
+                    <div className="flex items-center gap-4 mb-8">
+                        <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-lg flex items-center justify-center">
+                            <Sparkles className="w-6 h-6 text-emerald-500" />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-2">Difficulty</label>
-                            <select className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-neutral-200 text-sm font-bold uppercase tracking-tight outline-none focus:border-emerald-500/50 appearance-none">
-                                <option>Beginner</option>
-                                <option>Intermediate</option>
-                                <option>Advanced</option>
-                            </select>
+                            <h3 className="text-xl font-bold uppercase tracking-tight">AI Quiz Configuration</h3>
+                            <p className="text-neutral-500 text-[10px] font-bold uppercase tracking-widest">Set your parameters for automated question generation.</p>
                         </div>
                     </div>
 
-                    <button className="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-neutral-950 rounded text-[10px] font-bold uppercase tracking-[0.2em] transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)] flex items-center justify-center gap-3">
-                        <Sparkles className="w-4 h-4" />
-                        Generate Quiz
-                    </button>
-                </div>
-            </div>
+                    <div className="space-y-8">
+                        <div>
+                            <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Quiz Title</label>
+                            <input 
+                                type="text"
+                                value={quizTitle}
+                                onChange={(e) => setQuizTitle(e.target.value)}
+                                placeholder={`e.g. Lab ${aiConfig.labNum} Comprehensive Quiz`}
+                                className="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-neutral-200 text-sm font-bold uppercase tracking-tight focus:outline-none focus:border-emerald-500/50 transition-all placeholder:text-neutral-800"
+                            />
+                        </div>
 
-            <button
-                onClick={() => setMode('selection')}
-                className="mt-8 text-neutral-500 hover:text-white flex items-center justify-center gap-2 mx-auto transition-colors text-[10px] font-bold uppercase tracking-widest"
-            >
-                <ArrowLeft className="w-4 h-4" /> Selection mode
-            </button>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Select Source Lab</label>
+                                <select 
+                                    value={aiConfig.labNum}
+                                    onChange={(e) => setAiConfig({...aiConfig, labNum: parseInt(e.target.value)})}
+                                    className="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-neutral-200 text-sm font-bold uppercase tracking-tight focus:outline-none focus:border-emerald-500/50 appearance-none transition-all"
+                                >
+                                    {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                                        <option key={n} value={n}>Lab {n}: {
+                                            n === 1 ? 'Anatomical Language' :
+                                            n === 2 ? 'Bones & Markings' :
+                                            n === 3 ? 'Spinal Cord' :
+                                            n === 4 ? 'Brain & Nerves' :
+                                            n === 5 ? 'Special Senses' :
+                                            n === 6 ? 'Muscles' :
+                                            n === 7 ? 'Heart & Vessels' :
+                                            n === 8 ? 'Respiratory' :
+                                            n === 9 ? 'Digestive' : 'Urinary/Repro'
+                                        }</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Target Module</label>
+                                <select 
+                                    value={selectedModule}
+                                    onChange={(e) => setSelectedModule(e.target.value)}
+                                    className="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-neutral-200 text-sm font-bold uppercase tracking-tight focus:outline-none focus:border-emerald-500/50 appearance-none transition-all"
+                                >
+                                    <option value="">{isLoadingModules ? 'Loading...' : 'Select Target Module'}</option>
+                                    {moduleList.map((m) => (
+                                        <option key={m.moduleId} value={m.moduleId}>{m.title}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Question Count (Max 20)</label>
+                                <input 
+                                    type="number" 
+                                    min={1} 
+                                    max={20}
+                                    value={aiConfig.count}
+                                    onChange={(e) => setAiConfig({...aiConfig, count: Math.min(20, parseInt(e.target.value) || 1)})}
+                                    className="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-neutral-200 text-sm font-bold uppercase tracking-tight focus:outline-none focus:border-emerald-500/50 transition-all" 
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Difficulty Level</label>
+                                <div className="grid grid-cols-3 gap-2">
+                                    {['easy', 'medium', 'hard'].map((d) => (
+                                        <button
+                                            key={d}
+                                            onClick={() => setAiConfig({...aiConfig, difficulty: d})}
+                                            className={`py-2 text-[10px] font-bold uppercase tracking-widest border transition-all rounded ${
+                                                aiConfig.difficulty === d 
+                                                ? 'bg-emerald-500 border-emerald-500 text-neutral-950 shadow-[0_0_15px_rgba(16,185,129,0.3)]' 
+                                                : 'bg-neutral-950 border-neutral-800 text-neutral-500 hover:border-neutral-700'
+                                            }`}
+                                        >
+                                            {d}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Topic Hint / Specific Coverage (Optional)</label>
+                            <textarea
+                                rows={3}
+                                value={aiConfig.topicHint}
+                                onChange={(e) => setAiConfig({...aiConfig, topicHint: e.target.value})}
+                                className="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-4 text-neutral-200 text-sm font-bold uppercase tracking-tight focus:outline-none focus:border-emerald-500/50 transition-colors placeholder:text-neutral-800"
+                                placeholder="e.g. Focus on cranial nerves VII and X, or specific anatomical structures..."
+                            />
+                        </div>
+
+                        <div className="flex justify-end">
+                            <button 
+                                onClick={handleGenerateAI}
+                                className="w-full md:w-auto px-10 py-4 bg-emerald-500 hover:bg-emerald-600 text-neutral-950 rounded text-[10px] font-bold uppercase tracking-[0.2em] transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)] flex items-center justify-center gap-3"
+                            >
+                                <Sparkles className="w-4 h-4" />
+                                Generate Questions
+                            </button>
+                        </div>
+
+                        {ragResult && (
+                            <div className="mt-8 p-6 bg-emerald-500/5 border border-emerald-500/20 rounded-lg animate-in fade-in slide-in-from-top-4 duration-500">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center">
+                                        <CheckCircle className="w-5 h-5 text-neutral-950" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-sm font-bold uppercase tracking-tight text-emerald-500">Quiz Published Successfully!</h4>
+                                        <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest mt-0.5">Your assessment is now live in your dashboard.</p>
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4 mb-6">
+                                    <div className="bg-neutral-950 border border-neutral-800 p-4 rounded">
+                                        <span className="block text-[8px] font-bold text-neutral-600 uppercase tracking-[0.2em] mb-1">Quiz ID</span>
+                                        <span className="text-xl font-mono font-bold text-neutral-200">{ragResult.quizId}</span>
+                                    </div>
+                                    <div className="bg-neutral-950 border border-neutral-800 p-4 rounded">
+                                        <span className="block text-[8px] font-bold text-neutral-600 uppercase tracking-[0.2em] mb-1">Questions</span>
+                                        <span className="text-xl font-bold text-neutral-200">{ragResult.totalQuestions}</span>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => navigate('/instructordashboard')}
+                                    className="w-full px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-neutral-950 rounded text-[10px] font-bold uppercase tracking-widest transition-all shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+                                >
+                                    Finish & Go to Dashboard
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {aiStep === 'generating' && (
+                <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-20 text-center">
+                    <div className="relative w-24 h-24 mx-auto mb-8">
+                        <div className="absolute inset-0 border-4 border-emerald-500/10 rounded-full"></div>
+                        <div className="absolute inset-0 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <Sparkles className="w-8 h-8 text-emerald-500 animate-pulse" />
+                        </div>
+                    </div>
+                    <h3 className="text-2xl font-bold uppercase tracking-tight mb-4">AI is Processing</h3>
+                    <p className="text-neutral-500 text-xs font-bold uppercase tracking-[0.3em] max-w-sm mx-auto leading-relaxed">
+                        Reading lab manual content for <span className="text-emerald-500">Lab {aiConfig.labNum}</span> and formulating questions...
+                    </p>
+                </div>
+            )}
+
+            {aiStep === 'review' && (
+                <div className="space-y-6 max-w-5xl mx-auto mt-12 pb-20">
+                    <div className="flex items-center justify-between mb-8 sticky top-0 py-4 bg-[#0a0a0a] z-10 border-b border-neutral-800">
+                        <div>
+                            <h3 className="text-2xl font-bold uppercase tracking-tight">{quizTitle || `Lab ${aiConfig.labNum} Assessment`}</h3>
+                            <div className="flex items-center gap-2 mt-1">
+                                <span className="text-neutral-500 text-[10px] font-bold uppercase tracking-widest">
+                                    {stagedQuestions.filter(q => q.approved).length} of {stagedQuestions.length} questions approved
+                                </span>
+                                <span className="w-1 h-1 rounded-full bg-neutral-800"></span>
+                                <span className="text-emerald-500 text-[10px] font-bold uppercase tracking-widest">
+                                    Target: {moduleList.find(m => m.moduleId === parseInt(selectedModule))?.title || 'No Module Selected'}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="flex gap-4">
+                            <button
+                                onClick={handleGenerateMoreAI}
+                                disabled={isGenerating}
+                                className="px-6 py-3 bg-neutral-950 border border-neutral-800 rounded text-[10px] font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-all disabled:opacity-50 flex items-center gap-2"
+                            >
+                                {isGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                                Generate More
+                            </button>
+                            <button
+                                onClick={handlePublishFromStaging}
+                                disabled={isSubmitting || stagedQuestions.filter(q => q.approved).length === 0}
+                                className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-neutral-950 rounded text-[10px] font-bold uppercase tracking-[0.2em] transition-all flex items-center gap-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] disabled:opacity-50"
+                            >
+                                {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                                Publish Final Quiz
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        {stagedQuestions.map((q, idx) => (
+                            <div 
+                                key={q.id} 
+                                className={`bg-neutral-900 border transition-all rounded-lg p-6 group ${
+                                    q.approved ? 'border-emerald-500/40 opacity-100 shadow-[0_0_20px_rgba(16,185,129,0.05)]' : 'border-neutral-800 opacity-50 grayscale scale-[0.98]'
+                                }`}
+                            >
+                                <div className="flex gap-6">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="w-6 h-6 rounded bg-neutral-950 border border-neutral-800 text-[10px] font-bold text-neutral-400 flex items-center justify-center">
+                                                {idx + 1}
+                                            </span>
+                                            <span className={`text-[10px] font-bold uppercase tracking-widest ${q.approved ? 'text-emerald-500/80' : 'text-neutral-600'}`}>
+                                                AI Generated • {q.difficulty || 'medium'}
+                                            </span>
+                                        </div>
+                                        
+                                        <input
+                                            type="text"
+                                            value={q.question}
+                                            onChange={(e) => {
+                                                const newQuestions = [...stagedQuestions];
+                                                newQuestions[idx].question = e.target.value;
+                                                setStagedQuestions(newQuestions);
+                                            }}
+                                            className="w-full bg-neutral-950/50 border border-transparent hover:border-neutral-800 rounded p-4 text-neutral-200 text-sm font-bold uppercase tracking-tight focus:outline-none focus:border-emerald-500/30 transition-all mb-4"
+                                        />
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                                            {(q.options || []).map((opt: string, optIdx: number) => (
+                                                <button
+                                                    key={optIdx} 
+                                                    type="button"
+                                                    onClick={() => {
+                                                        const newQuestions = [...stagedQuestions];
+                                                        newQuestions[idx].correctIndex = optIdx;
+                                                        setStagedQuestions(newQuestions);
+                                                    }}
+                                                    className={`px-4 py-3 rounded text-[10px] font-semibold tracking-wide border transition-all flex justify-between items-center gap-3 text-left ${
+                                                        q.correctIndex === optIdx 
+                                                        ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-500' 
+                                                        : 'bg-neutral-950 border-neutral-800 text-neutral-500 hover:border-neutral-700'
+                                                    }`}
+                                                >
+                                                    <div className="flex gap-2 flex-1 items-center">
+                                                        <span className="text-[10px] font-bold opacity-80 mt-0.5">
+                                                            {String.fromCharCode(65 + optIdx)}.
+                                                        </span>
+                                                        <input
+                                                            type="text"
+                                                            value={opt}
+                                                            onChange={(e) => {
+                                                                const newQuestions = [...stagedQuestions];
+                                                                const nextOptions = [...(newQuestions[idx].options || [])];
+                                                                nextOptions[optIdx] = e.target.value;
+                                                                newQuestions[idx].options = nextOptions;
+                                                                setStagedQuestions(newQuestions);
+                                                            }}
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            className="w-full bg-transparent text-inherit leading-relaxed focus:outline-none"
+                                                        />
+                                                    </div>
+                                                    {q.correctIndex === optIdx && <CheckCircle className="w-3 h-3 flex-shrink-0" />}
+                                                </button>
+                                            ))}
+                                        </div>
+
+                                        <div className="bg-neutral-950/50 rounded-lg p-4 border border-neutral-800/50">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <div className={`w-1.5 h-1.5 rounded-full ${q.approved ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]' : 'bg-neutral-800'}`}></div>
+                                                <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Context & AI Rationale</span>
+                                            </div>
+                                            <p className="text-[10px] text-neutral-600 italic leading-relaxed">
+                                                {q.explanation || "No explanation provided for this question."}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex flex-col gap-2 justify-center pt-10">
+                                        <button
+                                            onClick={() => {
+                                                const newQuestions = [...stagedQuestions];
+                                                newQuestions[idx].approved = true;
+                                                setStagedQuestions(newQuestions);
+                                            }}
+                                            className={`p-4 rounded-lg border transition-all ${
+                                                q.approved 
+                                                ? 'bg-emerald-500 border-emerald-500 text-neutral-950 shadow-[0_0_15px_rgba(16,185,129,0.3)]' 
+                                                : 'bg-neutral-950 border-neutral-800 text-neutral-500 hover:text-white hover:border-neutral-700'
+                                            }`}
+                                        >
+                                            <CheckCircle className="w-6 h-6" />
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                const newQuestions = [...stagedQuestions];
+                                                newQuestions[idx].approved = false;
+                                                setStagedQuestions(newQuestions);
+                                            }}
+                                            className={`px-3 py-2 rounded border text-[8px] font-bold uppercase tracking-[0.2em] transition-all ${
+                                                !q.approved 
+                                                ? 'bg-rose-500 border-rose-500 text-neutral-950' 
+                                                : 'border-neutral-800 bg-neutral-950 text-neutral-500 hover:text-white hover:border-neutral-700'
+                                            }`}
+                                        >
+                                            Reject
+                                        </button>
+                                        <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-center text-neutral-600 mt-2">
+                                            {q.approved ? 'Approve' : 'Reject'}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 

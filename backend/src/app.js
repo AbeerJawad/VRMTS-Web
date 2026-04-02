@@ -36,6 +36,7 @@ app.use('/api/quiz', require('./routes/quiz.routes'));
 app.use('/api/explore', require('./routes/moduleExploration.routes'));
 app.use('/api/admin', require('./routes/admin.routes'));
 app.use('/api/analytics', require('./routes/analytics.routes'));
+app.use('/api/faculty/quiz', require('./routes/facultyQuiz.routes'));
 
 // Debug: Test dashboard route
 app.get('/api/dashboard/test', (req, res) => {

@@ -111,7 +111,7 @@ function CreateFacultyModal({ onClose, onRefresh }: any) {
       onRefresh();
       onClose();
     } catch (err) {
-      alert('Failed to commission faculty');
+      alert('Failed to register faculty member');
     } finally {
       setSaving(false);
     }

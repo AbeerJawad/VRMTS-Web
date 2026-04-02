@@ -30,7 +30,7 @@ export default function AdminDashboard() {
     setAnnouncing(true);
     try {
       await axios.post(`${API_BASE_URL}/announce`, announcement, { withCredentials: true });
-      alert('Broadcast dispatched successfully');
+      alert('Announcement sent successfully');
       setAnnouncement({ title: '', message: '', type: 'info' });
       fetchData(); // Refresh activity to show the announcement log
     } catch (err) {
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-8 shadow-inner">
-               <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-10">Resource Usage</h3>
+               <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-10">System Resources</h3>
                <div className="space-y-8">
                   {[
                     { label: 'CPU Usage', value: stats?.system?.cpu || 0, color: 'bg-emerald-500' },
@@ -96,7 +96,7 @@ export default function AdminDashboard() {
             </div>
 
             <div className="lg:col-span-2 bg-neutral-900/50 border border-neutral-800 rounded-xl p-8">
-              <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-6">Recent Administrative Activity</h3>
+              <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-6">Action Log</h3>
               <div className="space-y-4">
                 {recentActivity.map((log: any) => (
                   <div key={log.logId} className="flex items-center justify-between py-3 border-b border-neutral-800/50 last:border-0">
@@ -128,7 +128,7 @@ export default function AdminDashboard() {
               </div>
               <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] flex items-center gap-3">
                 <Bell className="w-4 h-4 text-amber-500" />
-                Broadcast Announcement
+                System Announcement
               </h3>
               
               <div className="space-y-4">
@@ -172,7 +172,7 @@ export default function AdminDashboard() {
                       disabled={!announcement.title || !announcement.message || announcing}
                       className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 disabled:opacity-50 disabled:grayscale rounded text-neutral-950 font-bold uppercase text-[9px] tracking-widest transition-all"
                     >
-                      {announcing ? 'Sending...' : 'Broadcast'}
+                      {announcing ? 'Sending...' : 'Announce'}
                     </button>
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
               <div className="bg-amber-500/5 border border-amber-500/10 rounded-lg p-4 flex gap-3">
                 <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0" />
                 <p className="text-[9px] font-bold text-amber-500/70 uppercase tracking-widest leading-relaxed">
-                  Caution: Broadcasts are instant and permanent.
+                  Caution: Announcements are instant and permanent.
                 </p>
               </div>
             </div>

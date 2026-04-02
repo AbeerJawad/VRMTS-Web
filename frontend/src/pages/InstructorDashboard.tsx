@@ -181,7 +181,7 @@ export default function InstructorDashboard() {
       change: null
     },
     {
-      label: 'At-Risk Students',
+      label: 'Students Needing Support',
       value: classStats.atRiskStudents.toString(),
       icon: AlertCircle,
       color: 'text-amber-500',
@@ -210,13 +210,7 @@ export default function InstructorDashboard() {
     return colors[risk] || colors['medium'];
   };
 
-  const instructorNav = [
-    { key: 'dashboard' as const, label: 'Dashboard', path: '/instructordashboard' },
-    { key: 'students' as const, label: 'Students', path: '/instructor/students' },
-    { key: 'modules' as const, label: 'Modules', path: '/modules' },
-    { key: 'quiz' as const, label: 'Quiz', path: '/instructor/create-quiz' },
-    { key: 'analytics' as const, label: 'Analytics', path: '/studentanalytics' },
-  ];
+
 
   const headerRight = (
     <>
@@ -274,7 +268,6 @@ export default function InstructorDashboard() {
       breadcrumbLabel="Dashboard"
       activeNav="dashboard"
       userType="instructor"
-      navItems={instructorNav}
       headerRight={headerRight}
     >
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
@@ -283,7 +276,10 @@ export default function InstructorDashboard() {
             <Download className="w-4 h-4" />
             Export report
           </button>
-          <button className="px-4 py-2 bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 rounded-md text-sm font-bold text-neutral-200 transition-colors flex items-center gap-2">
+          <button 
+            onClick={() => navigate('/instructor/modules')}
+            className="px-4 py-2 bg-neutral-950 hover:bg-neutral-900 border border-neutral-800 rounded-md text-sm font-bold text-neutral-200 transition-colors flex items-center gap-2"
+          >
             <Plus className="w-4 h-4" />
             Assign module
           </button>
@@ -332,8 +328,8 @@ export default function InstructorDashboard() {
           <div className="bg-neutral-900 border border-neutral-800 rounded-lg overflow-hidden">
             <div className="px-6 py-4 border-b border-neutral-800 flex items-center justify-between bg-neutral-900/50">
               <h3 className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest flex items-center gap-2">
-                <Activity className="w-3.5 h-3.5" />
-                Recent Activity
+                <Clock className="w-3.5 h-3.5" />
+                Recent History
               </h3>
               <button className="text-[10px] font-bold text-neutral-500 hover:text-emerald-500 uppercase tracking-widest transition-colors">View activity</button>
             </div>

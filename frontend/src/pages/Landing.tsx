@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Brain, Sparkles, Zap, CheckCircle2, ArrowRight } from "lucide-react";
+import { Brain, Zap, CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function Landing() {
   return (
@@ -32,7 +32,7 @@ export default function Landing() {
               to="/dashboard"
               className="bg-white text-neutral-950 px-4 py-2 rounded-md hover:bg-neutral-200 transition-colors"
             >
-              Explore Free
+              Quick Access
             </Link>
           </nav>
         </header>
@@ -62,7 +62,7 @@ export default function Landing() {
               to="/dashboard"
               className="bg-emerald-600 text-white px-6 py-3 rounded-md font-medium hover:bg-emerald-700 transition-colors flex items-center gap-2 w-full sm:w-auto justify-center"
             >
-              Start Exploring
+              Access Platform
               <ArrowRight className="w-4 h-4 pb-0.5" />
             </Link>
             <Link
@@ -76,7 +76,7 @@ export default function Landing() {
           <div className="mt-16 pt-8 border-t border-neutral-900 w-full max-w-3xl flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-neutral-500">
             <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> WebGL Native</span>
             <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> VR Headset Ready</span>
-            <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> AI-Powered Analytics</span>
+            <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Progression Tracking</span>
           </div>
         </section>
 
@@ -111,13 +111,6 @@ export default function Landing() {
                 </p>
               </div>
 
-              <div className="p-8 bg-neutral-900 border border-neutral-800 rounded-lg">
-                <Sparkles className="w-6 h-6 text-neutral-400 mb-4" />
-                <h4 className="text-lg font-bold text-white mb-2">AI-Powered Assistance</h4>
-                <p className="text-neutral-400 text-sm leading-relaxed">
-                  Our integrated AI analyzes decision patterns to suggest targeted review areas and dynamic quiz questions.
-                </p>
-              </div>
             </div>
           </div>
         </section>

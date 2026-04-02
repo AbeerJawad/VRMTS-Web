@@ -48,11 +48,11 @@ try:
         with open(meta_path, "rb") as f:
             metas = pickle.load(f)
         is_index_loaded = True
-        print(f"✅ Loaded {len(metas)} chunks from FAISS index")
+        print(f"[OK] Loaded {len(metas)} chunks from FAISS index")
     else:
-        print(f"⚠️ Warning: Index files not found at {index_path}. Assistant will run in Knowledge-Lite mode.")
+        print(f"[WARN] Index files not found at {index_path}. Assistant will run in Knowledge-Lite mode.")
 except Exception as e:
-    print(f"⚠️ Error loading index: {e}")
+    print(f"[WARN] Error loading index: {e}")
 
 # Load chunks into memory if possible
 ALL_CHUNKS = []
@@ -66,14 +66,18 @@ if is_index_loaded:
                     d = json.load(fh)
                 ALL_CHUNKS.append(d)
         
-        # Build lab mapping
+        # Build lab mapping (improved regex)
+        import re
         for ch in ALL_CHUNKS:
             text_low = ch.get("text", "").lower()
             for n in range(1, 11):
-                if f"lab {n}:" in text_low:
+                # Search for "Lab N:" or "Lab N " at the start or with header-like patterns
+                if re.search(fr'\blab\s*{n}\s*[:\- \n]', text_low):
                     LAB_CHUNKS.setdefault(n, []).append(ch)
+        
+        print(f"[OK] Mapped {sum(len(v) for v in LAB_CHUNKS.values())} chunks to labs: {list(LAB_CHUNKS.keys())}")
     except Exception as e:
-        print(f"⚠️ Error mapping chunks: {e}")
+        print(f"[WARN] Error mapping chunks: {e}")
 
 # ---------------------------------------------------------
 # Embedding model (local ONNX + tokenizer - Safe Load)
@@ -87,11 +91,11 @@ try:
     if os.path.exists(EMBED_MODEL):
         onnx_session = ort.InferenceSession(EMBED_MODEL)
         onnx_input_names = [i.name for i in onnx_session.get_inputs()]
-        print("✅ ONNX embedding model loaded.")
+        print("[OK] ONNX embedding model loaded.")
     else:
-        print(f"⚠️ Warning: ONNX model not found at {EMBED_MODEL}.")
+        print(f"[WARN] ONNX model not found at {EMBED_MODEL}.")
 except Exception as e:
-    print(f"⚠️ Error loading embedding model: {e}")
+    print(f"[WARN] Error loading embedding model: {e}")
 
 
 def embed_query(text: str):
@@ -191,7 +195,7 @@ OLLAMA_API = f"{_OLLAMA_HOST}/v1/completions"
 OLLAMA_CHAT_API = f"{_OLLAMA_HOST}/api/chat"
 
 
-def call_llm(prompt: str, max_tokens: int = 256, temperature: float = 0.3) -> str:
+def call_llm(prompt: str, max_tokens: int = 256, temperature: float = 0.3, allow_completion_fallback: bool = True) -> str:
     """Call LLM with improved error handling and fallbacks."""
     try:
         # Try chat API first for better responses
@@ -206,7 +210,7 @@ def call_llm(prompt: str, max_tokens: int = 256, temperature: float = 0.3) -> st
                     "num_predict": max_tokens
                 }
             },
-            timeout=300,
+            timeout=180,
         )
         
         if chat_response.status_code == 200:
@@ -214,7 +218,10 @@ def call_llm(prompt: str, max_tokens: int = 256, temperature: float = 0.3) -> st
             if "message" in r and "content" in r["message"]:
                 return r["message"]["content"]
         
-        # Fallback to completions API
+        # Optional fallback to completions API (slower, less structured)
+        if not allow_completion_fallback:
+            return ""
+
         r = requests.post(
             OLLAMA_API,
             json={
@@ -223,7 +230,7 @@ def call_llm(prompt: str, max_tokens: int = 256, temperature: float = 0.3) -> st
                 "max_tokens": max_tokens,
                 "temperature": temperature,
             },
-            timeout=300,
+            timeout=180,
         ).json()
 
         if isinstance(r, dict) and "choices" in r and r["choices"]:
@@ -275,7 +282,7 @@ def retrieve_chunks(question: str, k: int = TOP_K):
     retrieved_chunks = []
     
     if not is_index_loaded or not onnx_session:
-        print("⚠️ Search attempted but index/model not loaded.")
+        print("[WARN] Search attempted but index/model not loaded.")
         # We can't do RAG, but maybe we can still use Ollama for a general answer?
         # For now, let's just use a fallback or an empty context.
     else:
@@ -294,7 +301,7 @@ def retrieve_chunks(question: str, k: int = TOP_K):
                             retrieved_chunks.append(ch)
                             break
         except Exception as e:
-            print(f"⚠️ Search error: {e}")
+            print(f"[WARN] Search error: {e}")
 
     print(f"DEBUG: Vector retrieval, got {len(retrieved_chunks)} chunks for query: {question}")
     return retrieved_chunks
@@ -312,6 +319,13 @@ class Query(BaseModel):
 class MCQRequest(BaseModel):
     lab_num: int
     count: int = 50
+
+
+class MCQRequestOnFly(BaseModel):
+    lab_num: int
+    count: int = 10
+    difficulty: str = "medium"
+    topic_hint: str = ""
 
 
 # ---------------------------------------------------------
@@ -390,6 +404,189 @@ def ask(query: Query):
 
 
 # ---------------------------------------------------------
+# /generate_mcqs_on_fly endpoint - Real-time MCQ generation
+# ---------------------------------------------------------
+
+def extract_json_array_from_text(text: str):
+    """Extract JSON array from LLM response."""
+    if not text: return None
+    text = re.sub(r'```json\s*', '', text)
+    text = re.sub(r'```\s*', '', text)
+    start = text.find('[')
+    end = text.rfind(']') + 1
+    if start == -1 or end <= start: return None
+    try:
+        return json.loads(text[start:end])
+    except:
+        # Try to find objects if array parse fails
+        try:
+            objs = re.findall(r'\{[^{}]*\}', text[start:end])
+            return [json.loads(o) for o in objs]
+        except:
+            return None
+
+def normalize_and_validate_mcqs(mcqs, lab_num: int, difficulty: str, max_count: int):
+    """Normalize LLM output into strict MCQ shape and discard invalid items."""
+    if not isinstance(mcqs, list):
+        return []
+
+    normalized = []
+    for m in mcqs:
+        if not isinstance(m, dict):
+            continue
+
+        question = str(m.get("question", "")).strip()
+        options = m.get("options", [])
+        if not question or not isinstance(options, list):
+            continue
+
+        clean_options = [str(o).strip() for o in options if str(o).strip()]
+        if len(clean_options) < 4:
+            continue
+        clean_options = clean_options[:4]
+
+        try:
+            correct_index = int(m.get("correctIndex", 0))
+        except Exception:
+            correct_index = 0
+        if correct_index < 0 or correct_index > 3:
+            correct_index = 0
+
+        explanation = str(m.get("explanation", "Based on the provided lab context.")).strip()
+        source = str(m.get("source", "Lab manual context")).strip()
+
+        normalized.append({
+            "question": question,
+            "options": clean_options,
+            "correctIndex": correct_index,
+            "difficulty": str(m.get("difficulty", difficulty or "medium")),
+            "explanation": explanation,
+            "source": source,
+            "labNum": lab_num,
+            "citation": f"Lab {lab_num} Manual"
+        })
+
+    return normalized[:max_count]
+
+def make_fallback_mcqs_from_context(context_text: str, lab_num: int, difficulty: str, count: int):
+    """Create guaranteed-valid MCQs if the LLM output cannot be parsed."""
+    sentences = re.split(r'(?<=[.!?])\s+', context_text or "")
+    base = [s.strip() for s in sentences if len(s.strip()) > 40][:count]
+    if not base:
+        base = [f"Key concept from Lab {lab_num}"] * count
+
+    out = []
+    for i in range(count):
+        stem = base[i % len(base)]
+        q_text = f"Which statement is most consistent with this lab concept: {stem[:120]}?"
+        options = [
+            f"{stem[:90]}",
+            "An unrelated concept from a different system.",
+            "A contradictory interpretation of the concept.",
+            "Insufficient detail to support this statement."
+        ]
+        out.append({
+            "question": q_text,
+            "options": options,
+            "correctIndex": 0,
+            "difficulty": difficulty or "medium",
+            "explanation": "The first option is directly grounded in the provided lab context.",
+            "source": stem[:180],
+            "labNum": lab_num,
+            "citation": f"Lab {lab_num} Manual"
+        })
+    return out[:count]
+
+@app.post("/generate_mcqs_on_fly")
+async def generate_mcqs_on_fly(req: MCQRequestOnFly):
+    """Generate MCQs in real-time based on lab content."""
+    if req.lab_num not in LAB_CHUNKS:
+        return {"success": False, "error": f"Lab {req.lab_num} not found. Available labs: {list(LAB_CHUNKS.keys())}"}
+    
+    # Keep generation bounded for responsiveness/reliability.
+    count = min(req.count, 8)
+    
+    chunks = LAB_CHUNKS.get(req.lab_num, [])
+    # Keep context bounded so generation stays responsive.
+    context_chunks = chunks[:8]
+    context_text = "\n\n".join(c.get("text", "") for c in context_chunks)
+    
+    prompt = f"""You are an expert Human Anatomy professor.
+Based ONLY on the provided LAB MANUAL CONTEXT, generate EXACTLY {count} multiple-choice questions.
+
+LAB: {req.lab_num}
+DIFFICULTY: {req.difficulty}
+TOPIC HINT: {req.topic_hint}
+
+CONTEXT:
+{context_text[:5000]}
+
+REQUIREMENTS:
+1. Each question must be anatomically accurate and based on the context.
+2. Provide 4 options for each question.
+3. correctIndex must be 0, 1, 2, or 3.
+4. Provide a brief explanation for the correct answer.
+5. Include a "source" field with a short quote (1-2 sentences) from the context that justifies the answer.
+
+OUTPUT FORMAT (JSON Array only):
+[
+  {{
+    "question": "...",
+    "options": ["...", "...", "...", "..."],
+    "correctIndex": 0,
+    "difficulty": "{req.difficulty}",
+    "explanation": "...",
+    "source": "..."
+  }}
+]
+
+STRICT RULES:
+- Return ONLY a valid JSON array.
+- Do NOT wrap in markdown/code fences.
+- Do NOT add commentary before/after the array.
+"""
+
+    response_text = call_llm(
+        prompt,
+        max_tokens=1400,
+        temperature=0.3,
+        allow_completion_fallback=False
+    )
+    mcqs = extract_json_array_from_text(response_text)
+    valid_mcqs = normalize_and_validate_mcqs(mcqs, req.lab_num, req.difficulty, count)
+
+    # One repair attempt if first parse/validation fails
+    if not valid_mcqs:
+        repair_prompt = f"""Convert the following text into a valid JSON array of EXACTLY {count} MCQs.
+Each object must contain: question, options (4 strings), correctIndex (0-3), difficulty, explanation, source.
+Return ONLY JSON array.
+
+TEXT:
+{response_text[:4000]}
+"""
+        repaired = call_llm(
+            repair_prompt,
+            max_tokens=1400,
+            temperature=0.1,
+            allow_completion_fallback=False
+        )
+        repaired_mcqs = extract_json_array_from_text(repaired)
+        valid_mcqs = normalize_and_validate_mcqs(repaired_mcqs, req.lab_num, req.difficulty, count)
+
+    # Guaranteed fallback so API remains usable
+    if not valid_mcqs:
+        valid_mcqs = make_fallback_mcqs_from_context(context_text, req.lab_num, req.difficulty, count)
+        return {
+            "success": True,
+            "count": len(valid_mcqs),
+            "questions": valid_mcqs,
+            "warning": "LLM JSON formatting failed; fallback MCQs were generated from context."
+        }
+
+    return {"success": True, "count": len(valid_mcqs), "questions": valid_mcqs}
+
+
+# ---------------------------------------------------------
 # /mcqs/{lab_num} endpoint - Serve pre-built MCQ JSON bank for a lab
 # ---------------------------------------------------------
 @app.get("/mcqs/{lab_num}")
@@ -420,7 +617,7 @@ def ensure_model_pulled():
     max_retries = 10
     retry_delay = 5
     
-    print(f"🔍 Checking Ollama connection at {_OLLAMA_HOST}...")
+    print(f"[INFO] Checking Ollama connection at {_OLLAMA_HOST}...")
     
     # Wait for Ollama to be ready
     for attempt in range(max_retries):
@@ -428,14 +625,14 @@ def ensure_model_pulled():
             tags_url = f"{_OLLAMA_HOST}/api/tags"
             response = requests.get(tags_url, timeout=10)
             if response.status_code == 200:
-                print("✅ Ollama is reachable.")
+                print("[OK] Ollama is reachable.")
                 break
         except Exception:
             if attempt < max_retries - 1:
-                print(f"⏳ Waiting for Ollama (attempt {attempt+1}/{max_retries})...")
+                print(f"[INFO] Waiting for Ollama (attempt {attempt+1}/{max_retries})...")
                 time.sleep(retry_delay)
             else:
-                print(f"❌ Error: Could not connect to Ollama after {max_retries} attempts.")
+                print(f"[ERROR] Could not connect to Ollama after {max_retries} attempts.")
                 return
 
     try:
@@ -443,10 +640,10 @@ def ensure_model_pulled():
         response = requests.get(f"{_OLLAMA_HOST}/api/tags", timeout=10)
         models = response.json().get("models", [])
         if any(m.get("name").startswith(MODEL_NAME) for m in models):
-            print(f"✅ Model {MODEL_NAME} is already available.")
+            print(f"[OK] Model {MODEL_NAME} is already available.")
             return
 
-        print(f"🚀 Pulling model {MODEL_NAME}... This will take a few minutes (approx 2GB).")
+        print(f"[INFO] Pulling model {MODEL_NAME}... This will take a few minutes (approx 2GB).")
         pull_url = f"{_OLLAMA_HOST}/api/pull"
         
         # Use streaming to show progress
@@ -461,14 +658,14 @@ def ensure_model_pulled():
                         if current_status != last_status:
                             if "completed" in status and "total" in status:
                                 percent = (status["completed"] / status["total"]) * 100
-                                print(f"📦 {current_status}: {percent:.1f}%")
+                                print(f"[PULL] {current_status}: {percent:.1f}%")
                             else:
-                                print(f"📦 {current_status}")
+                                print(f"[PULL] {current_status}")
                             last_status = current_status
                             
-        print(f"✅ Model {MODEL_NAME} pulled successfully.")
+        print(f"[OK] Model {MODEL_NAME} pulled successfully.")
     except Exception as e:
-        print(f"⚠️ Warning: Could not verify/pull model {MODEL_NAME}: {e}")
+        print(f"[WARN] Could not verify/pull model {MODEL_NAME}: {e}")
 
 # ---------------------------------------------------------
 # Run (for python -m scripts.rag_server)
@@ -479,7 +676,7 @@ if __name__ == "__main__":
     # Ensure model is available before starting
     ensure_model_pulled()
 
-    print("🚀 RAG Server running at: http://127.0.0.1:8000")
+    print("[INFO] RAG Server running at: http://127.0.0.1:8000")
     uvicorn.run(
         "scripts.rag_server:app",
         host="0.0.0.0",

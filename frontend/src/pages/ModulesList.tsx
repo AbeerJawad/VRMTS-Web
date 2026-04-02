@@ -153,7 +153,7 @@ export default function ModulesPage() {
       <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-emerald-500 mx-auto mb-4" />
-          <p className="text-sm text-neutral-500 font-medium tracking-tight">Syncing modules...</p>
+          <p className="text-sm text-neutral-500 font-medium tracking-tight">Loading modules...</p>
         </div>
       </div>
     );
@@ -170,7 +170,7 @@ export default function ModulesPage() {
             onClick={fetchModules}
             className="px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 rounded-lg text-sm font-bold text-white transition-all"
           >
-            Retry authentication
+            Retry Connection
           </button>
         </div>
       </div>
@@ -256,8 +256,8 @@ export default function ModulesPage() {
       {filteredModules.length === 0 && (
         <div className="text-center py-24 border-2 border-dashed border-neutral-900 rounded-lg">
           <Search className="w-10 h-10 mx-auto mb-4 text-neutral-800" />
-          <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-widest mb-1">No segments found</h3>
-          <p className="text-xs text-neutral-700 font-medium">Verify system parameters or search criteria</p>
+          <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-widest mb-1">No modules found</h3>
+          <p className="text-xs text-neutral-700 font-medium">Refine search parameters or filters</p>
         </div>
       )}
     </PageLayout>
@@ -304,7 +304,7 @@ function ModuleCard({ module, onStart }: { module: Module; onStart: (id: number,
         <div className="space-y-6">
           <div>
             <div className="flex justify-between text-[9px] font-bold uppercase tracking-widest text-neutral-700 mb-2">
-              <span>Sync status</span>
+              <span>Progression</span>
               <span>{module.progress}%</span>
             </div>
             <div className="h-1 bg-neutral-950 rounded-full overflow-hidden">
@@ -325,7 +325,7 @@ function ModuleCard({ module, onStart }: { module: Module; onStart: (id: number,
               className="px-6 py-2 bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 rounded-md text-[9px] font-bold uppercase tracking-widest text-white transition-all flex items-center gap-2 group/btn"
               onClick={(e) => { e.stopPropagation(); module.status !== 'locked' && onStart(module.moduleId, module.name); }}
             >
-              {module.status === 'completed' ? 'Review' : module.status === 'in_progress' ? 'Resume' : 'Initialize'}
+              {module.status === 'completed' ? 'Review' : module.status === 'in_progress' ? 'Resume' : 'Begin'}
               <ChevronRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
             </button>
           </div>
@@ -385,7 +385,7 @@ function ModuleListItem({ module, onStart }: { module: Module; onStart: (id: num
               className="flex-shrink-0 px-6 py-2 bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 rounded-md text-[9px] font-bold uppercase tracking-widest text-white transition-all flex items-center gap-2 group/btn"
               onClick={(e) => { e.stopPropagation(); module.status !== 'locked' && onStart(module.moduleId, module.name); }}
             >
-              {module.status === 'completed' ? 'Review' : module.status === 'in_progress' ? 'Resume' : 'Initialize'}
+              {module.status === 'completed' ? 'Review' : module.status === 'in_progress' ? 'Resume' : 'Begin'}
               <ChevronRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
             </button>
           </div>

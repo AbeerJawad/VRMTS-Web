@@ -1,7 +1,44 @@
 const db = require('../config/db');
 
-// RAG service URL: uses Docker service name 'rag' in production, localhost for local dev
-const RAG_SERVICE_URL = process.env.RAG_SERVICE_URL || 'http://rag:8000';
+// RAG service URL: prioritize env vars, default to docker service name 'rag'
+const RAG_SERVICE_URL = process.env.RAG_SERVICE_URL || process.env.RAG_BASE_URL || 'http://rag:8000';
+
+async function fetchRagMcqs(labNumber) {
+  const ragResponse = await fetch(`${RAG_SERVICE_URL}/mcqs/${labNumber}`);
+  if (!ragResponse.ok) {
+    throw new Error(`RAG service returned ${ragResponse.status} for lab ${labNumber}`);
+  }
+  const ragData = await ragResponse.json();
+  if (ragData.error) {
+    throw new Error(ragData.error);
+  }
+  return ragData.mcqs || [];
+}
+
+// Preview questions from RAG bank without creating a DB quiz
+async function previewRagQuestions(req, res) {
+  try {
+    const { labNumber, questionCount } = req.body;
+    if (!labNumber || !questionCount) {
+      return res.status(400).json({ success: false, message: 'labNumber and questionCount required' });
+    }
+
+    const count = Math.max(1, Math.min(parseInt(questionCount, 10), 40));
+    const mcqs = await fetchRagMcqs(labNumber);
+    const selected = mcqs.slice(0, count).map((q) => ({
+      question: q.question || '',
+      options: Array.isArray(q.options) ? q.options.slice(0, 4) : [],
+      correctIndex: typeof q.correctIndex === 'number' ? q.correctIndex : 0,
+      explanation: q.explanation || q.source || '',
+      difficulty: q.difficulty || 'medium'
+    }));
+
+    return res.json({ success: true, totalQuestions: selected.length, data: selected });
+  } catch (err) {
+    console.error('Error previewing RAG questions:', err);
+    return res.status(502).json({ success: false, message: 'Could not fetch RAG question bank', error: err.message });
+  }
+}
 
 // Generate quiz from RAG MCQ bank and store in DB
 async function generateQuizFromRAG(req, res) {
@@ -11,18 +48,9 @@ async function generateQuizFromRAG(req, res) {
       return res.status(400).json({ success: false, message: 'labNumber and questionCount required' });
     }
 
-    // Fetch MCQs from the RAG service instead of local filesystem
     let mcqs;
     try {
-      const ragResponse = await fetch(`${RAG_SERVICE_URL}/mcqs/${labNumber}`);
-      if (!ragResponse.ok) {
-        return res.status(404).json({ success: false, message: `RAG service returned ${ragResponse.status} for lab ${labNumber}` });
-      }
-      const ragData = await ragResponse.json();
-      if (ragData.error) {
-        return res.status(404).json({ success: false, message: ragData.error });
-      }
-      mcqs = ragData.mcqs;
+      mcqs = await fetchRagMcqs(labNumber);
     } catch (fetchErr) {
       console.error('Failed to fetch MCQs from RAG service:', fetchErr);
       return res.status(502).json({ success: false, message: 'Could not reach RAG service. Is it running?', error: fetchErr.message });
@@ -67,4 +95,4 @@ async function generateQuizFromRAG(req, res) {
   }
 }
 
-module.exports = { generateQuizFromRAG };
+module.exports = { generateQuizFromRAG, previewRagQuestions };

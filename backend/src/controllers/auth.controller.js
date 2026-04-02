@@ -47,8 +47,6 @@ const login = async (req, res) => {
       [user.userId]
     );
 
-    await connection.end();
-
     // CREATE SESSION DATA
     req.session.user = {
       userId: user.userId,
@@ -56,6 +54,27 @@ const login = async (req, res) => {
       name: user.name,
       userType: user.userType
     };
+
+    // ADD ROLE-SPECIFIC ID
+    if (user.userType === 'teacher') {
+      const [teachers] = await connection.execute(
+        'SELECT teacherId FROM teacher WHERE userId = ?',
+        [user.userId]
+      );
+      if (teachers.length > 0) {
+        req.session.user.teacherId = teachers[0].teacherId;
+      }
+    } else if (user.userType === 'student') {
+      const [students] = await connection.execute(
+        'SELECT studentId FROM student WHERE userId = ?',
+        [user.userId]
+      );
+      if (students.length > 0) {
+        req.session.user.studentId = students[0].studentId;
+      }
+    }
+
+    await connection.end();
 
     // CRITICAL: Save session before sending response
     req.session.save((err) => {
@@ -67,7 +86,7 @@ const login = async (req, res) => {
         });
       }
 
-      console.log('Session created:', req.session); // Debug log
+      console.log('Session created:', req.session.user); // Debug log
 
       // Send response AFTER session is saved
       res.json({

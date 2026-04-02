@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Layers, MessageSquare, Info, Brain, Activity, Search, FileText, Maximize2, Eye, EyeOff, X, MousePointer2, Move3D } from 'lucide-react';
+import { Layers, MessageSquare, Info, Brain, Activity, Search, FileText, Maximize2, Eye, EyeOff, X, MousePointer2, Move3D, List } from 'lucide-react';
 import { PageLayout } from '../components/PageLayout';
 import { LabOrientation } from '../components/LabOrientation';
 import { StudyAssistant } from '../components/StudyAssistant';
@@ -22,15 +22,15 @@ export default function Lab1Explore() {
   const sceneRef = useRef<any>(null);
   const initRef = useRef(false);
 
-  const [missions, setMissions] = useState([
+  const [objectives, setObjectives] = useState([
     { id: 'rotate', label: 'Rotate Model', icon: Move3D, description: 'Click and drag in the viewer to rotate the anatomical model.', isComplete: false },
     { id: 'select', label: 'Select Part', icon: MousePointer2, description: 'Click on any part of the model to see its details and highlight it.', isComplete: false },
     { id: 'layer', label: 'Switch Plane', icon: Layers, description: 'Use the anatomical plane buttons to switch between views.', isComplete: false },
     { id: 'manual', label: 'Open Manual', icon: FileText, description: 'Click the "Lab Manual" button to view detailed instructions.', isComplete: false }
   ]);
 
-  const updateMission = (id: string) => {
-    setMissions(prev => prev.map(m => m.id === id ? { ...m, isComplete: true } : m));
+  const updateObjective = (id: string) => {
+    setObjectives(prev => prev.map(m => m.id === id ? { ...m, isComplete: true } : m));
   };
 
   useEffect(() => {
@@ -327,7 +327,7 @@ export default function Lab1Explore() {
             rotation.x += deltaY * 0.01;
 
             previousMousePosition = { x: e.clientX, y: e.clientY };
-            updateMission('rotate');
+            updateObjective('rotate');
           } else if (loadedModels[activeModel]) {
             const rect = renderer.domElement.getBoundingClientRect();
             mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -392,7 +392,7 @@ export default function Lab1Explore() {
               clickedMesh.material = highlightMat;
               // Mark lab as interacted for the guided checklist
               localStorage.setItem('vrmts_lab1_interacted', 'true');
-              updateMission('select');
+              updateObjective('select');
             } else {
               const originalMat = originalMaterials.get(selectedMesh.uuid);
               if (originalMat) {
@@ -696,7 +696,7 @@ export default function Lab1Explore() {
 
     // Update active model state
     setActiveModel(modelKey);
-    updateMission('layer');
+    updateObjective('layer');
 
     // Update group list for the selected model
     if (sceneRef.current.modelGroups && sceneRef.current.modelGroups[modelKey]) {
@@ -726,7 +726,7 @@ export default function Lab1Explore() {
       isWide={true}
     >
       <LabOrientation 
-        missions={missions} 
+        objectives={objectives} 
         onComplete={() => {
           // This marks the checklist item in dashboard as well if they finish everything
           localStorage.setItem('vrmts_lab1_interacted', 'true');
@@ -737,14 +737,14 @@ export default function Lab1Explore() {
         <div className="col-span-2 space-y-4">
           {/* Plane Switcher */}
           <div className={`bg-neutral-900 border rounded-xl p-4 transition-all duration-500 ${
-            !missions[2].isComplete && missions[1].isComplete 
+            !objectives[2].isComplete && objectives[1].isComplete 
               ? 'border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.2)]' 
               : 'border-neutral-800'
           }`}>
             <h3 className="font-semibold mb-3 text-sm flex items-center gap-2 text-white">
               <Layers className="w-4 h-4 text-green-500" />
               Anatomical Planes
-              {!missions[2].isComplete && missions[1].isComplete && (
+              {!objectives[2].isComplete && objectives[1].isComplete && (
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
               )}
             </h3>
@@ -767,8 +767,8 @@ export default function Lab1Explore() {
           {/* Model Hierarchy */}
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 overflow-hidden flex flex-col max-h-[450px]">
             <h3 className="font-semibold mb-3 text-sm flex items-center gap-2 text-white">
-              <Activity className="w-4 h-4 text-green-500" />
-              Hierarchy
+              <List className="w-4 h-4 text-green-500" />
+              Anatomical Structure
             </h3>
             <div className="space-y-2 mb-3">
               <button
@@ -808,16 +808,16 @@ export default function Lab1Explore() {
         {/* Center - 3D Viewer */}
         <div className="col-span-5 space-y-4">
           <div className={`bg-neutral-900 border rounded-2xl overflow-hidden relative transition-all duration-500 ${
-            !missions[0].isComplete 
+            !objectives[0].isComplete 
               ? 'border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.15)]' 
               : 'border-neutral-800'
           }`}>
-            {!missions[0].isComplete && !isLoading && (
+            {!objectives[0].isComplete && !isLoading && (
               <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-emerald-500 text-neutral-950 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-bounce shadow-lg">
                 Drag to Rotate
               </div>
             )}
-            {!missions[1].isComplete && missions[0].isComplete && !isLoading && (
+            {!objectives[1].isComplete && objectives[0].isComplete && !isLoading && (
               <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-emerald-500 text-neutral-950 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-bounce shadow-lg">
                 Click a Part
               </div>
@@ -876,7 +876,7 @@ export default function Lab1Explore() {
         <div className="col-span-3 space-y-4">
           {/* Laboratory Manual */}
           <div className={`bg-neutral-900 border rounded-xl p-4 overflow-hidden transition-all duration-500 ${
-            !missions[3].isComplete && missions[2].isComplete 
+            !objectives[3].isComplete && objectives[2].isComplete 
               ? 'border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.2)]' 
               : 'border-neutral-800'
           }`}>
@@ -884,14 +884,14 @@ export default function Lab1Explore() {
               <h3 className="font-semibold text-sm flex items-center gap-2 text-white">
                 <FileText className="w-4 h-4 text-green-500" />
                 Laboratory Manual
-                {!missions[3].isComplete && missions[2].isComplete && (
+                {!objectives[3].isComplete && objectives[2].isComplete && (
                   <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
                 )}
               </h3>
               <button
                 onClick={() => {
                   setShowManual(!showManual);
-                  updateMission('manual');
+                  updateObjective('manual');
                 }}
                 className="p-1.5 bg-neutral-950 hover:bg-neutral-800 rounded-lg transition-colors text-slate-500 hover:text-white"
               >
@@ -911,7 +911,7 @@ export default function Lab1Explore() {
                     <button
                       onClick={() => {
                         setShowManual(true);
-                        updateMission('manual');
+                        updateObjective('manual');
                       }}
                       className="px-4 py-2 bg-neutral-950 border border-neutral-800 rounded-full text-[10px] font-bold text-white hover:bg-neutral-800 transition-all flex items-center gap-2"
                     >

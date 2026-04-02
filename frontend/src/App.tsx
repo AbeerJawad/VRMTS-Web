@@ -26,6 +26,7 @@ import TestModelPage from "./pages/testmodel";
 import GuestLab from "./pages/GuestLab";
 import CreateQuiz from "./pages/CreateQuiz";
 import VRMTSModuleAssignment from "./pages/AssignModule";
+import InstructorAnalytics from "./pages/InstructorAnalytics";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/instructor/students" element={<InstructorManageStudents />} />
           <Route path="/instructor/settings" element={<InstructorSettings />} />
           <Route path="/instructor/create-quiz" element={<CreateQuiz />} />
+          <Route path="/instructor/analytics" element={<InstructorAnalytics />} />
           <Route path="/settings" element={<StudentSettings />} />
           <Route path="/studentanalytics" element={<StudentAnalytics />} />
           <Route path="/instructor/modules" element={<VRMTSModuleAssignment />} />

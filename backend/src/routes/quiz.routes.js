@@ -49,6 +49,7 @@ router.get('/:quizId/questions', quizController.getQuizQuestions);
 
 // Teacher: Generate quiz from RAG MCQ bank
 const ragQuizController = require('../controllers/ragQuiz.controller');
+router.post('/preview-rag-questions', ragQuizController.previewRagQuestions);
 router.post('/generate-rag-quiz', ragQuizController.generateQuizFromRAG);
 
 module.exports = router;

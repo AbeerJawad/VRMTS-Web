@@ -214,38 +214,6 @@ export default function QuizSelection() {
     }
   };
 
-  const handleStartAdaptiveTest = async () => {
-    setStartingQuiz(true);
-    try {
-      const response = await fetch(`${API_BASE_URL}/quiz/adaptive/start`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          targetDifficulty: 'intermediate',
-          questionCount: 18
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to start adaptive test');
-      }
-
-      const data = await response.json();
-      if (data.success) {
-        navigate(`/quizattempt/${data.data.attemptId}`);
-      } else {
-        throw new Error(data.message || 'Failed to start adaptive test');
-      }
-    } catch (err) {
-      console.error('Error starting adaptive test:', err);
-      setError(err instanceof Error ? err.message : 'Failed to start adaptive test');
-    } finally {
-      setStartingQuiz(false);
-    }
-  };
 
   const toggleModuleSelection = (moduleId: number) => {
     setSelectedModules(prev =>
@@ -277,7 +245,7 @@ export default function QuizSelection() {
         userType="student"
       >
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
           <div
             onClick={handleStartModuleQuiz}
             className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 hover:border-neutral-700 transition-all cursor-pointer group"
@@ -403,39 +371,6 @@ export default function QuizSelection() {
             </button>
           </div>
 
-          <div onClick={handleStartAdaptiveTest} className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 hover:border-neutral-700 transition-all cursor-pointer group">
-            <div className="mb-6">
-              <div className="w-12 h-12 rounded bg-neutral-950 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-4 group-hover:text-emerald-500 transition-colors">
-                <Zap className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-1 tracking-tight">Adaptive Test</h3>
-              <p className="text-neutral-500 text-sm font-medium">Difficulty scales with your performance</p>
-            </div>
-            <div className="space-y-3 mb-6 text-xs font-bold text-neutral-400 uppercase tracking-tight">
-              <div className="flex justify-between"><span>Method</span><span className="text-neutral-200">AI Driven</span></div>
-              <div className="flex justify-between"><span>Duration</span><span className="text-neutral-200">20-25 mins</span></div>
-              <div className="flex justify-between"><span>Questions</span><span className="text-neutral-200">15-20</span></div>
-            </div>
-            <div className="mb-6 p-4 bg-neutral-950 border border-neutral-800 rounded-lg">
-              <div className="flex items-start gap-3">
-                <Target className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-[10px] text-neutral-300 uppercase tracking-widest mb-1">AI Recommendation</h4>
-                  <p className="text-[10px] text-neutral-500 font-bold leading-relaxed uppercase">Focus on Cardiovascular and Respiratory systems based on recent trends.</p>
-                </div>
-              </div>
-            </div>
-            <div className="mb-6">
-              <div className="flex justify-between text-[10px] font-bold text-neutral-600 mb-2 uppercase tracking-tight"><span>Progress Readiness</span><span>75%</span></div>
-              <div className="h-1 bg-neutral-950 rounded-full overflow-hidden border border-neutral-800/30">
-                <div className="h-full bg-emerald-500 rounded-full transition-all duration-700" style={{ width: '75%' }} />
-              </div>
-            </div>
-            <button disabled={startingQuiz} className="w-full py-3 px-4 bg-neutral-950 hover:bg-neutral-800 text-white rounded-md font-bold text-sm border border-neutral-800 hover:border-neutral-700 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
-              {startingQuiz ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
-              Begin Test
-            </button>
-          </div>
         </div>
 
         <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8">
