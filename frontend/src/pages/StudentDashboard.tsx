@@ -74,7 +74,7 @@ export default function StudentDashboard() {
   const [userName, setUserName] = useState('Student');
   const [analyticsViewed, setAnalyticsViewed] = useState(false);
   const [lab1Interacted, setLab1Interacted] = useState(false);
-
+  
   useEffect(() => {
     setAnalyticsViewed(localStorage.getItem('vrmts_analytics_viewed') === 'true');
     setLab1Interacted(localStorage.getItem('vrmts_lab1_interacted') === 'true');

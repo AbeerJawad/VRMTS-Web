@@ -53,6 +53,13 @@ export default function CreateQuiz() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [moduleList, setModuleList] = useState<ModuleOption[]>([]);
     const [isLoadingModules, setIsLoadingModules] = useState(false);
+    
+    // Quiz Config State
+    const [isTimed, setIsTimed] = useState(true);
+    const [timeLimit, setTimeLimit] = useState(30);
+    const [passingScore, setPassingScore] = useState(60);
+    const [quizDescription, setQuizDescription] = useState('');
+    const [isComprehensive, setIsComprehensive] = useState(false);
 
     // AI Generation State
     const [aiStep, setAiStep] = useState<'config' | 'generating' | 'review'>('config');
@@ -137,7 +144,7 @@ export default function CreateQuiz() {
         try {
             const payload = {
                 title: quizTitle,
-                description: `Custom quiz for ${moduleList.find(m => m.moduleId === parseInt(selectedModule))?.title || 'selected module'}`,
+                description: quizDescription || `Custom quiz for ${moduleList.find(m => m.moduleId === parseInt(selectedModule))?.title || 'selected module'}`,
                 moduleId: parseInt(selectedModule),
                 questions: questions.map(q => ({
                     question: q.question,
@@ -146,8 +153,9 @@ export default function CreateQuiz() {
                     correctAnswer: q.correctAnswer,
                     points: q.points
                 })),
-                timeLimit: 20, // Default 20 mins for custom quizzes
-                passingScore: 60
+                timeLimit: isTimed ? (timeLimit || 0) : 0,
+                passingScore: passingScore || 60,
+                isComprehensive: isComprehensive
             };
 
             const response = await axios.post(`${API_BASE_URL}/quiz/create`, payload, {
@@ -266,7 +274,7 @@ export default function CreateQuiz() {
         try {
             const payload = {
                 title: quizTitle || `Lab ${aiConfig.labNum} Assessment`,
-                description: `AI-generated quiz for lab ${aiConfig.labNum}`,
+                description: quizDescription || `AI-generated quiz for lab ${aiConfig.labNum}`,
                 moduleId: parseInt(effectiveModuleId),
                 questions: approved.map(q => ({
                     question: q.question,
@@ -275,8 +283,9 @@ export default function CreateQuiz() {
                     correctAnswer: q.options[q.correctIndex],
                     points: 1
                 })),
-                timeLimit: 30,
-                passingScore: 60
+                timeLimit: isTimed ? (timeLimit || 0) : 0,
+                passingScore: passingScore || 60,
+                isComprehensive: isComprehensive
             };
 
             const response = await axios.post(`${API_BASE_URL}/quiz/create`, payload, {
@@ -335,7 +344,7 @@ export default function CreateQuiz() {
 
     const renderManualMode = () => (
         <div className="space-y-6 max-w-4xl mx-auto">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-2">Quiz Title</label>
@@ -363,6 +372,73 @@ export default function CreateQuiz() {
                         </select>
                     </div>
                 </div>
+
+                <div>
+                    <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-2">Quiz Description</label>
+                    <textarea
+                        value={quizDescription}
+                        onChange={(e) => setQuizDescription(e.target.value)}
+                        placeholder="Provide a brief description of the quiz goals..."
+                        rows={2}
+                        className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-3 text-neutral-200 text-xs font-medium focus:outline-none focus:border-emerald-500/50 transition-colors resize-none"
+                    />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Quiz Type</label>
+                        <div className="flex bg-neutral-950 border border-neutral-800 rounded-lg p-1">
+                            <button
+                                onClick={() => setIsTimed(true)}
+                                className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-widest rounded transition-all ${isTimed ? 'bg-emerald-500 text-neutral-950 shadow-lg' : 'text-neutral-500 hover:text-neutral-300'}`}
+                            >
+                                Timed
+                            </button>
+                            <button
+                                onClick={() => setIsTimed(false)}
+                                className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-widest rounded transition-all ${!isTimed ? 'bg-emerald-500 text-neutral-950 shadow-lg' : 'text-neutral-500 hover:text-neutral-300'}`}
+                            >
+                                Untimed
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className={isTimed ? 'opacity-100' : 'opacity-30 pointer-events-none'}>
+                        <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Time Limit (Mins)</label>
+                        <input
+                            type="number"
+                            min={1}
+                            value={timeLimit}
+                            onChange={(e) => setTimeLimit(parseInt(e.target.value) || 0)}
+                            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-neutral-200 text-sm font-bold focus:outline-none focus:border-emerald-500/50 transition-colors"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Passing Score (%)</label>
+                        <input
+                            type="number"
+                            min={1}
+                            max={100}
+                            value={passingScore}
+                            onChange={(e) => setPassingScore(parseInt(e.target.value) || 0)}
+                            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-neutral-200 text-sm font-bold focus:outline-none focus:border-emerald-500/50 transition-colors"
+                        />
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-4 pt-4 border-t border-neutral-800/50">
+                    <button
+                        onClick={() => setIsComprehensive(!isComprehensive)}
+                        className={`w-12 h-6 rounded-full transition-all relative ${isComprehensive ? 'bg-emerald-500' : 'bg-neutral-800'}`}
+                    >
+                        <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${isComprehensive ? 'left-7' : 'left-1'}`}></div>
+                    </button>
+                    <div>
+                        <label className="block text-sm font-bold text-neutral-200 uppercase tracking-tight">Mark as Comprehensive Exam</label>
+                        <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">This will list the quiz in the "Comprehensive" section for students.</p>
+                    </div>
+                </div>
             </div>
 
             <div className="space-y-4">
@@ -374,13 +450,26 @@ export default function CreateQuiz() {
                         >
                             <Trash2 className="w-5 h-5" />
                         </button>
-                        <div className="flex items-center gap-4 mb-6">
-                            <span className="w-8 h-8 bg-neutral-950 border border-neutral-800 rounded text-xs font-bold text-neutral-400 flex items-center justify-center">
-                                {index + 1}
-                            </span>
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-500">
-                                {q.type === 'mcq' ? 'Multiple Choice' : q.type === 'short' ? 'Short Question' : 'Fill in the Blank'}
-                            </span>
+                        <div className="flex items-center justify-between gap-4 mb-6">
+                            <div className="flex items-center gap-4">
+                                <span className="w-8 h-8 bg-neutral-950 border border-neutral-800 rounded text-xs font-bold text-neutral-400 flex items-center justify-center">
+                                    {index + 1}
+                                </span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+                                    {q.type === 'mcq' ? 'Multiple Choice' : q.type === 'short' ? 'Short Question' : 'Fill in the Blank'}
+                                </span>
+                            </div>
+                            
+                            <div className="flex items-center gap-3">
+                                <label className="text-[9px] font-bold text-neutral-600 uppercase tracking-widest">Points:</label>
+                                <input 
+                                    type="number"
+                                    min={1}
+                                    value={q.points}
+                                    onChange={(e) => updateQuestion(q.id, { points: parseInt(e.target.value) || 1 })}
+                                    className="w-12 bg-neutral-950 border border-neutral-800 rounded px-2 py-1 text-[10px] font-bold text-emerald-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                                />
+                            </div>
                         </div>
 
                         <input

@@ -21,6 +21,7 @@ interface Quiz {
   totalQuestions: number;
   timeLimit: number;
   passingScore: number;
+  isComprehensive: number;
 }
 
 interface QuizAttempt {
@@ -59,6 +60,15 @@ export default function QuizSelection() {
   const [customQuizzes, setCustomQuizzes] = useState<Quiz[]>([]);
   const [loadingCustom, setLoadingCustom] = useState(false);
   const [selectedQuizId, setSelectedQuizId] = useState<number | null>(null);
+  
+  // Practice Quiz State
+  const [isTimedPractice, setIsTimedPractice] = useState(true);
+  const [practiceTimeLimit, setPracticeTimeLimit] = useState('15');
+  const [practiceQuestionCount, setPracticeQuestionCount] = useState('10');
+  
+  // Comprehensive Exam State
+  const [selectedExamId, setSelectedExamId] = useState<number | null>(null);
+
   const [attemptsPage, setAttemptsPage] = useState(1);
   const ATTEMPTS_PER_PAGE = 5;
 
@@ -133,6 +143,7 @@ export default function QuizSelection() {
           const data = await response.json();
           setCustomQuizzes(data.data || []);
           setSelectedQuizId(null); // Reset selection
+          setSelectedExamId(null); // Reset exam selection
         }
       } catch (err) {
         console.error('Error fetching custom quizzes:', err);
@@ -159,6 +170,11 @@ export default function QuizSelection() {
         headers: {
           'Content-Type': 'application/json',
         },
+        // Only send custom config for non-static practice quizzes
+        body: !selectedQuizId ? JSON.stringify({
+          timeLimit: isTimedPractice ? parseInt(practiceTimeLimit) : 0,
+          questionCount: parseInt(practiceQuestionCount)
+        }) : undefined
       });
 
       if (!response.ok) {
@@ -181,34 +197,30 @@ export default function QuizSelection() {
 
 
   const handleStartTimedExam = async () => {
-    if (selectedModules.length === 0) return;
+    if (!selectedModule || !selectedExamId) return;
     setStartingQuiz(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/quiz/timed-exam/start`, {
+      const response = await fetch(`${API_BASE_URL}/quiz/module/${selectedModule.moduleId}/start?quizId=${selectedExamId}`, {
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          timeLimit: parseInt(timeLimit),
-          questionCount: 20
-        }),
+        }
       });
 
       if (!response.ok) {
-        throw new Error('Failed to start timed exam');
+        throw new Error('Failed to start comprehensive exam');
       }
 
       const data = await response.json();
       if (data.success) {
         navigate(`/quizattempt/${data.data.attemptId}`);
       } else {
-        throw new Error(data.message || 'Failed to start timed exam');
+        throw new Error(data.message || 'Failed to start comprehensive exam');
       }
     } catch (err) {
-      console.error('Error starting timed exam:', err);
-      setError(err instanceof Error ? err.message : 'Failed to start timed exam');
+      console.error('Error starting comprehensive exam:', err);
+      setError(err instanceof Error ? err.message : 'Failed to start comprehensive exam');
     } finally {
       setStartingQuiz(false);
     }
@@ -291,25 +303,72 @@ export default function QuizSelection() {
                   onClick={() => setSelectedQuizId(null)}
                   className={`w-full text-left px-3 py-3 rounded-md border transition-all ${selectedQuizId === null ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:border-neutral-700'}`}
                 >
-                  <div className="text-sm font-bold tracking-tight">Practice Quiz</div>
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm font-bold tracking-tight">Practice Quiz</div>
+                    <span className="text-[8px] font-bold px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-400 uppercase tracking-widest border border-neutral-700">Dynamic</span>
+                  </div>
                   <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest mt-0.5">Random questions from module</div>
                 </button>
 
-                {customQuizzes.map(quiz => (
-                  <button
-                    key={quiz.quizId}
-                    onClick={() => setSelectedQuizId(quiz.quizId)}
-                    className={`w-full text-left px-3 py-3 rounded-md border transition-all ${selectedQuizId === quiz.quizId ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:border-neutral-700'}`}
-                  >
-                    <div className="text-sm font-bold tracking-tight">{quiz.title}</div>
-                    <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest mt-0.5">{quiz.totalQuestions} questions • {quiz.timeLimit} mins</div>
-                  </button>
-                ))}
+                {customQuizzes.filter(q => !q.isComprehensive).map(quiz => {
+                  const isTimed = (quiz.timeLimit || 0) > 0;
+                  return (
+                    <button
+                      key={quiz.quizId}
+                      onClick={() => setSelectedQuizId(quiz.quizId)}
+                      className={`w-full text-left px-3 py-3 rounded-md border transition-all ${selectedQuizId === quiz.quizId ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:border-neutral-700'}`}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="text-sm font-bold tracking-tight">{quiz.title}</div>
+                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${isTimed ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' : 'bg-blue-500/10 text-blue-500 border-blue-500/20'}`}>
+                          {isTimed ? 'Timed' : 'Untimed'}
+                        </span>
+                      </div>
+                      <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest mt-0.5">{quiz.totalQuestions} questions • {isTimed ? `${quiz.timeLimit} mins` : 'No limit'}</div>
+                    </button>
+                  );
+                })}
 
                 {loadingCustom && <div className="text-center py-2"><Loader2 className="w-4 h-4 animate-spin mx-auto text-emerald-500" /></div>}
                 {!loadingCustom && customQuizzes.length === 0 && <div className="text-[10px] text-neutral-600 text-center py-2 font-bold uppercase tracking-widest italic">No custom quizzes found</div>}
               </div>
             </div>
+
+            {selectedQuizId === null && (
+              <div className="mb-6 p-4 bg-neutral-950/50 border border-neutral-800 rounded-md box-content -mx-1" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between mb-4">
+                  <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">Practice Mode</label>
+                  <button 
+                    onClick={() => setIsTimedPractice(!isTimedPractice)}
+                    className={`px-2 py-1 rounded text-[9px] font-bold uppercase tracking-widest transition-all border ${isTimedPractice ? 'bg-emerald-500 text-neutral-950 border-emerald-500' : 'bg-neutral-900 text-neutral-500 border-neutral-800'}`}
+                  >
+                    {isTimedPractice ? 'Timed' : 'Untimed'}
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[9px] font-bold text-neutral-600 uppercase tracking-widest mb-1.5">Questions</label>
+                    <input 
+                      type="number" 
+                      value={practiceQuestionCount} 
+                      onChange={(e) => setPracticeQuestionCount(e.target.value)}
+                      className="w-full px-2 py-1.5 bg-neutral-900 border border-neutral-800 rounded text-xs font-bold text-neutral-300 focus:outline-none focus:border-neutral-700" 
+                      min="5" max="30"
+                    />
+                  </div>
+                  <div className={isTimedPractice ? 'opacity-100' : 'opacity-30 pointer-events-none'}>
+                    <label className="block text-[9px] font-bold text-neutral-600 uppercase tracking-widest mb-1.5">Mins</label>
+                    <input 
+                      type="number" 
+                      value={practiceTimeLimit} 
+                      onChange={(e) => setPracticeTimeLimit(e.target.value)}
+                      className="w-full px-2 py-1.5 bg-neutral-900 border border-neutral-800 rounded text-xs font-bold text-neutral-300 focus:outline-none focus:border-neutral-700" 
+                      min="5" max="60"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
             <button
               disabled={startingQuiz}
               className={`w-full py-3 px-4 rounded-md font-bold text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all ${previousAttempts.some(a => a.status === 'in_progress' && (
@@ -338,36 +397,58 @@ export default function QuizSelection() {
             className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 hover:border-neutral-700 transition-all cursor-pointer group"
           >
             <div className="mb-6">
-              <div className="w-12 h-12 rounded bg-neutral-950 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-4 group-hover:text-emerald-500 transition-colors">
-                <Clock className="w-6 h-6" />
+              <div className="w-12 h-12 rounded bg-neutral-950 border border-neutral-800 text-neutral-500 flex items-center justify-center mb-4 group-hover:text-amber-500 transition-colors">
+                <Zap className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-1 tracking-tight">Timed Exam</h3>
-              <p className="text-neutral-500 text-sm font-medium">Standardized comprehensive assessment</p>
+              <h3 className="text-lg font-bold text-white mb-1 tracking-tight">Comprehensive Exam</h3>
+              <p className="text-neutral-500 text-sm font-medium">Official instructor-prescribed assessment</p>
             </div>
 
             <div className="space-y-3 mb-6 text-xs font-bold text-neutral-400 uppercase tracking-tight">
-              <div className="flex justify-between"><span>Format</span><span className="text-neutral-200">Mixed Types</span></div>
-              <div className="flex justify-between"><span>Duration</span><span className="text-neutral-200">Adaptive</span></div>
-              <div className="flex justify-between"><span>Questions</span><span className="text-neutral-200">20-30</span></div>
+              <div className="flex justify-between"><span>Standards</span><span className="text-neutral-200">Official</span></div>
+              <div className="flex justify-between"><span>Attempt Limit</span><span className="text-neutral-200">Institutional</span></div>
+              <div className="flex justify-between"><span>Goal</span><span className="text-neutral-200">Formal Mastery</span></div>
             </div>
+
             <div className="mb-6" onClick={(e) => e.stopPropagation()}>
-              <label className="block text-xs font-bold mb-2 text-neutral-500 uppercase tracking-wider">Select Modules</label>
-              <div className="grid grid-cols-2 gap-2 max-h-32 overflow-y-auto pr-2 custom-scrollbar">
-                {modules.map(module => (
-                  <label key={module.moduleId} className="flex items-center gap-2 p-2 bg-neutral-950 border border-neutral-800 rounded-md cursor-pointer hover:border-neutral-700 transition-all">
-                    <input type="checkbox" checked={selectedModules.includes(module.moduleId)} onChange={() => toggleModuleSelection(module.moduleId)} className="w-3.5 h-3.5 accent-emerald-500 bg-neutral-900 border-neutral-800 rounded" />
-                    <span className="text-[10px] font-bold text-neutral-300 uppercase truncate">{module.name.split(' ')[0]}</span>
-                  </label>
-                ))}
+              <label className="block text-xs font-bold mb-2 text-neutral-500 uppercase tracking-wider">Select Assessment</label>
+              <div className="space-y-2 max-h-64 overflow-y-auto pr-1 custom-scrollbar">
+                {customQuizzes.filter(q => q.isComprehensive).map(quiz => {
+                  const isTimed = (quiz.timeLimit || 0) > 0;
+                  return (
+                    <button
+                      key={quiz.quizId}
+                      onClick={() => setSelectedExamId(quiz.quizId)}
+                      className={`w-full text-left px-3 py-3 rounded-md border transition-all ${selectedExamId === quiz.quizId ? 'bg-amber-500/10 border-amber-500/20 text-amber-500' : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:border-neutral-700'}`}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="text-sm font-bold tracking-tight">{quiz.title}</div>
+                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${isTimed ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' : 'bg-blue-500/10 text-blue-500 border-blue-500/20'}`}>
+                          {isTimed ? 'Timed' : 'Untimed'}
+                        </span>
+                      </div>
+                      <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest mt-0.5">{quiz.totalQuestions} questions • {isTimed ? `${quiz.timeLimit} mins` : 'No limit'}</div>
+                    </button>
+                  );
+                })}
+
+                {loadingCustom && <div className="text-center py-2"><Loader2 className="w-4 h-4 animate-spin mx-auto text-emerald-500" /></div>}
+                {!loadingCustom && customQuizzes.filter(q => q.isComprehensive).length === 0 && (
+                  <div className="text-[10px] text-neutral-600 text-center py-8 font-bold uppercase tracking-widest italic border border-dashed border-neutral-800 rounded-md">
+                    No official exams published for this module
+                  </div>
+                )}
               </div>
             </div>
-            <div className="mb-6" onClick={(e) => e.stopPropagation()}>
-              <label className="block text-xs font-bold mb-2 text-neutral-500 uppercase tracking-wider">Time Limit (Min)</label>
-              <input type="number" value={timeLimit} onChange={(e) => setTimeLimit(e.target.value)} className="w-full px-3 py-2.5 bg-neutral-950 border border-neutral-800 rounded-md text-neutral-200 focus:outline-none focus:border-neutral-700 text-sm font-medium" min="15" max="120" />
-            </div>
-            <button disabled={startingQuiz} className="w-full py-3 px-4 bg-neutral-950 hover:bg-neutral-800 text-white rounded-md font-bold text-sm border border-neutral-800 hover:border-neutral-700 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+
+            <button 
+              disabled={startingQuiz || !selectedExamId} 
+              className={`w-full py-3 px-4 rounded-md font-bold text-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                selectedExamId ? 'bg-amber-600 hover:bg-amber-500 text-white shadow-[0_0_15px_rgba(217,119,6,0.3)]' : 'bg-neutral-950 text-neutral-600 border border-neutral-800'
+              }`}
+            >
               {startingQuiz ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
-              Start Exam
+              Start Comprehensive Exam
             </button>
           </div>
 

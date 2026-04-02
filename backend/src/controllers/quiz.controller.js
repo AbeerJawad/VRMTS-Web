@@ -275,16 +275,18 @@ const startModuleQuiz = async (req, res) => {
       [moduleId, practiceTitle]
     );
 
-    let finalQuizId;
-    let quizConfig = { timeLimit: 30, totalQuestions: 15, passingScore: 60 };
+    let quizConfig = { 
+      timeLimit: req.body.timeLimit !== undefined ? parseInt(req.body.timeLimit) : 30, 
+      totalQuestions: req.body.questionCount !== undefined ? parseInt(req.body.questionCount) : 15, 
+      passingScore: 60 
+    };
 
     if (masterQuizzes.length > 0) {
       finalQuizId = masterQuizzes[0].quizId;
-      quizConfig = {
-        timeLimit: masterQuizzes[0].timeLimit || 30,
-        totalQuestions: masterQuizzes[0].totalQuestions || 15,
-        passingScore: masterQuizzes[0].passingScore || 60
-      };
+      // Note: we use req.body overrides if provided, otherwise defaults from master
+      if (req.body.timeLimit === undefined) quizConfig.timeLimit = masterQuizzes[0].timeLimit || 30;
+      if (req.body.questionCount === undefined) quizConfig.totalQuestions = masterQuizzes[0].totalQuestions || 15;
+      quizConfig.passingScore = masterQuizzes[0].passingScore || 60;
     } else {
       // Create master quiz record
       const [insertResult] = await connection.execute(
@@ -1502,7 +1504,7 @@ const getQuizAttempt = async (req, res) => {
 const createQuiz = async (req, res) => {
   let connection = null;
   try {
-    const { title, description, moduleId, questions, timeLimit, passingScore } = req.body;
+    const { title, description, moduleId, questions, timeLimit, passingScore, isComprehensive } = req.body;
 
     if (!title || !moduleId || !questions || !Array.isArray(questions) || questions.length === 0) {
       return res.status(400).json({
@@ -1516,8 +1518,8 @@ const createQuiz = async (req, res) => {
 
     // 1. Create the Quiz entry
     const [quizResult] = await connection.execute(
-      'INSERT INTO Quiz (title, description, moduleId, timeLimit, totalQuestions, passingScore, isCustom) VALUES (?, ?, ?, ?, ?, ?, TRUE)',
-      [title, description || '', moduleId, timeLimit || 30, questions.length, passingScore || 60]
+      'INSERT INTO Quiz (title, description, moduleId, timeLimit, totalQuestions, passingScore, isCustom, isComprehensive) VALUES (?, ?, ?, ?, ?, ?, TRUE, ?)',
+      [title, description || '', moduleId, timeLimit || 30, questions.length, passingScore || 60, isComprehensive ? 1 : 0]
     );
 
     const quizId = quizResult.insertId;
@@ -1634,7 +1636,7 @@ const getCustomQuizzesByModule = async (req, res) => {
     const connection = await db();
 
     const [quizzes] = await connection.execute(
-      'SELECT quizId, title, description, totalQuestions, timeLimit, passingScore, generatedAt FROM Quiz WHERE moduleId = ? AND isCustom = TRUE ORDER BY generatedAt DESC',
+      'SELECT quizId, title, description, totalQuestions, timeLimit, passingScore, isComprehensive, generatedAt FROM Quiz WHERE moduleId = ? AND isCustom = TRUE ORDER BY generatedAt DESC',
       [moduleId]
     );
 

@@ -124,6 +124,8 @@ export default function QuizTaking() {
 
   // Timer countdown
   useEffect(() => {
+    if (quizData && quizData.timeLimit <= 0) return; // No timer for untimed quizzes
+
     const timer = setInterval(() => {
       setTimeRemaining(prev => {
         if (prev <= 0 && !autoSubmitted) {
@@ -138,7 +140,7 @@ export default function QuizTaking() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [autoSubmitted]);
+  }, [autoSubmitted, quizData]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -282,13 +284,20 @@ export default function QuizTaking() {
 
             <div className="flex items-center gap-3">
               {/* Timer */}
-              <div className={`flex items-center gap-2 px-3.5 py-2 rounded-md border text-xs font-bold font-mono tracking-wider transition-all ${timeRemaining < 300
-                ? 'bg-rose-500/10 border-rose-500/20 text-rose-500'
-                : 'bg-neutral-900 border-neutral-800 text-neutral-200'
-                }`}>
-                <Clock className="w-4 h-4" />
-                <span>{formatTime(timeRemaining)}</span>
-              </div>
+              {quizData?.timeLimit > 0 ? (
+                <div className={`flex items-center gap-2 px-3.5 py-2 rounded-md border text-xs font-bold font-mono tracking-wider transition-all ${timeRemaining < 300
+                  ? 'bg-rose-500/10 border-rose-500/20 text-rose-500'
+                  : 'bg-neutral-900 border-neutral-800 text-neutral-200'
+                  }`}>
+                  <Clock className="w-4 h-4" />
+                  <span>{formatTime(timeRemaining)}</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 px-3.5 py-2 rounded-md border border-neutral-800 bg-neutral-900 text-xs font-bold text-emerald-500 uppercase tracking-widest">
+                  <Clock className="w-4 h-4 text-neutral-500" />
+                  <span>Untimed</span>
+                </div>
+              )}
 
               {/* Question Counter */}
               <div className="px-3.5 py-2 bg-neutral-900 border border-neutral-800 rounded-md text-xs font-bold text-neutral-400">

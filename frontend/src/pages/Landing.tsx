@@ -65,12 +65,6 @@ export default function Landing() {
               Access Platform
               <ArrowRight className="w-4 h-4 pb-0.5" />
             </Link>
-            <Link
-              to="/login"
-              className="bg-neutral-900 border border-neutral-800 text-white px-6 py-3 rounded-md font-medium hover:bg-neutral-800 transition-colors w-full sm:w-auto text-center"
-            >
-              Instructor Login
-            </Link>
           </div>
           
           <div className="mt-16 pt-8 border-t border-neutral-900 w-full max-w-3xl flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-neutral-500">
@@ -149,7 +143,6 @@ export default function Landing() {
             <div className="flex gap-8 font-medium">
               <a href="#features" className="hover:text-white transition-colors">Platform</a>
               <Link to="/dashboard" className="hover:text-white transition-colors">Demo</Link>
-              <Link to="/login" className="hover:text-white transition-colors">Instructor Access</Link>
             </div>
           </div>
         </footer>
