@@ -492,7 +492,7 @@ export default function ModelTestPage() {
     });
     
     if (value === 0) return;
-    
+    //handle explosion
     if (selectedGroupForExplosion === 'ALL') {
       const modelCenter = new THREE.Vector3(-4.30, 86.03, -0.71); 
       
@@ -534,6 +534,7 @@ export default function ModelTestPage() {
       
       if (meshes.length === 0) return;
       
+      //spherical distribution
       meshes.forEach((mesh: any, index: number) => {
         const meshBox = new THREE.Box3().setFromObject(mesh);
         const meshCenter = meshBox.getCenter(new THREE.Vector3());
