@@ -5,6 +5,7 @@ import { BookOpen, Trophy, Clock, Zap, Target, MessageSquare, Settings, Bell, Ch
 import { PageLayout } from '@/components/PageLayout';
 import { GuidedChecklist } from '@/components/GuidedChecklist';
 import { StudyAssistant } from '@/components/StudyAssistant';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
 interface Module {
   moduleId: number;
@@ -52,8 +53,7 @@ interface Deadline {
   daysUntil: number;
 }
 
-const API_BASE_URL = 'http://localhost:8080/api';
-const RAG_API_URL = 'http://localhost:8000/ask';
+const API_BASE_URL = getApiBaseUrl();
 
 export default function StudentDashboard() {
   const navigate = useNavigate();

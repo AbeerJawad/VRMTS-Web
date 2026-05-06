@@ -25,18 +25,23 @@ const options = {
 };
 
 const sessionStore = new MySQLStore(options);
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (!process.env.SESSION_SECRET) {
+  throw new Error('SESSION_SECRET must be set');
+}
 
 const sessionConfig = {
   key: 'session_cookie',
-  secret: process.env.SESSION_SECRET || 'i-wanna-kms',
+  secret: process.env.SESSION_SECRET,
   store: sessionStore,
   resave: false,
   saveUninitialized: false,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24, // 24 hours
     httpOnly: true,
-    secure: false, // Set to true in production with HTTPS
-    sameSite: 'lax'
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax'
   }
 };
 

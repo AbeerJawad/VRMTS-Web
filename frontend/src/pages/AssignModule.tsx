@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BookOpen, Users, Calendar, Clock, Target, ChevronRight, Plus, Save, Send, X, CheckCircle, Lock, Award, FileText, AlertCircle, Search, Filter, Edit, Trash2, Copy, Eye, Loader2 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
 import axios from 'axios';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
 interface Student {
   studentId: number;
@@ -18,7 +19,7 @@ interface Module {
   difficultyLevel: string;
 }
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = getApiBaseUrl();
 
 export default function VRMTSModuleAssignment() {
   const [showCreateModal, setShowCreateModal] = useState(false);

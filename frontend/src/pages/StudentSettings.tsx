@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { User, Mail, Phone, MapPin, Calendar, Shield, Bell, Globe, Monitor, Sun, Moon, Eye, Lock, Key, Smartphone, Clock, Save, Camera, AlertCircle, Check } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
 import { useTheme } from '@/hooks/useTheme';
+import { buildApiUrl } from '@/lib/api';
 
 export default function ProfileSettings() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function ProfileSettings() {
 
   const fetchUserSettings = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/user/settings', {
+      const response = await fetch(buildApiUrl('user/settings'), {
         credentials: 'include'
       });
       if (response.ok) {
@@ -68,7 +69,7 @@ export default function ProfileSettings() {
       // Save account info
       if (activeTab === 'account') {
         promises.push(
-          fetch('http://localhost:8080/api/user/account', {
+          fetch(buildApiUrl('user/account'), {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -80,7 +81,7 @@ export default function ProfileSettings() {
       // Save preferences
       if (activeTab === 'preferences') {
         promises.push(
-          fetch('http://localhost:8080/api/user/preferences', {
+          fetch(buildApiUrl('user/preferences'), {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -98,7 +99,7 @@ export default function ProfileSettings() {
       // Save notifications
       if (activeTab === 'notifications') {
         promises.push(
-          fetch('http://localhost:8080/api/user/notifications', {
+          fetch(buildApiUrl('user/notifications'), {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -110,7 +111,7 @@ export default function ProfileSettings() {
       // Save accessibility (simplified - you can expand this)
       if (activeTab === 'accessibility') {
         promises.push(
-          fetch('http://localhost:8080/api/user/accessibility', {
+          fetch(buildApiUrl('user/accessibility'), {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',

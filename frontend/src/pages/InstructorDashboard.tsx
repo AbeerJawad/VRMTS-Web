@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Users, BookOpen, TrendingUp, AlertCircle, Clock, Target, Award, MessageSquare, Settings, Bell, ChevronRight, Plus, Download, Send, BarChart3, Activity, CheckCircle, AlertTriangle, Calendar, Eye, Loader2 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = getApiBaseUrl();
 
 interface ClassStats {
   totalStudents: number;

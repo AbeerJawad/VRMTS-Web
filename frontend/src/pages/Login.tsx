@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2 } from "lucide-react";
+import { Loader2, Monitor, Headset } from "lucide-react";
+import { useEffect } from "react";
+import { buildApiUrl } from '@/lib/api';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -17,6 +19,33 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [platform, setPlatform] = useState<"Web" | "VR-Ready" | "VR-Native">("Web");
+
+  useEffect(() => {
+    const checkPlatform = async () => {
+      // Check for standalone VR browsers (Quest, Oculus, Pico)
+      const ua = navigator.userAgent;
+      const isVRNative = /Quest|OculusBrowser|PicoBrowser|ViveBrowser/i.test(ua);
+      
+      if (isVRNative) {
+        setPlatform("VR-Native");
+        return;
+      }
+
+      // Check for WebXR support (Desktop browsers with VR hardware)
+      if (navigator.xr) {
+        try {
+          const supported = await navigator.xr.isSessionSupported('immersive-vr');
+          if (supported) {
+            setPlatform("VR-Ready");
+          }
+        } catch (e) {
+          console.warn("WebXR check failed:", e);
+        }
+      }
+    };
+    checkPlatform();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +60,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8080/api/auth/login`, {
+      const response = await fetch(buildApiUrl('auth/login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +106,25 @@ export default function Login() {
           <span className="text-neutral-500 text-sm hover:text-white transition-colors">← Back to home</span>
         </Link>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 relative overflow-hidden">
+          {/* Platform Badge */}
+          <div className="absolute top-0 right-0 p-3">
+            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border shadow-sm ${
+              platform === 'VR-Native' 
+                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500' 
+                : platform === 'VR-Ready'
+                ? 'bg-blue-500/10 border-blue-500/30 text-blue-400'
+                : 'bg-neutral-800/50 border-neutral-700/50 text-neutral-500'
+            }`}>
+              {platform === 'VR-Native' || platform === 'VR-Ready' ? (
+                <Headset className="w-3 h-3" />
+              ) : (
+                <Monitor className="w-3 h-3" />
+              )}
+              {platform === 'VR-Native' ? 'Native VR Session' : platform === 'VR-Ready' ? 'VR Immersive Ready' : 'Standard Web'}
+            </div>
+          </div>
+
           {error && (
             <Alert className="mb-4 bg-red-500/10 border-red-500/50 text-red-500 rounded-md">
               <AlertDescription>{error}</AlertDescription>

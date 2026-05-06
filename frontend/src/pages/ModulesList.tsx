@@ -6,6 +6,7 @@ import {
   CheckCircle2, BookOpen, AlertTriangle, Loader2, ChevronRight
 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
 interface Module {
   moduleId: number;
@@ -22,7 +23,7 @@ interface Module {
   hoursSpent?: number;
 }
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = getApiBaseUrl();
 
 // Same icon for all modules; only the icon differs by status (in progress / completed / not started / locked)
 const getStatusIcon = (status: Module['status']) => {

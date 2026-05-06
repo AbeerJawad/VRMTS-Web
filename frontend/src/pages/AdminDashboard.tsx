@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { RefreshCw, BookOpen, Bell, CheckCircle, AlertTriangle } from 'lucide-react';
 import { PageLayout } from '../components/PageLayout';
 import axios from 'axios';
+import { API_ADMIN_BASE_URL } from '@/lib/api';
 
-const API_BASE_URL = 'http://localhost:8080/api/admin';
+const API_BASE_URL = API_ADMIN_BASE_URL;
 
 export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);

@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Home, ChevronRight, LogOut } from 'lucide-react';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = getApiBaseUrl();
 
 type NavKey = 'dashboard' | 'modules' | 'quiz' | 'analytics' | 'students' | 'faculty' | 'announcements' | 'audit' | 'none';
 

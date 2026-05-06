@@ -14,6 +14,7 @@ import {
     Loader2
 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
 type CreationMode = 'selection' | 'manual' | 'pdf' | 'ai';
 type QuestionType = 'mcq' | 'short' | 'blank';
@@ -42,7 +43,7 @@ interface StagedQuestion {
     approved: boolean;
 }
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = getApiBaseUrl();
 
 export default function CreateQuiz() {
     const navigate = useNavigate();

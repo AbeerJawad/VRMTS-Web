@@ -24,7 +24,7 @@ COPY --from=builder /app/src ./src
 COPY --from=builder /app/package*.json ./
 
 # Expose backend port
-EXPOSE 3000
+EXPOSE 8080
 
 # Start the application
 CMD ["npm", "start"]

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Clock, Flag, ChevronLeft, ChevronRight, MessageCircle, Eye, EyeOff, Save, AlertCircle, CheckCircle, Circle, XCircle, Lightbulb, Brain, AlertTriangle, Loader2 } from 'lucide-react';
+import { API_BASE_URL } from '@/lib/api';
 
 export default function QuizTaking() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function QuizTaking() {
 
     setSubmitting(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/quiz/attempt/${attemptId}/finish`, {
+      const response = await fetch(`${API_BASE_URL}/quiz/attempt/${attemptId}/finish`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -85,7 +86,7 @@ export default function QuizTaking() {
       }
 
       try {
-        const fetchUrl = `http://localhost:8080/api/quiz/attempt/${attemptId}`;
+        const fetchUrl = `${API_BASE_URL}/quiz/attempt/${attemptId}`;
         const response = await fetch(fetchUrl, {
           credentials: 'include',
           headers: {
@@ -157,7 +158,7 @@ export default function QuizTaking() {
 
     // Submit answer to backend
     try {
-      const response = await fetch(`http://localhost:8080/api/quiz/submit-answer`, {
+      const response = await fetch(`${API_BASE_URL}/quiz/submit-answer`, {
         method: 'POST',
         credentials: 'include',
         headers: {

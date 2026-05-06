@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Brain, Clock, Zap, Target, ChevronRight, ChevronLeft, Trophy, TrendingUp, Calendar, Filter, Search, Play, BarChart3, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
 interface Module {
   moduleId: number;
@@ -43,7 +44,7 @@ interface QuizStats {
 }
 
 // API base URL
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = getApiBaseUrl();
 
 export default function QuizSelection() {
   const navigate = useNavigate();

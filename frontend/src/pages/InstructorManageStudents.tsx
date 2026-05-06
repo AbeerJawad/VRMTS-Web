@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Users, Search, Filter, Download, Upload, Mail, MoreVertical, TrendingUp, TrendingDown, Clock, Target, BookOpen, Award, AlertTriangle, CheckCircle, XCircle, Eye, Edit, Trash2, Send, X, Calendar, BarChart3, Activity, MessageSquare, Loader2 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
 import axios from 'axios';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
 interface Activity {
   type: 'quiz' | 'study';
@@ -30,7 +31,7 @@ interface Student {
   recentActivity: Activity[];
 }
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = getApiBaseUrl();
 
 export default function VRMTSStudentManagement() {
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');

@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Target, Clock, TrendingUp, ChevronRight, ChevronDown, RotateCcw, Home, BarChart3, CheckCircle2, XCircle, AlertCircle, BookOpen, Share2, Download, Loader2 } from 'lucide-react';
 import { PageLayout } from '@/components/PageLayout';
+import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = getApiBaseUrl();
 
 interface ResultsData {
   score: number;
