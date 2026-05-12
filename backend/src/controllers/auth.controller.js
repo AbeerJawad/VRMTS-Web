@@ -58,7 +58,7 @@ const login = async (req, res) => {
     // ADD ROLE-SPECIFIC ID
     if (user.userType === 'teacher') {
       const [teachers] = await connection.execute(
-        'SELECT teacherId FROM teacher WHERE userId = ?',
+        'SELECT teacherId FROM Teacher WHERE userId = ?',
         [user.userId]
       );
       if (teachers.length > 0) {
@@ -66,7 +66,7 @@ const login = async (req, res) => {
       }
     } else if (user.userType === 'student') {
       const [students] = await connection.execute(
-        'SELECT studentId FROM student WHERE userId = ?',
+        'SELECT studentId FROM Student WHERE userId = ?',
         [user.userId]
       );
       if (students.length > 0) {
