@@ -328,11 +328,38 @@ export default function Lab2Explore() {
           setZoomLevel(newZoom);
         };
 
+        const onTouchStart = (e: TouchEvent) => {
+          if (e.touches.length === 1) {
+            isDragging = true;
+            previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          }
+        };
+
+        const onTouchMove = (e: TouchEvent) => {
+          if (isDragging && e.touches.length === 1) {
+            e.preventDefault();
+            const deltaX = e.touches[0].clientX - previousMousePosition.x;
+            const deltaY = e.touches[0].clientY - previousMousePosition.y;
+
+            rotation.y += deltaX * 0.01;
+            rotation.x += deltaY * 0.01;
+
+            previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          }
+        };
+
+        const onTouchEnd = () => {
+          isDragging = false;
+        };
+
         renderer.domElement.addEventListener('mousedown', onMouseDown);
         renderer.domElement.addEventListener('mousemove', onMouseMove);
         renderer.domElement.addEventListener('mouseup', onMouseUp);
         renderer.domElement.addEventListener('click', onClick);
-        renderer.domElement.addEventListener('wheel', onWheel);
+        renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
+        renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
+        renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
+        renderer.domElement.addEventListener('touchend', onTouchEnd);
 
         let animationId: number;
         const animate = () => {
@@ -359,6 +386,9 @@ export default function Lab2Explore() {
           renderer.domElement.removeEventListener('mouseup', onMouseUp);
           renderer.domElement.removeEventListener('click', onClick);
           renderer.domElement.removeEventListener('wheel', onWheel);
+          renderer.domElement.removeEventListener('touchstart', onTouchStart);
+          renderer.domElement.removeEventListener('touchmove', onTouchMove);
+          renderer.domElement.removeEventListener('touchend', onTouchEnd);
           window.removeEventListener('resize', handleResize);
           if (container.contains(renderer.domElement)) {
             container.removeChild(renderer.domElement);

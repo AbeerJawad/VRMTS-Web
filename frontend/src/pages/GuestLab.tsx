@@ -255,11 +255,38 @@ export default function GuestLab() {
           setZoomLevel(newZoom);
         };
 
+        const onTouchStart = (e: TouchEvent) => {
+          if (e.touches.length === 1) {
+            isDragging = true;
+            previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          }
+        };
+
+        const onTouchMove = (e: TouchEvent) => {
+          if (isDragging && e.touches.length === 1) {
+            e.preventDefault();
+            const deltaX = e.touches[0].clientX - previousMousePosition.x;
+            const deltaY = e.touches[0].clientY - previousMousePosition.y;
+
+            rotation.y += deltaX * 0.01;
+            rotation.x += deltaY * 0.01;
+
+            previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          }
+        };
+
+        const onTouchEnd = () => {
+          isDragging = false;
+        };
+
         renderer.domElement.addEventListener('mousedown', onMouseDown);
         renderer.domElement.addEventListener('mousemove', onMouseMove);
         renderer.domElement.addEventListener('mouseup', onMouseUp);
         renderer.domElement.addEventListener('click', onClick);
-        renderer.domElement.addEventListener('wheel', onWheel);
+        renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
+        renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
+        renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
+        renderer.domElement.addEventListener('touchend', onTouchEnd);
 
         let animationId: number;
         const animate = () => {
@@ -286,6 +313,9 @@ export default function GuestLab() {
           renderer.domElement.removeEventListener('mouseup', onMouseUp);
           renderer.domElement.removeEventListener('click', onClick);
           renderer.domElement.removeEventListener('wheel', onWheel);
+          renderer.domElement.removeEventListener('touchstart', onTouchStart);
+          renderer.domElement.removeEventListener('touchmove', onTouchMove);
+          renderer.domElement.removeEventListener('touchend', onTouchEnd);
           window.removeEventListener('resize', handleResize);
           if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
           renderer.dispose();
@@ -368,6 +398,50 @@ export default function GuestLab() {
         const offset = new THREE.Vector3().subVectors(boundingCenter, modelCenter).normalize().multiplyScalar(value * 0.02);
         child.position.copy(originalPos).add(offset);
       });
+    } else {
+      const targetGroup = sceneRef.current.model.children.find((c: any) => c.uuid === selectedGroupForExplosion);
+      if (!targetGroup) return;
+
+      const groupBox = new THREE.Box3().setFromObject(targetGroup);
+      const groupCenter = groupBox.getCenter(new THREE.Vector3());
+
+      const meshes: any[] = [];
+      targetGroup.traverse((child: any) => {
+        if (child.isMesh) {
+          meshes.push(child);
+        }
+      });
+
+      if (meshes.length === 0) return;
+
+      meshes.forEach((mesh: any, index: number) => {
+        const meshBox = new THREE.Box3().setFromObject(mesh);
+        const meshCenter = meshBox.getCenter(new THREE.Vector3());
+
+        let direction = new THREE.Vector3().subVectors(meshCenter, groupCenter).normalize();
+
+        if (direction.lengthSq() < 0.0001) {
+          const phi = Math.acos(-1 + (2 * index) / meshes.length);
+          const theta = Math.sqrt(meshes.length * Math.PI) * phi;
+          direction.set(
+            Math.cos(theta) * Math.sin(phi),
+            Math.sin(theta) * Math.sin(phi),
+            Math.cos(phi)
+          ).normalize();
+        }
+
+        let key = mesh.uuid;
+        if (mesh.parent) {
+          key = `${mesh.parent.uuid}_${mesh.uuid}`;
+        }
+
+        const originalPos = sceneRef.current.originalPositions.get(key);
+
+        if (originalPos) {
+          const offset = direction.multiplyScalar(value * 0.01);
+          mesh.position.copy(originalPos).add(offset);
+        }
+      });
     }
   };
 
@@ -405,6 +479,21 @@ export default function GuestLab() {
               </h3>
               <div className="mb-4 bg-neutral-950 p-3 rounded-lg border border-neutral-800">
                 <label className="block text-[10px] font-bold mb-2 text-amber-500 uppercase tracking-widest">Exploded View</label>
+                <select
+                  value={selectedGroupForExplosion}
+                  onChange={(e) => {
+                    setSelectedGroupForExplosion(e.target.value);
+                    handleExplosion(explosionAmount);
+                  }}
+                  className="w-full bg-neutral-900 text-slate-200 text-[10px] py-1.5 px-2 rounded border border-neutral-800 focus:outline-none focus:border-amber-500 mb-2"
+                >
+                  <option value="ALL">All Parts</option>
+                  {groupList.filter(g => !g.isMesh).map((group) => (
+                    <option key={group.uuid} value={group.uuid}>
+                      {group.name}
+                    </option>
+                  ))}
+                </select>
                 <input
                   type="range" min="0" max="100" value={explosionAmount}
                   onChange={(e) => handleExplosion(Number(e.target.value))}
