@@ -374,7 +374,7 @@ export default function GuestLab() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-200">
       <header className="border-b border-neutral-900 bg-neutral-950 sticky top-0 z-50">
-        <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-6">
             <h1 className="text-sm font-bold uppercase tracking-tighter flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
               <span className="text-emerald-500">VR</span><span className="text-white">MTS</span>
@@ -384,19 +384,20 @@ export default function GuestLab() {
           <div className="flex items-center gap-4">
             <Link
               to="/login"
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-md transition-all shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-md transition-all shadow-[0_0_15px_rgba(16,185,129,0.2)] shrink-0"
             >
-              <LogIn className="w-3.5 h-3.5" />
-              LOGIN FOR FULL ACCESS
+              <LogIn className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">LOGIN FOR FULL ACCESS</span>
+              <span className="sm:hidden">LOGIN</span>
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="max-w-[1600px] mx-auto px-6 py-8">
-        <div className="grid grid-cols-10 gap-6">
+      <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
           {/* Left Sidebar */}
-          <div className="col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4">
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
               <h3 className="font-bold text-xs flex items-center gap-2 mb-4 text-neutral-400 uppercase tracking-widest">
                 <Layers className="w-4 h-4 text-emerald-500" />
@@ -444,7 +445,7 @@ export default function GuestLab() {
           </div>
 
           {/* Center Viewer */}
-          <div className="col-span-12 lg:col-span-5 space-y-4">
+          <div className="lg:col-span-5 space-y-4 min-w-0 order-first lg:order-none">
             <div className="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden relative shadow-2xl">
               {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-neutral-950/95 z-40">
@@ -464,7 +465,7 @@ export default function GuestLab() {
                   </div>
                 </div>
               )}
-              <div ref={containerRef} className="w-full h-[600px]" onContextMenu={(e) => e.preventDefault()} />
+              <div ref={containerRef} className="w-full h-[min(55vh,600px)] min-h-[280px] sm:min-h-[400px] lg:h-[600px]" onContextMenu={(e) => e.preventDefault()} />
               <div className="absolute bottom-6 left-6 right-6 bg-neutral-950/80 backdrop-blur-md border border-neutral-800 rounded-xl p-4 z-10 shadow-2xl">
                 <div className="flex items-center justify-between mb-3 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">
                   <div className="flex items-center gap-2"><Search className="w-3.5 h-3.5 text-emerald-500" /> Zoom Level</div>
@@ -483,7 +484,7 @@ export default function GuestLab() {
           </div>
 
           {/* Right Sidebar */}
-          <div className="col-span-3 space-y-4">
+          <div className="lg:col-span-3 space-y-4 min-w-0">
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-8 rounded bg-neutral-950 border border-neutral-800 flex items-center justify-center">

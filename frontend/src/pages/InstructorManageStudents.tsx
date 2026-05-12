@@ -27,11 +27,10 @@ interface Student {
   studyTime: string;
   quizzesTaken: number;
   achievements: number;
-  weakAreas: string[];
   recentActivity: Activity[];
 }
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 export default function VRMTSStudentManagement() {
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
@@ -74,7 +73,6 @@ export default function VRMTSStudentManagement() {
           studyTime: '---',
           quizzesTaken: 0,
           achievements: 0,
-          weakAreas: ['None identified'],
           recentActivity: []
         };
       });
@@ -464,20 +462,14 @@ export default function VRMTSStudentManagement() {
                   <div className="bg-neutral-950 border border-neutral-800 rounded-lg p-5">
                     <h4 className="font-semibold mb-4 flex items-center gap-2">
                       <AlertTriangle className="w-5 h-5 text-orange-400" />
-                      Areas Needing Attention
+                      Academic Support
                     </h4>
-                    <div className="space-y-2">
-                      {selectedStudent.weakAreas.map((area, idx) => (
-                        <div key={idx} className={`p-3 rounded-lg ${area === 'None identified' ? 'bg-emerald-500/10 border border-emerald-500/20' : 'bg-orange-500/10 border border-orange-500/20'}`}>
-                          <p className={`text-sm ${area === 'None identified' ? 'text-emerald-400' : 'text-orange-400'}`}>{area}</p>
-                        </div>
-                      ))}
-                    </div>
-                    {selectedStudent.weakAreas[0] !== 'None identified' && (
-                      <button className="mt-4 w-full py-2 px-4 bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/30 rounded-lg text-sm font-medium transition-all">
-                        Assign Remedial Modules
-                      </button>
-                    )}
+                    <p className="text-sm text-neutral-500 mb-4">
+                      Use full analytics to identify weak topics and assign targeted practice modules.
+                    </p>
+                    <button className="w-full py-2 px-4 bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/30 rounded-lg text-sm font-medium transition-all">
+                      Open Student Analytics
+                    </button>
                   </div>
                 </div>
 

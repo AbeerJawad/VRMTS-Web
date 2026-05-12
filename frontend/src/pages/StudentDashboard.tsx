@@ -53,7 +53,7 @@ interface Deadline {
   daysUntil: number;
 }
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 export default function StudentDashboard() {
   const navigate = useNavigate();

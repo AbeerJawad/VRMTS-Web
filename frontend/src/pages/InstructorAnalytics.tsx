@@ -5,7 +5,7 @@ import { BarChart3, TrendingUp, Clock, Trophy, Target, Calendar, Download, Filte
 import { PageLayout } from '@/components/PageLayout';
 import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 interface Overview {
   totalStudents: number;

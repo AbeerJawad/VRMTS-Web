@@ -1,8 +1,9 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, ChevronRight, LogOut } from 'lucide-react';
+import { Home, ChevronRight, LogOut, Menu, X } from 'lucide-react';
 import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 type NavKey = 'dashboard' | 'modules' | 'quiz' | 'analytics' | 'students' | 'faculty' | 'announcements' | 'audit' | 'none';
 
@@ -40,6 +41,21 @@ export function PageLayout({
   isWide = false,
 }: PageLayoutProps) {
   const navigate = useNavigate();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileNavOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [mobileNavOpen]);
 
   const handleLogout = async () => {
     try {
@@ -88,16 +104,19 @@ export function PageLayout({
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-200">
       <header className="border-b border-neutral-900 bg-neutral-950 sticky top-0 z-50">
-        <div className={`${isWide ? 'max-w-[1600px]' : 'max-w-[1200px]'} mx-auto px-6 py-4`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <h1 className="text-sm font-bold uppercase tracking-tighter cursor-pointer" onClick={() => navigate(dashboardPath)}>
+        <div className={`${isWide ? 'max-w-[1600px]' : 'max-w-[1200px]'} mx-auto px-4 sm:px-6 py-4`}>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 md:gap-6 min-w-0">
+              <h1
+                className="text-sm font-bold uppercase tracking-tighter cursor-pointer shrink-0"
+                onClick={() => navigate(dashboardPath)}
+              >
                 <span className="text-emerald-500">VR</span><span className="text-white">MTS</span>
                 {userType === 'instructor' && (
-                  <span className="text-emerald-500 ml-1.5 uppercase">INSTRUCTOR</span>
+                  <span className="text-emerald-500 ml-1.5 uppercase hidden md:inline">INSTRUCTOR</span>
                 )}
                 {userType === 'admin' && (
-                  <span className="text-emerald-500 ml-1.5 uppercase font-bold tracking-widest">ADMIN</span>
+                  <span className="text-emerald-500 ml-1.5 uppercase font-bold tracking-widest hidden md:inline">ADMIN</span>
                 )}
               </h1>
               <nav className="hidden md:flex gap-6 text-sm">
@@ -116,38 +135,115 @@ export function PageLayout({
                 ))}
               </nav>
             </div>
-            <div className="flex items-center gap-4">
-              {headerRight}
-              <div className="flex items-center gap-2 text-xs text-neutral-600">
+            <div className="flex items-center gap-2 sm:gap-4 shrink-0 min-w-0">
+              {headerRight && <div className="min-w-0 flex items-center [&_button]:min-h-[40px] [&_button]:min-w-[40px] md:[&_button]:min-h-0 md:[&_button]:min-w-0">{headerRight}</div>}
+              <div className="hidden md:flex items-center gap-2 text-xs text-neutral-600 min-w-0">
                 <Home
-                  className="w-3.5 h-3.5 cursor-pointer hover:text-white transition-colors"
+                  className="w-3.5 h-3.5 shrink-0 cursor-pointer hover:text-white transition-colors"
                   onClick={() => navigate(dashboardPath)}
                   aria-label="Dashboard"
                 />
-                <ChevronRight className="w-3.5 h-3.5" />
-                <span className="text-neutral-500">{breadcrumbLabel}</span>
+                <ChevronRight className="w-3.5 h-3.5 shrink-0" />
+                <span className="text-neutral-500 truncate max-w-[140px] lg:max-w-none">{breadcrumbLabel}</span>
               </div>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="flex items-center gap-2 px-3 py-1.5 text-xs text-neutral-500 hover:text-white hover:bg-neutral-900 rounded-md transition-colors border border-transparent hover:border-neutral-800"
+                className="hidden md:flex items-center gap-2 px-3 py-1.5 text-xs text-neutral-500 hover:text-white hover:bg-neutral-900 rounded-md transition-colors border border-transparent hover:border-neutral-800"
                 aria-label="Log out"
               >
                 <LogOut className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Log out</span>
+                <span>Log out</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setMobileNavOpen(true)}
+                className="md:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-md text-neutral-400 hover:text-white hover:bg-neutral-900 border border-neutral-800"
+                aria-label="Open menu"
+              >
+                <Menu className="w-5 h-5" />
               </button>
             </div>
           </div>
-          <div className="mt-8">
+          <div className="mt-6 md:mt-8">
             <h2 className="text-2xl font-bold text-white tracking-tight">{title}</h2>
             {subtitle && (
-              <p className="text-neutral-500 text-sm mt-1">{subtitle}</p>
+              <p className="text-neutral-500 text-sm mt-1 break-words">{subtitle}</p>
             )}
           </div>
         </div>
       </header>
 
-      <main className={`${isWide ? 'max-w-[1600px]' : 'max-w-[1200px]'} mx-auto px-6 py-10`}>{children}</main>
+      {/* Mobile menu: same routes as desktop nav + quick actions */}
+      {mobileNavOpen && (
+        <div className="md:hidden fixed inset-0 z-[60] flex justify-end" role="dialog" aria-modal="true" aria-label="Navigation">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/60"
+            aria-label="Close menu"
+            onClick={() => setMobileNavOpen(false)}
+          />
+          <div className="relative w-full max-w-[min(100vw,20rem)] bg-neutral-950 border-l border-neutral-900 shadow-2xl flex flex-col max-h-screen pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
+            <div className="flex items-center justify-between p-4 border-b border-neutral-900">
+              <span className="text-xs font-bold uppercase tracking-widest text-neutral-500">Menu</span>
+              <button
+                type="button"
+                onClick={() => setMobileNavOpen(false)}
+                className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-md text-neutral-400 hover:text-white hover:bg-neutral-900"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <nav className="flex-1 overflow-y-auto p-4 flex flex-col gap-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => {
+                    navigate(item.path);
+                    setMobileNavOpen(false);
+                  }}
+                  className={`text-left px-4 py-3.5 rounded-lg text-sm font-medium transition-colors ${
+                    activeNav === item.key
+                      ? 'bg-neutral-900 text-emerald-500'
+                      : 'text-neutral-300 hover:bg-neutral-900'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              <div className="my-4 border-t border-neutral-900" />
+              <button
+                type="button"
+                onClick={() => {
+                  navigate(dashboardPath);
+                  setMobileNavOpen(false);
+                }}
+                className="text-left px-4 py-3.5 rounded-lg text-sm text-neutral-300 hover:bg-neutral-900 flex items-center gap-2"
+              >
+                <Home className="w-4 h-4" />
+                Dashboard home
+              </button>
+              <p className="px-4 pt-2 text-[10px] uppercase tracking-widest text-neutral-600">Current</p>
+              <p className="px-4 pb-2 text-sm text-neutral-400 truncate">{breadcrumbLabel}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  void handleLogout();
+                  setMobileNavOpen(false);
+                }}
+                className="mt-auto text-left px-4 py-3.5 rounded-lg text-sm text-rose-400 hover:bg-neutral-900 flex items-center gap-2 border border-neutral-900"
+              >
+                <LogOut className="w-4 h-4" />
+                Log out
+              </button>
+            </nav>
+          </div>
+        </div>
+      )}
+
+      <main className={`${isWide ? 'max-w-[1600px]' : 'max-w-[1200px]'} mx-auto px-4 sm:px-6 py-6 sm:py-10`}>{children}</main>
     </div>
   );
 }

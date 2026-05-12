@@ -44,7 +44,7 @@ interface QuizStats {
 }
 
 // API base URL
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 export default function QuizSelection() {
   const navigate = useNavigate();

@@ -54,6 +54,7 @@ export default function ThreeViewer({ modelPath, onPartClick, onPartHover }: Thr
       scriptLoadingPromise = (async () => {
         await loadScript('https://cdn.jsdelivr.net/npm/fflate@0.7.4/umd/index.js');
         await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
+        await loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js');
         await loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js');
         scriptsLoaded = true;
       })();
@@ -105,36 +106,48 @@ export default function ThreeViewer({ modelPath, onPartClick, onPartHover }: Thr
         const gridHelper = new THREE.GridHelper(500, 50, 0x334155, 0x1e293b);
         scene.add(gridHelper);
 
-        const loader = new (THREE as any).FBXLoader();
+        // Use appropriate loader based on file extension
+        const fileExtension = modelPath.toLowerCase().split('.').pop();
+        let loader: any;
+        
+        if (fileExtension === 'glb' || fileExtension === 'gltf') {
+          loader = new (THREE as any).GLTFLoader();
+        } else {
+          // Default to FBX for other formats
+          await loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js');
+          loader = new (THREE as any).FBXLoader();
+        }
+        
         let loadedModel: any = null;
         let originalMaterials = new Map();
 
         loader.load(
           modelPath,
-          (fbx: any) => {
+          (result: any) => {
             if (!isMounted) return;
             
-            const box = new THREE.Box3().setFromObject(fbx);
+            // Handle both GLTF and FBX formats
+            const scene_model = result.scene || result;
+            const box = new THREE.Box3().setFromObject(scene_model);
             const center = box.getCenter(new THREE.Vector3());
             const size = box.getSize(new THREE.Vector3());
 
-            fbx.position.sub(center);
+            scene_model.position.sub(center);
 
             const maxDim = Math.max(size.x, size.y, size.z);
             if (maxDim > 200) {
               const scale = 200 / maxDim;
-              fbx.scale.setScalar(scale);
+              scene_model.scale.setScalar(scale);
             }
 
-            fbx.traverse((child: any) => {
+            scene_model.traverse((child: any) => {
               if (child.isMesh) {
                 const materials = Array.isArray(child.material) ? child.material : [child.material];
                 materials.forEach((mat: any) => {
                   if (mat) {
                     originalMaterials.set(child.uuid, mat.clone());
                     mat.side = THREE.DoubleSide;
-                    if (mat.type === 'MeshPhongMaterial') {
-                      mat.shininess = 30;
+                    if (mat.type === 'MeshPhongMaterial' || mat.type === 'MeshStandardMaterial') {
                       mat.needsUpdate = true;
                     }
                   }
@@ -142,8 +155,8 @@ export default function ThreeViewer({ modelPath, onPartClick, onPartHover }: Thr
               }
             });
 
-            scene.add(fbx);
-            loadedModel = fbx;
+            scene.add(scene_model);
+            loadedModel = scene_model;
             setIsLoading(false);
           },
           (xhr: any) => {

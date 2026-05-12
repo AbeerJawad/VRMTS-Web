@@ -23,7 +23,7 @@ interface Module {
   hoursSpent?: number;
 }
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 // Same icon for all modules; only the icon differs by status (in progress / completed / not started / locked)
 const getStatusIcon = (status: Module['status']) => {

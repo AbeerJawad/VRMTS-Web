@@ -575,9 +575,9 @@ export default function Lab2Explore() {
       userType="student"
       isWide={true}
     >
-      <div className="grid grid-cols-10 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
         {/* Left Sidebar */}
-        <div className="col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-4 min-w-0">
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
             <h3 className="font-semibold mb-3 text-sm flex items-center gap-2">
               <Layers className="w-4 h-4 text-green-500" />
@@ -662,7 +662,7 @@ export default function Lab2Explore() {
         </div>
 
         {/* Center - 3D Viewer */}
-        <div className="col-span-5 space-y-4">
+        <div className="lg:col-span-5 space-y-4 min-w-0 order-first lg:order-none">
           <div className="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden relative">
             {/* Hover Tooltip moved out to avoid backdrop-blur repositioning */}
 
@@ -690,7 +690,7 @@ export default function Lab2Explore() {
               </div>
             )}
 
-            <div ref={containerRef} className="w-full h-[600px]" />
+            <div ref={containerRef} className="w-full h-[min(52vh,600px)] min-h-[260px] sm:min-h-[400px] lg:h-[600px]" />
 
             {/* Zoom Control Slider Overlay */}
             <div className="absolute bottom-4 left-4 right-4 bg-neutral-900 border border-neutral-800 rounded-xl p-3 z-10 mx-6">
@@ -714,7 +714,7 @@ export default function Lab2Explore() {
         </div>
 
         {/* Right Sidebar */}
-        <div className="col-span-3 space-y-4">
+        <div className="lg:col-span-3 space-y-4 min-w-0">
           {/* Laboratory Manual */}
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 overflow-hidden">
             <div className="flex items-center justify-between mb-4">

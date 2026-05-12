@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   :root {
@@ -52,6 +54,9 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Animations */

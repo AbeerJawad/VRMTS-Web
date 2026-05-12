@@ -528,35 +528,35 @@ export default function ModuleExploration() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 text-white">
       {/* Header */}
       <header className="border-b border-white/10 bg-slate-950/50 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-[1800px] mx-auto px-6 py-4">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-4">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between mb-4">
+            <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-wrap">
               <button
                 onClick={() => navigate('/modules')}
-                className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+                className="p-2 hover:bg-white/5 rounded-lg transition-colors shrink-0"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              <h1 className="text-2xl font-bold">
+              <h1 className="text-xl lg:text-2xl font-bold shrink-0">
                 <span className="text-white">VRMTS</span>
               </h1>
-              <div className="flex items-center gap-2 text-sm text-slate-400">
-                <Home className="w-4 h-4 cursor-pointer hover:text-cyan-400 transition-colors" onClick={() => navigate('/studentdashboard')} />
-                <ChevronRight className="w-4 h-4" />
-                <span>Modules</span>
-                <ChevronRight className="w-4 h-4" />
-                <span className="text-cyan-400">Skeletal System</span>
+              <div className="hidden md:flex items-center gap-2 text-sm text-slate-400 min-w-0">
+                <Home className="w-4 h-4 shrink-0 cursor-pointer hover:text-cyan-400 transition-colors" onClick={() => navigate('/studentdashboard')} />
+                <ChevronRight className="w-4 h-4 shrink-0" />
+                <span className="truncate">Modules</span>
+                <ChevronRight className="w-4 h-4 shrink-0" />
+                <span className="text-cyan-400 truncate">Skeletal System</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="bg-slate-800/50 rounded-lg px-4 py-2 flex items-center gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap shrink-0">
+              <div className="bg-slate-800/50 rounded-lg px-3 sm:px-4 py-2 flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                <span className="text-sm">Progress: 0%</span>
+                <span className="text-xs sm:text-sm whitespace-nowrap">Progress: 0%</span>
               </div>
               <button
                 onClick={() => navigate('/quizselection')}
-                className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-lg font-medium text-sm hover:from-cyan-400 hover:to-teal-400 transition-all flex items-center gap-2"
+                className="px-3 sm:px-4 py-2 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-lg font-medium text-xs sm:text-sm hover:from-cyan-400 hover:to-teal-400 transition-all flex items-center gap-2"
               >
                 <Play className="w-4 h-4" />
                 Take Quiz
@@ -564,7 +564,7 @@ export default function ModuleExploration() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-2xl font-bold mb-1">Skeletal System</h2>
               <p className="text-slate-400 text-sm">Explore the human skeleton in 3D</p>
@@ -584,10 +584,10 @@ export default function ModuleExploration() {
         </div>
       </header>
 
-      <main className="max-w-[1800px] mx-auto px-6 py-6">
-        <div className="grid grid-cols-12 gap-6">
+      <main className="max-w-[1800px] mx-auto px-4 sm:px-6 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Sidebar */}
-          <div className="col-span-3 space-y-4">
+          <div className="lg:col-span-3 space-y-4 min-w-0">
             <div className="bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-xl p-4">
               <h3 className="font-semibold mb-3 text-sm flex items-center gap-2">
                 <Layers className="w-4 h-4 text-cyan-400" />
@@ -692,7 +692,7 @@ export default function ModuleExploration() {
           </div>
 
           {/* Center - 3D Viewer */}
-          <div className="col-span-7 space-y-4">
+          <div className="lg:col-span-7 space-y-4 min-w-0 order-first lg:order-none">
             <div className="bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
               <div className="relative aspect-[16/10] bg-gradient-to-br from-slate-900 to-slate-950">
                 {/* Hover Tooltip */}
@@ -745,20 +745,20 @@ export default function ModuleExploration() {
 
               {/* Control Panel */}
               <div className="border-t border-white/10 p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 text-sm text-slate-400">
-                    <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-sm text-slate-400 min-w-0">
+                    <div className="flex items-center gap-2 shrink-0">
                       <Maximize2 size={12} className="text-cyan-400" />
                       <input
                         type="range" min="50" max="800" value={zoomLevel}
                         onChange={(e) => handleZoomChange(Number(e.target.value))}
-                        className="w-32 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                        className="w-full sm:w-32 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
                       />
                     </div>
-                    <span>Drag to rotate • Scroll to zoom • Click to select</span>
+                    <span className="hidden lg:inline text-xs">Drag to rotate • Scroll to zoom • Click to select</span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={() => setShowLabels(!showLabels)}
                       className={`p-2 rounded-lg transition-colors ${showLabels ? 'bg-cyan-500/20 text-cyan-400' : 'hover:bg-white/5'
@@ -786,7 +786,7 @@ export default function ModuleExploration() {
             </div>
 
             {/* Layer Selection */}
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <span className="text-sm text-slate-400 font-medium whitespace-nowrap">View Presets:</span>
               {layers.map((layer) => (
                 <button
@@ -805,7 +805,7 @@ export default function ModuleExploration() {
           </div>
 
           {/* Right Sidebar */}
-          <div className="col-span-3 space-y-4">
+          <div className="lg:col-span-3 space-y-4 min-w-0">
             <div className="bg-slate-900/50 border border-white/10 rounded-xl">
               <StudyAssistant labId={id === '1' ? 1 : id === '2' ? 2 : undefined} compact={true} />
             </div>

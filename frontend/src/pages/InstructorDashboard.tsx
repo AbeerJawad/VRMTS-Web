@@ -5,7 +5,7 @@ import { Users, BookOpen, TrendingUp, AlertCircle, Clock, Target, Award, Message
 import { PageLayout } from '@/components/PageLayout';
 import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 interface ClassStats {
   totalStudents: number;

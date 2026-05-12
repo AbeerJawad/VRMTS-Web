@@ -1,0 +1,11 @@
+// DEPRECATED - This file is no longer used
+// Tailwind v4 is configured in postcss.config.js instead
+// DO NOT USE - Keeping for reference only
+
+// Legacy Tailwind v3 configuration (DISABLED):
+// module.exports = {
+//   plugins: {
+//     tailwindcss: {},
+//     autoprefixer: {},
+//   },
+// }

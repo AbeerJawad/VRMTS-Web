@@ -19,7 +19,7 @@ interface Module {
   difficultyLevel: string;
 }
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 export default function VRMTSModuleAssignment() {
   const [showCreateModal, setShowCreateModal] = useState(false);

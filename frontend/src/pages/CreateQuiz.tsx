@@ -43,7 +43,7 @@ interface StagedQuestion {
     approved: boolean;
 }
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 export default function CreateQuiz() {
     const navigate = useNavigate();
@@ -113,7 +113,7 @@ export default function CreateQuiz() {
         { key: 'students' as const, label: 'Students', path: '/instructor/students' },
         { key: 'modules' as const, label: 'Modules', path: '/modules' },
         { key: 'quiz' as const, label: 'Quiz', path: '/instructor/create-quiz' },
-        { key: 'analytics' as const, label: 'Analytics', path: '/studentanalytics' },
+        { key: 'analytics' as const, label: 'Analytics', path: '/instructor/analytics' },
     ];
 
     const addQuestion = (type: QuestionType) => {
@@ -670,7 +670,7 @@ export default function CreateQuiz() {
                             </div>
                             <div>
                                 <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-3">Difficulty Level</label>
-                                <div className="grid grid-cols-3 gap-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                     {['easy', 'medium', 'hard'].map((d) => (
                                         <button
                                             key={d}

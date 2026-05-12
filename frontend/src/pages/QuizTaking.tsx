@@ -272,18 +272,18 @@ export default function QuizTaking() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-200">
       <header className="border-b border-neutral-900 bg-neutral-950/50 sticky top-0 z-50">
-        <div className="max-w-[1200px] mx-auto px-6 py-4">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-6">
-              <h1 className="text-base font-bold text-white tracking-tight">VRMTS</h1>
-              <div className="h-6 w-px bg-neutral-900"></div>
-              <div>
-                <h2 className="text-sm font-bold text-white tracking-tight">{quizData.title}</h2>
-                <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest mt-0.5">{quizData.module}</p>
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-3 sm:py-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between mb-3 md:mb-4">
+            <div className="flex items-start sm:items-center gap-3 sm:gap-6 min-w-0">
+              <h1 className="text-base font-bold text-white tracking-tight shrink-0">VRMTS</h1>
+              <div className="h-6 w-px bg-neutral-900 shrink-0 hidden sm:block" />
+              <div className="min-w-0">
+                <h2 className="text-sm font-bold text-white tracking-tight truncate">{quizData.title}</h2>
+                <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest mt-0.5 truncate">{quizData.module}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap shrink-0">
               {/* Timer */}
               {quizData?.timeLimit > 0 ? (
                 <div className={`flex items-center gap-2 px-3.5 py-2 rounded-md border text-xs font-bold font-mono tracking-wider transition-all ${timeRemaining < 300
@@ -322,10 +322,10 @@ export default function QuizTaking() {
         </div>
       </header>
 
-      <main className="max-w-[1200px] mx-auto px-6 py-6">
+      <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-4 sm:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div className="lg:col-span-3 space-y-6">
-            <div key={question.id} className="bg-neutral-900 border border-neutral-800 rounded-lg p-8">
+          <div className="lg:col-span-3 space-y-6 min-w-0">
+            <div key={question.id} className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-8">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-4">
@@ -338,7 +338,7 @@ export default function QuizTaking() {
                           'Matching'}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-white leading-relaxed tracking-tight">
+                  <h3 className="text-lg sm:text-xl font-bold text-white leading-relaxed tracking-tight">
                     {question.question || 'Instruction sequence unavailable'}
                   </h3>
                 </div>
@@ -415,7 +415,7 @@ export default function QuizTaking() {
                   </div>
 
                   {/* Label Options */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {question.labels?.map((label: string, idx: number) => (
                       <button
                         key={idx}
@@ -470,7 +470,7 @@ export default function QuizTaking() {
                   {/* Draggable Items */}
                   <div>
                     <p className="text-sm text-slate-400 mb-3">Available Items:</p>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {question.items?.map((item: any) => {
                         const isUsed = Object.values(draggedLabels).includes(item.id);
                         return (
@@ -514,8 +514,8 @@ export default function QuizTaking() {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6">
-              <div className="flex items-center justify-between">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <button
                   onClick={handlePreviousQuestion}
                   disabled={currentQuestion === 0}
@@ -525,7 +525,7 @@ export default function QuizTaking() {
                   PREVIOUS
                 </button>
 
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 justify-end sm:justify-center">
                   <button
                     onClick={() => setShowHint(!showHint)}
                     className="px-5 py-2.5 bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 rounded-md text-[10px] font-bold text-neutral-400 uppercase tracking-widest transition-all flex items-center gap-2"
@@ -566,7 +566,7 @@ export default function QuizTaking() {
 
           {/* Sidebar - Question Navigator */}
           <div className="lg:col-span-1">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-8 sticky top-24">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-4 sm:p-8 lg:sticky lg:top-24">
               <div className="flex items-center justify-between mb-8">
                 <h4 className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">Navigation</h4>
                 <button
@@ -592,7 +592,7 @@ export default function QuizTaking() {
                   </div>
 
                   {/* Question Grid */}
-                  <div className="grid grid-cols-4 gap-2.5 mb-10">
+                  <div className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-4 gap-2 sm:gap-2.5 mb-10">
                     {quizData.questions.map((q: any, idx: number) => {
                       const status = getQuestionStatus(q.id);
                       return (

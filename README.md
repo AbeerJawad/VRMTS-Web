@@ -8,6 +8,11 @@ A comprehensive Virtual Reality Medical Training System for anatomy education wi
 - [Quiz System Implementation](#quiz-system-implementation)
 - [3D Model Viewing](#3d-model-viewing-progress)
 - [Setup Instructions](#setup-instructions)
+- [Backend deployment](#backend-deployment)
+
+## Backend deployment
+
+Step-by-step backend hosting (e.g. Railway), MySQL wiring, CORS/cookies, and a **full environment variable reference**, are in **`backend/DEPLOYMENT.md`**. For local API work, copy `backend/.env.example` to `backend/.env` and fill in values.
 
 ## Frontend Screens
 

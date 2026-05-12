@@ -4,7 +4,7 @@ import { Target, Clock, TrendingUp, ChevronRight, ChevronDown, RotateCcw, Home, 
 import { PageLayout } from '@/components/PageLayout';
 import { API_BASE_URL as getApiBaseUrl } from '@/lib/api';
 
-const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL = getApiBaseUrl;
 
 interface ResultsData {
   score: number;
@@ -35,7 +35,6 @@ interface ResultsData {
   topScore: number;
   rank: number;
   totalStudents: number;
-  weakAreas: Array<{ topic: string; accuracy: number }>;
   strongAreas: Array<{ topic: string; accuracy: number }>;
   recommendations: string[];
   badges: Array<{ icon?: string; name: string; earned?: boolean }>;
@@ -127,7 +126,6 @@ export default function QuizResults() {
             topScore: 0, // Not available from current API
             rank: 0, // Not available from current API
             totalStudents: 0, // Not available from current API
-            weakAreas: [],
             strongAreas: [],
             recommendations: [],
             badges: []
@@ -255,7 +253,7 @@ export default function QuizResults() {
                 </p>
 
                 {/* Quick Stats Grid */}
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   <div>
                     <div className="text-lg font-bold text-white tracking-tight">{resultsData.correctAnswers}</div>
                     <div className="text-[9px] uppercase tracking-widest text-neutral-600 font-bold">Correct</div>

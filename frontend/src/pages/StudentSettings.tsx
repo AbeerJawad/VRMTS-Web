@@ -293,7 +293,7 @@ export default function ProfileSettings() {
                   <label className="block text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
                     App theme
                   </label>
-                  <div className="grid grid-cols-3 gap-6">
+                  <div className="grid grid-cols-2 gap-6">
                     {[
                       { id: 'light', icon: Sun, label: 'Light' as const },
                       { id: 'dark', icon: Moon, label: 'Dark' as const }

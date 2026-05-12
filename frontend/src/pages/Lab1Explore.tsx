@@ -732,9 +732,9 @@ export default function Lab1Explore() {
           localStorage.setItem('vrmts_lab1_interacted', 'true');
         }} 
       />
-      <div className="grid grid-cols-10 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
         {/* Left Sidebar */}
-        <div className="col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-4 min-w-0">
           {/* Plane Switcher */}
           <div className={`bg-neutral-900 border rounded-xl p-4 transition-all duration-500 ${
             !objectives[2].isComplete && objectives[1].isComplete 
@@ -806,7 +806,7 @@ export default function Lab1Explore() {
         </div>
 
         {/* Center - 3D Viewer */}
-        <div className="col-span-5 space-y-4">
+        <div className="lg:col-span-5 space-y-4 min-w-0 order-first lg:order-none">
           <div className={`bg-neutral-900 border rounded-2xl overflow-hidden relative transition-all duration-500 ${
             !objectives[0].isComplete 
               ? 'border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.15)]' 
@@ -846,7 +846,7 @@ export default function Lab1Explore() {
               </div>
             )}
 
-            <div ref={containerRef} className="w-full h-[550px]" />
+            <div ref={containerRef} className="w-full h-[min(50vh,550px)] min-h-[260px] sm:min-h-[380px] lg:h-[550px]" />
 
             {/* Zoom Influence */}
             <div className="absolute bottom-4 left-4 right-4 bg-neutral-900 border border-neutral-800 rounded-xl p-3">
@@ -873,7 +873,7 @@ export default function Lab1Explore() {
         </div>
 
         {/* Right Sidebar */}
-        <div className="col-span-3 space-y-4">
+        <div className="lg:col-span-3 space-y-4 min-w-0">
           {/* Laboratory Manual */}
           <div className={`bg-neutral-900 border rounded-xl p-4 overflow-hidden transition-all duration-500 ${
             !objectives[3].isComplete && objectives[2].isComplete 
