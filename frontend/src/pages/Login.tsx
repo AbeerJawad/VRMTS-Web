@@ -33,9 +33,9 @@ export default function Login() {
       }
 
       // Check for WebXR support (Desktop browsers with VR hardware)
-      if (navigator.xr) {
+      if ((navigator as any).xr) {
         try {
-          const supported = await navigator.xr.isSessionSupported('immersive-vr');
+          const supported = await (navigator as any).xr.isSessionSupported('immersive-vr');
           if (supported) {
             setPlatform("VR-Ready");
           }

@@ -1,5 +1,6 @@
+/// <reference types="vitest" />
 import path from "path"
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react-swc'
 
 // https://vite.dev/config/
@@ -26,10 +27,12 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],
-      lines: 80,
-      functions: 80,
-      branches: 75,
-      statements: 80,
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 75,
+        statements: 80,
+      },
       exclude: ["src/main.tsx", "src/pages/testmodel.tsx", "src/pages/ThreeViewer.tsx"],
     },
   },
