@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Brain, Zap, CheckCircle2, ArrowRight } from "lucide-react";
 
-function Landing() {
+export default function Landing() {
   React.useEffect(() => {
     document.title = 'VRMTS';
   }, []);
