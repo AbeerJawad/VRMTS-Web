@@ -3,9 +3,18 @@ import { Layers, MessageSquare, Info, Brain, Activity, Search, FileText, Maximiz
 import { PageLayout } from '../components/PageLayout';
 import { LabOrientation } from '../components/LabOrientation';
 import { StudyAssistant } from '../components/StudyAssistant';
+import { useSearchParams } from 'react-router-dom';
+import { getAssetsForModule, getModelPathFromModelKey } from '@/lib/moduleAssets';
+
 
 export default function Lab1Explore() {
+  const [searchParams] = useSearchParams();
+  const moduleId = searchParams.get('moduleId') ?? '1';
+
+  const assets = getAssetsForModule(moduleId);
+
   const containerRef = useRef<HTMLDivElement>(null);
+
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -109,11 +118,16 @@ export default function Lab1Explore() {
           eyelashes: textureLoader.load('/textures/eyelashes01.1.png')
         };
 
+        // Prototype: allow faculty-selected model key to override the default Lab 1 FBX
+        // If no mapping exists for this module, fall back to the existing hardcoded paths.
+        const selectedModelPath = assets?.modelKey ? getModelPathFromModelKey(assets.modelKey) : null;
+
         const models = {
-          saggital: '/models/Saggittal.fbx',
-          traverse: '/models/transverse.fbx',
-          coronal: '/models/coronal.fbx'
+          saggital: selectedModelPath || '/models/Saggittal.fbx',
+          traverse: selectedModelPath || '/models/transverse.fbx',
+          coronal: selectedModelPath || '/models/coronal.fbx'
         };
+
 
         let loadedModels: any = {
           saggital: null,
@@ -933,10 +947,11 @@ export default function Lab1Explore() {
             <div className={`relative transition-all duration-300 ${showManual ? 'h-[400px]' : 'h-[160px]'}`}>
               <div className="absolute inset-0 bg-neutral-950 rounded-lg border border-neutral-800 overflow-hidden">
                 <iframe
-                  src="/pdfs/Lab_1.pdf#toolbar=0"
+                  src={assets?.manualPdfUrl ? `${assets.manualPdfUrl}#toolbar=0` : '/pdfs/Lab_1.pdf#toolbar=0'}
                   className="w-full h-full border-none grayscale-[0.3] contrast-[1.1]"
                   title="Lab Manual"
                 />
+
                 {!showManual && (
                   <div className="absolute inset-0 bg-neutral-900/60 flex items-end justify-center pb-4">
                     <button

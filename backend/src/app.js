@@ -14,6 +14,9 @@ const corsOrigins = (process.env.CORS_ORIGIN || '')
 const defaultDevOrigins = ['http://localhost:5173', 'http://localhost:3000'];
 const allowedOrigins = isProduction ? corsOrigins : [...new Set([...corsOrigins, ...defaultDevOrigins])];
 
+// Trust proxy required for secure cookies behind Railway/Vercel
+app.set('trust proxy', 1);
+
 // Middleware - ORDER MATTERS!
 
 // 1. CORS - MUST be first and configured for credentials
