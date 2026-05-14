@@ -2,7 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Brain, Zap, CheckCircle2, ArrowRight } from "lucide-react";
 
-export default function Landing() {
+function Landing() {
+  React.useEffect(() => {
+    document.title = 'VRMTS';
+  }, []);
+
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-200 flex flex-col font-sans selection:bg-emerald-500/30">
       <div className="relative z-10 flex-grow flex flex-col">
@@ -35,6 +39,16 @@ export default function Landing() {
               Quick Access
             </Link>
           </nav>
+
+          {/* Mobile actions */}
+          <div className="md:hidden flex items-center gap-3">
+            <Link
+              to="/login"
+              className="text-neutral-300 hover:text-white transition-colors text-sm font-medium"
+            >
+              Sign in
+            </Link>
+          </div>
         </header>
 
         {/* --- HERO SECTION --- */}
@@ -128,8 +142,7 @@ export default function Landing() {
               <TeamMember name="Tauha Imran" role="Unity & VR Architecture" />
               <TeamMember name="Abeer Jawad" role="Backend & WebGL Systems" />
               <TeamMember name="Daniya Qasim" role="Machine Learning Analyst" />
-            </div>
-          </div>
+            </div>          </div>
         </section>
 
         {/* --- FOOTER --- */}

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -92,58 +92,58 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
-const router = express.Router();
-const instructorDashboardController = require('../controllers/instructorDashboard.controller');
-const authMiddleware = require('../middleware/auth.middleware');
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = <span class="cstat-no" title="statement not covered" >require('express');</span>
+const router = <span class="cstat-no" title="statement not covered" >express.Router();</span>
+const instructorDashboardController = <span class="cstat-no" title="statement not covered" >require('../controllers/instructorDashboard.controller');</span>
+const authMiddleware = <span class="cstat-no" title="statement not covered" >require('../middleware/auth.middleware');</span>
 &nbsp;
 // All routes require authentication
-router.use(authMiddleware);
+<span class="cstat-no" title="statement not covered" >router.use(authMiddleware);</span>
 &nbsp;
-router.get('/class-stats', instructorDashboardController.getClassStats);
-router.get('/module-performance', instructorDashboardController.getModulePerformance);
-router.get('/recent-submissions', instructorDashboardController.getRecentSubmissions);
-router.get('/at-risk-students', instructorDashboardController.getAtRiskStudents);
-router.get('/top-performers', instructorDashboardController.getTopPerformers);
-router.get('/upcoming-deadlines', instructorDashboardController.getUpcomingDeadlines);
-router.get('/my-students', instructorDashboardController.getMyStudents);
-router.post('/assign-module', instructorDashboardController.assignModuleToStudent);
-router.post('/assign-module-class', instructorDashboardController.assignModuleToClass);
-router.get('/active-assignments', instructorDashboardController.getActiveAssignments);
-router.delete('/unassign-module', instructorDashboardController.unassignModuleFromStudent);
-router.delete('/unassign-module-batch', instructorDashboardController.unassignModuleFromBatch);
-router.get('/class-analytics', instructorDashboardController.getClassAnalytics);
+<span class="cstat-no" title="statement not covered" >router.get('/class-stats', instructorDashboardController.getClassStats);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/module-performance', instructorDashboardController.getModulePerformance);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/recent-submissions', instructorDashboardController.getRecentSubmissions);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/at-risk-students', instructorDashboardController.getAtRiskStudents);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/top-performers', instructorDashboardController.getTopPerformers);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/upcoming-deadlines', instructorDashboardController.getUpcomingDeadlines);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/my-students', instructorDashboardController.getMyStudents);</span>
+<span class="cstat-no" title="statement not covered" >router.post('/assign-module', instructorDashboardController.assignModuleToStudent);</span>
+<span class="cstat-no" title="statement not covered" >router.post('/assign-module-class', instructorDashboardController.assignModuleToClass);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/active-assignments', instructorDashboardController.getActiveAssignments);</span>
+<span class="cstat-no" title="statement not covered" >router.delete('/unassign-module', instructorDashboardController.unassignModuleFromStudent);</span>
+<span class="cstat-no" title="statement not covered" >router.delete('/unassign-module-batch', instructorDashboardController.unassignModuleFromBatch);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/class-analytics', instructorDashboardController.getClassAnalytics);</span>
 &nbsp;
-module.exports = router;
+<span class="cstat-no" title="statement not covered" >module.exports = router;</span>
 &nbsp;
 &nbsp;
 &nbsp;
@@ -157,7 +157,7 @@ module.exports = router;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-04-16T17:15:10.079Z
+                at 2026-05-14T05:59:42.123Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
